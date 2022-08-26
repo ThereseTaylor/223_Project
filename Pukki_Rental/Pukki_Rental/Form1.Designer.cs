@@ -69,6 +69,7 @@
             this.rentAVehicleOutToolStripMenuItem.Name = "rentAVehicleOutToolStripMenuItem";
             this.rentAVehicleOutToolStripMenuItem.Size = new System.Drawing.Size(118, 20);
             this.rentAVehicleOutToolStripMenuItem.Text = "Rent Out a Vehicle ";
+            this.rentAVehicleOutToolStripMenuItem.Click += new System.EventHandler(this.rentAVehicleOutToolStripMenuItem_Click);
             // 
             // receiveVehicleBackToolStripMenuItem
             // 
@@ -137,9 +138,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.menuStrip1);
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmWelcome";
             this.Text = "Welcome";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

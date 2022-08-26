@@ -21,5 +21,12 @@ namespace Pukki_Rental
         {
 
         }
+
+        private void rentAVehicleOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRentOut myformView = new frmRentOut();
+            myformView.MdiParent = this;
+            myformView.Show();
+        }
     }
 }

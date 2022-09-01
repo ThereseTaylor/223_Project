@@ -6,6 +6,16 @@ CREATE TABLE VEHICLE_COLOUR(
     Colour_Name varchar(10)
 );
 
+CREATE TABLE VEHICLE_TYPE(
+    TypeID int IDENTITY(1,1) PRIMARY KEY,
+    Type_Description varchar(35)
+);
+
+CREATE TABLE VEHICLE_MODEL(
+    ModelID int IDENTITY(1,1) PRIMARY KEY,
+    Model_Description varchar(25)
+);
+
 CREATE TABLE VEHICLE(
     VehicleID int IDENTITY(1,1) PRIMARY KEY,
     TypeID int FOREIGN KEY REFERENCES VEHICLE_TYPE(TypeID),

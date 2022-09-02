@@ -48,7 +48,42 @@ namespace Pukki_Rental
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
+            if(rdoAdd.Checked == true)
+            {
+                if(cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox
+                {
+                    frmPopup popup = new frmPopup();
+                    popup.ShowDialog();
+                }else if (cmbTable.SelectedIndex == 1)
+                {
 
+                }else if (cmbTable.SelectedIndex == 2)
+                {
+
+                }else if (cmbTable.SelectedIndex == 3)
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select an option by data tables above");
+                }
+
+            }
+        }
+
+        private void rdoChange_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rdoChange.Checked == true)
+            {
+                cmbChange.Visible = true;
+                lblChange.Visible = true;
+            }
+            else
+            {
+                cmbChange.Visible = false;
+                lblChange.Visible = false;
+            }
         }
     }
 }

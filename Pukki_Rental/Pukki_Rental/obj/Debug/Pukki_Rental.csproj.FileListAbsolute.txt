@@ -23,3 +23,4 @@ C:\3RD Year 2ND semester\CMPG 223\PROJECT\223_Project\Pukki_Rental\Pukki_Rental\
 C:\3RD Year 2ND semester\CMPG 223\PROJECT\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.exe
 C:\3RD Year 2ND semester\CMPG 223\PROJECT\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.pdb
 C:\3RD Year 2ND semester\CMPG 223\PROJECT\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmVehicleInfo.resources
+C:\3RD Year 2ND semester\CMPG 223\PROJECT\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmPopup.resources

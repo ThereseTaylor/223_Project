@@ -24,6 +24,11 @@ namespace Pukki_Rental
 
         private void rentAVehicleOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (ActiveMdiChild != null)
+            {
+                ActiveMdiChild.Close();
+            }
+
             frmRentOut myformView = new frmRentOut();
             myformView.MdiParent = this;
             myformView.Show();
@@ -31,8 +36,18 @@ namespace Pukki_Rental
 
         private void vehicleInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if(ActiveMdiChild != null)
+            {
+                ActiveMdiChild.Close();
+            }
+            
             frmVehicleInfo formviewing = new frmVehicleInfo();
             formviewing.MdiParent = this;
+
+            //formviewing.Size = ClientSize;
+            formviewing.Dock = DockStyle.Fill;
+
+
             formviewing.Show();
         }
     }

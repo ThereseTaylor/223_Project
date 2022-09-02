@@ -60,8 +60,8 @@
             this.cmbTable.Items.AddRange(new object[] {
             "Vehicle",
             "Model",
-            "Colour",
-            "Type"});
+            "Type",
+            "Colour"});
             this.cmbTable.Location = new System.Drawing.Point(794, 35);
             this.cmbTable.Name = "cmbTable";
             this.cmbTable.Size = new System.Drawing.Size(166, 28);

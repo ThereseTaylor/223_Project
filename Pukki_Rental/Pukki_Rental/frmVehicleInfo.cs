@@ -54,19 +54,24 @@ namespace Pukki_Rental
                 {
                     frmPopup popup = new frmPopup();
                     popup.ShowDialog();
-                }else if (cmbTable.SelectedIndex == 1)
-                {
 
-                }else if (cmbTable.SelectedIndex == 2)
-                {
+                }
+                else if (cmbTable.SelectedIndex == 1)
+                {//model
+                    frmModelPopup modelpopup = new frmModelPopup();
+                    modelpopup.ShowDialog();
+                }
+                else if (cmbTable.SelectedIndex == 2)
+                {//type
 
-                }else if (cmbTable.SelectedIndex == 3)
-                {
+                }
+                else if (cmbTable.SelectedIndex == 3)
+                {//colour
 
                 }
                 else
                 {
-                    MessageBox.Show("Please select an option by data tables above");
+                    MessageBox.Show("Please select an option by data type above");
                 }
 
             }

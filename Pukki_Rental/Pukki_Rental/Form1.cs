@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Pukki_Rental
 {
-    public partial class Form1 : Form
+    public partial class frmWelcome : Form
     {
-        public Form1()
+        public frmWelcome()
         {
             InitializeComponent();
         }
@@ -20,6 +20,13 @@ namespace Pukki_Rental
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void rentAVehicleOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRentOut myformView = new frmRentOut();
+            myformView.MdiParent = this;
+            myformView.Show();
         }
     }
 }

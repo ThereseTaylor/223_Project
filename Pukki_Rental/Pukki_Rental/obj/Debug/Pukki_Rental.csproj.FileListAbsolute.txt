@@ -1,0 +1,12 @@
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\bin\Debug\Pukki_Rental.exe.config
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\bin\Debug\Pukki_Rental.exe
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\bin\Debug\Pukki_Rental.pdb
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.csproj.AssemblyReference.cache
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.csproj.SuggestedBindingRedirects.cache
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmWelcome.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmRentOut.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.Properties.Resources.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.csproj.GenerateResource.cache
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.csproj.CoreCompileInputs.cache
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.exe
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.pdb

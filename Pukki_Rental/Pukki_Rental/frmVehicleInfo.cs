@@ -60,6 +60,23 @@ namespace Pukki_Rental
                 {//model
                     frmModelPopup modelpopup = new frmModelPopup();
                     modelpopup.ShowDialog();
+
+                    string sql;
+                    try
+                    {
+                        conn.Open();
+                        sql = $"INSERT INTO VEHICLE_MODEL(Model_Description)" + $"VALUES ('{modelpopup.newModel}')";
+                        adap = new SqlDataAdapter();
+                        cmd = new SqlCommand(sql, conn);
+                        adap.InsertCommand = cmd;
+                        adap.InsertCommand.ExecuteNonQuery();
+                        conn.Close();
+                        MessageBox.Show("New model successfully added");
+                    }
+                    catch
+                    {
+                        MessageBox.Show("There was an error adding the new model");
+                    }
                 }
                 else if (cmbTable.SelectedIndex == 2)
                 {//type

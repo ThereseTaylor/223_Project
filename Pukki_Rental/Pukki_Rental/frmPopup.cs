@@ -25,11 +25,12 @@ namespace Pukki_Rental
         {
             InitializeComponent();
         }
+
         private void frmPopup_Load(object sender, EventArgs e)
         {
             conn = new SqlConnection(conStr);
             conn.Open();
-            string sql = "SELECT * FROM VEHICLE_TYPE";
+            string sql = "SELECT Type_Description FROM VEHICLE_TYPE";
             ds = new DataSet();
             adap = new SqlDataAdapter();
             cmd = new SqlCommand(sql, conn);
@@ -44,7 +45,7 @@ namespace Pukki_Rental
             
             conn = new SqlConnection(conStr);
             conn.Open();
-            sql = "SELECT * FROM VEHICLE_MODEL";
+            sql = "SELECT Model_Description FROM VEHICLE_MODEL";
             ds = new DataSet();
             adap = new SqlDataAdapter();
             cmd = new SqlCommand(sql, conn);
@@ -59,7 +60,7 @@ namespace Pukki_Rental
 
             conn = new SqlConnection(conStr);
             conn.Open();
-            sql = "SELECT * FROM VEHICLE_COLOUR";
+            sql = "SELECT Colour_Name FROM VEHICLE_COLOUR";
             ds = new DataSet();
             adap = new SqlDataAdapter();
             cmd = new SqlCommand(sql, conn);
@@ -77,24 +78,27 @@ namespace Pukki_Rental
             try
             {
                 vehicleReg = txtReg.Text;
-                if(dtPurchDate.Value < DateTime.Today)
+                rentalCost = Convert.ToDouble(txtRentalCost.Text);
+                purchPrice = Convert.ToDouble(txtPurchPrice.Text);
+                if (dtPurchDate.Value < DateTime.Today)
                 {
                     purchDate = dtPurchDate.Value.ToString("dd-MM-yyyy");
+                    this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Cannot choose a future date");
                 }
-                rentalCost = Convert.ToDouble(txtRentalCost.Text);
-                purchPrice = Convert.ToDouble(txtPurchPrice.Text);
-                this.Close();
             }
             catch
             {
                 MessageBox.Show("Please ensure you enter in the correct information");
             }
         }
-
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         
     }
 }

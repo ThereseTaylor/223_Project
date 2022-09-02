@@ -23,5 +23,32 @@ namespace Pukki_Rental
         SqlCommand cmd;
         SqlDataAdapter adap;
         DataSet ds;
+
+        private void frmVehicleInfo_Load(object sender, EventArgs e)
+        {
+            string sql = "";
+
+            conn = new SqlConnection(conStr);
+            conn.Open();
+
+            ds = new DataSet();
+            adap = new SqlDataAdapter();
+
+            sql = "SELECT * FROM dbo.VEHICLE";
+
+            cmd = new SqlCommand(sql, conn);
+            adap.SelectCommand = cmd;
+            adap.Fill(ds, "SourceTable");
+
+            dgVehicleInfo.DataSource = ds;
+            dgVehicleInfo.DataMember = "SourceTable";
+
+            conn.Close();
+        }
+
+        private void btnExecute_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

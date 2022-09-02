@@ -24,7 +24,7 @@ namespace Pukki_Rental
 
         private void rentAVehicleOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ActiveMdiChild != null)
+            if (ActiveMdiChild != null) //closes previous child form
             {
                 ActiveMdiChild.Close();
             }
@@ -36,7 +36,7 @@ namespace Pukki_Rental
 
         private void vehicleInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(ActiveMdiChild != null)
+            if(ActiveMdiChild != null) //closes previous child form
             {
                 ActiveMdiChild.Close();
             }
@@ -44,9 +44,7 @@ namespace Pukki_Rental
             frmVehicleInfo formviewing = new frmVehicleInfo();
             formviewing.MdiParent = this;
 
-            //formviewing.Size = ClientSize;
-            formviewing.Dock = DockStyle.Fill;
-
+            formviewing.Dock = DockStyle.Fill; //forces child form to fill space of parent form. Doesnt help when parent form is made smaller
 
             formviewing.Show();
         }

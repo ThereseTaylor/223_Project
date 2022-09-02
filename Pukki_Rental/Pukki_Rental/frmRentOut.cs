@@ -35,7 +35,7 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            sql = "SELECT * FROM dbo.VEHICLE";
+            sql = "SELECT * FROM dbo.CLIENT";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;

@@ -35,7 +35,7 @@
             // dgRentOut
             // 
             this.dgRentOut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgRentOut.Location = new System.Drawing.Point(97, 194);
+            this.dgRentOut.Location = new System.Drawing.Point(87, 145);
             this.dgRentOut.Name = "dgRentOut";
             this.dgRentOut.Size = new System.Drawing.Size(240, 150);
             this.dgRentOut.TabIndex = 0;

@@ -45,7 +45,6 @@ namespace Pukki_Rental
 
                 while (reader.Read())
                 {
-                    //comboBox3.Items.Add(reader.GetString(0));
                     if (reader.GetString(0).ToLower() == txtColour.Text.ToLower())
                     {
                         availableColour += 1;

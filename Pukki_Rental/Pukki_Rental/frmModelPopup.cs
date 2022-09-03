@@ -45,7 +45,6 @@ namespace Pukki_Rental
 
                 while (reader.Read())
                 {
-                    //comboBox3.Items.Add(reader.GetString(0));
                     if (reader.GetString(0).ToLower() == txtModel.Text.ToLower())
                     {
                         availableType += 1;
@@ -63,11 +62,6 @@ namespace Pukki_Rental
                 {
                     MessageBox.Show("That model is already available.\nYou can try add a different model or press cancel to exit.");
                 }
-
-
-                //newModel = txtModel.Text;
-                //addModel = true;
-                //this.Close();
             }
         }
 

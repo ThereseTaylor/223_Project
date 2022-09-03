@@ -15,12 +15,15 @@ namespace Pukki_Rental
     {
         public string vehicleReg, purchDate;
         public double rentalCost, purchPrice;
+        public string vModelID, vTypeID, vColourID;
+        public Boolean addVehicle = false;
         string conStr = @"Data Source=DESKTOP-GVIQ2PC;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adap;
         DataSet ds;
         SqlDataReader reader;
+
         public frmPopup()
         {
             InitializeComponent();
@@ -75,24 +78,57 @@ namespace Pukki_Rental
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            try
+            if(txtPurchPrice.Text == "" || txtReg.Text == "" || txtRentalCost.Text == "" || comboBox1.SelectedItem == null || comboBox2.SelectedItem == null || comboBox2.SelectedItem == null)
             {
-                vehicleReg = txtReg.Text;
-                rentalCost = Convert.ToDouble(txtRentalCost.Text);
-                purchPrice = Convert.ToDouble(txtPurchPrice.Text);
-                if (dtPurchDate.Value < DateTime.Today)
+                MessageBox.Show("Please ensure to fill out the data correctly");
+            }
+            else
+            {
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                string sql = "SELECT Registration_Plate FROM VEHICLE";
+                ds = new DataSet();
+                adap = new SqlDataAdapter();
+                cmd = new SqlCommand(sql, conn);
+                reader = cmd.ExecuteReader();
+                int availableColour = 0;
+
+                while (reader.Read())
                 {
-                    purchDate = dtPurchDate.Value.ToString("dd-MM-yyyy");
-                    this.Close();
+                    if (reader.GetString(0).ToLower() == txtReg.Text.ToLower())
+                    {
+                        availableColour += 1;
+                    }
+                }
+                conn.Close();
+
+                if (availableColour == 0)
+                {
+                    try
+                    {
+                        vehicleReg = txtReg.Text;
+                        rentalCost = Convert.ToDouble(txtRentalCost.Text);
+                        purchPrice = Convert.ToDouble(txtPurchPrice.Text);
+                        if (dtPurchDate.Value < DateTime.Today)
+                        {
+                            purchDate = dtPurchDate.Value.ToString("dd-MM-yyyy");
+                            addVehicle = true;
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cannot choose a future date");
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Please ensure you enter in the correct information");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Cannot choose a future date");
+                    MessageBox.Show("There is already a vehicle with that registration,\nplease enter a new registration or press cancel to exit");
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Please ensure you enter in the correct information");
             }
         }
         private void btnCancel_Click(object sender, EventArgs e)

@@ -36,7 +36,7 @@ namespace Pukki_Rental
             {
                 conn = new SqlConnection(conStr);
                 conn.Open();
-                string sql = "SELECT Type_Description FROM VEHICLE_TYPE";
+                string sql = "SELECT Type_Description FROM dbo.VEHICLE_TYPE";
                 ds = new DataSet();
                 adap = new SqlDataAdapter();
                 cmd = new SqlCommand(sql, conn);

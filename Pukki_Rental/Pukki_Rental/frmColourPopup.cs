@@ -36,7 +36,7 @@ namespace Pukki_Rental
             {
                 conn = new SqlConnection(conStr);
                 conn.Open();
-                string sql = "SELECT Colour_Name FROM VEHICLE_COLOUR";
+                string sql = "SELECT Colour_Name FROM dbo.VEHICLE_COLOUR";
                 ds = new DataSet();
                 adap = new SqlDataAdapter();
                 cmd = new SqlCommand(sql, conn);

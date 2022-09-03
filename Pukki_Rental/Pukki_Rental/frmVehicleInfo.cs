@@ -34,7 +34,8 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            sql = "SELECT * FROM dbo.VEHICLE";
+            //done in one line or the code throws a tantrum. Displays vehicle table to datagridview. changing the id's to information from their respective table
+            sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -48,7 +49,7 @@ namespace Pukki_Rental
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
-            if(rdoAdd.Checked == true)
+            if (rdoAdd.Checked == true)
             {
                 if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
                 {
@@ -60,19 +61,22 @@ namespace Pukki_Rental
                     {
                         try
                         {
+                            sql = "";
+                            int rentalstatus = 0;
                             conn.Open();
-                            //sql = $"INSERT INTO VEHICLE(Model_Description)" + $"VALUES ('{popup.}')";
-                            //sql = $"INSERT INTO VEHICLE
+                            sql = $"INSERT INTO VEHICLE(TypeID, ModelID, ColourID, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price, Rental_Status) " +
+                                $"VALUES ({popup.vTypeID}, {popup.vModelID}, {popup.vColourID}, '{popup.vehicleReg}', {popup.purchPrice}, '{popup.purchDate}', {popup.rentalCost}, {rentalstatus})";
                             adap = new SqlDataAdapter();
-                            //cmd = new SqlCommand(sql, conn);
+                            cmd = new SqlCommand(sql, conn);
                             adap.InsertCommand = cmd;
                             adap.InsertCommand.ExecuteNonQuery();
                             conn.Close();
-                            MessageBox.Show("New model successfully added");
+                            MessageBox.Show("New Vehicle successfully added");
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            MessageBox.Show("There was an error adding the new model");
+                            MessageBox.Show("There was an error adding the new Vehicle\n" + ex);
+                            conn.Close();
                         }
                     }
                 }
@@ -98,6 +102,7 @@ namespace Pukki_Rental
                         catch
                         {
                             MessageBox.Show("There was an error adding the new model");
+                            conn.Close();
                         }
                     }
 
@@ -124,6 +129,7 @@ namespace Pukki_Rental
                         catch
                         {
                             MessageBox.Show("There was an error adding the new type");
+                            conn.Close();
                         }
                     }
                 }
@@ -149,6 +155,7 @@ namespace Pukki_Rental
                         catch
                         {
                             MessageBox.Show("There was an error adding the new colour");
+                            conn.Close();
                         }
                     }
                 }
@@ -157,6 +164,26 @@ namespace Pukki_Rental
                     MessageBox.Show("Please select an option by data type above");
                 }
 
+            }
+            else if (rdoDelete.Checked == true)
+            {
+                if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
+                {
+
+                }else if(cmbTable.SelectedIndex == 1)//model
+                {
+
+                }else if(cmbTable.SelectedIndex == 2)//type
+                {
+
+                }else if(cmbTable.SelectedIndex == 3)//colour
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select an option by data type above");
+                }
             }
         }
 
@@ -186,7 +213,9 @@ namespace Pukki_Rental
                 ds = new DataSet();
                 adap = new SqlDataAdapter();
 
-                sql = "SELECT * FROM dbo.VEHICLE";
+                //done in one line or code throws a fit
+                sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+
                 cmd = new SqlCommand(sql, conn);
                 adap.SelectCommand = cmd;
                 adap.Fill(ds, "SourceTable");

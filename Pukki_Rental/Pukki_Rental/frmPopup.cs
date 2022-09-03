@@ -15,7 +15,7 @@ namespace Pukki_Rental
     {
         public string vehicleReg, purchDate;
         public double rentalCost, purchPrice;
-        public string vModelID, vTypeID, vColourID;
+        public int vModelID, vTypeID, vColourID;
         public Boolean addVehicle = false;
         string conStr = @"Data Source=DESKTOP-GVIQ2PC;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         SqlConnection conn;
@@ -33,7 +33,7 @@ namespace Pukki_Rental
         {
             conn = new SqlConnection(conStr);
             conn.Open();
-            string sql = "SELECT Type_Description FROM VEHICLE_TYPE";
+            string sql = "SELECT Type_Description FROM dbo.VEHICLE_TYPE";
             ds = new DataSet();
             adap = new SqlDataAdapter();
             cmd = new SqlCommand(sql, conn);
@@ -48,7 +48,7 @@ namespace Pukki_Rental
             
             conn = new SqlConnection(conStr);
             conn.Open();
-            sql = "SELECT Model_Description FROM VEHICLE_MODEL";
+            sql = "SELECT Model_Description FROM dbo.VEHICLE_MODEL";
             ds = new DataSet();
             adap = new SqlDataAdapter();
             cmd = new SqlCommand(sql, conn);
@@ -63,7 +63,7 @@ namespace Pukki_Rental
 
             conn = new SqlConnection(conStr);
             conn.Open();
-            sql = "SELECT Colour_Name FROM VEHICLE_COLOUR";
+            sql = "SELECT Colour_Name FROM dbo.VEHICLE_COLOUR";
             ds = new DataSet();
             adap = new SqlDataAdapter();
             cmd = new SqlCommand(sql, conn);
@@ -72,6 +72,61 @@ namespace Pukki_Rental
             while (reader.Read())
             {
                 comboBox3.Items.Add(reader.GetString(0));
+            }
+            conn.Close();
+        }
+
+
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string vType = comboBox1.GetItemText(comboBox1.SelectedItem);
+            conn.Open();
+            string sql = "SELECT * FROM dbo.VEHICLE_TYPE";
+            cmd = new SqlCommand(sql, conn);
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if(reader.GetValue(1).ToString() == vType)
+                {
+                    vTypeID = (int)(reader.GetValue(0));
+                }
+            }
+            conn.Close();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string vModel = comboBox2.GetItemText(comboBox2.SelectedItem);
+            conn.Open();
+            string sql = "SELECT * FROM dbo.VEHICLE_MODEL";
+            cmd = new SqlCommand(sql, conn);
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if (reader.GetValue(1).ToString() == vModel)
+                {
+                    vModelID = (int)(reader.GetValue(0));
+                }
+            }
+            conn.Close();
+        }
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string vColour = comboBox3.GetItemText(comboBox3.SelectedItem);
+            conn.Open();
+            string sql = "SELECT * FROM dbo.VEHICLE_COLOUR";
+            cmd = new SqlCommand(sql, conn);
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if (reader.GetValue(1).ToString() == vColour)
+                {
+                    vColourID = (int)(reader.GetValue(0));
+                }
             }
             conn.Close();
         }
@@ -86,7 +141,7 @@ namespace Pukki_Rental
             {
                 conn = new SqlConnection(conStr);
                 conn.Open();
-                string sql = "SELECT Registration_Plate FROM VEHICLE";
+                string sql = "SELECT Registration_Plate FROM dbo.VEHICLE";
                 ds = new DataSet();
                 adap = new SqlDataAdapter();
                 cmd = new SqlCommand(sql, conn);
@@ -109,7 +164,7 @@ namespace Pukki_Rental
                         vehicleReg = txtReg.Text;
                         rentalCost = Convert.ToDouble(txtRentalCost.Text);
                         purchPrice = Convert.ToDouble(txtPurchPrice.Text);
-                        if (dtPurchDate.Value < DateTime.Today)
+                        if (dtPurchDate.Value <= DateTime.Today)
                         {
                             purchDate = dtPurchDate.Value.ToString("dd-MM-yyyy");
                             addVehicle = true;
@@ -118,6 +173,7 @@ namespace Pukki_Rental
                         else
                         {
                             MessageBox.Show("Cannot choose a future date");
+                            conn.Close();
                         }
                     }
                     catch

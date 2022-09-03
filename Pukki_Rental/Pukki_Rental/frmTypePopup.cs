@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Pukki_Rental
 {
@@ -14,6 +15,12 @@ namespace Pukki_Rental
     {
         public string newType;
         public Boolean addType = false;
+        string conStr = @"Data Source=DESKTOP-GVIQ2PC;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        SqlConnection conn;
+        SqlCommand cmd;
+        SqlDataAdapter adap;
+        DataSet ds;
+        SqlDataReader reader;
         public frmTypePopup()
         {
             InitializeComponent();
@@ -27,9 +34,35 @@ namespace Pukki_Rental
             }
             else
             {
-                newType = txtType.Text;
-                addType = true;
-                this.Close();
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                string sql = "SELECT Type_Description FROM VEHICLE_TYPE";
+                ds = new DataSet();
+                adap = new SqlDataAdapter();
+                cmd = new SqlCommand(sql, conn);
+                reader = cmd.ExecuteReader();
+                int availableType = 0;
+
+                while (reader.Read())
+                {
+                    //comboBox3.Items.Add(reader.GetString(0));
+                    if (reader.GetString(0).ToLower() == txtType.Text.ToLower())
+                    {
+                        availableType += 1;
+                    }
+                }
+                conn.Close();
+
+                if (availableType == 0)
+                {
+                    newType = txtType.Text;
+                    addType = true;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("That vehicle type is already available.\nYou can try add a different type or press cancel to exit.");
+                }
             }
         }
 

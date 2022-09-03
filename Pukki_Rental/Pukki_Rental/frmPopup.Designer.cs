@@ -31,6 +31,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtPurchDate = new System.Windows.Forms.DateTimePicker();
             this.txtRentalCost = new System.Windows.Forms.TextBox();
             this.txtPurchPrice = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.dtPurchDate = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -89,6 +89,14 @@
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Vehicle Information";
+            // 
+            // dtPurchDate
+            // 
+            this.dtPurchDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.dtPurchDate.Location = new System.Drawing.Point(22, 187);
+            this.dtPurchDate.Name = "dtPurchDate";
+            this.dtPurchDate.Size = new System.Drawing.Size(296, 24);
+            this.dtPurchDate.TabIndex = 16;
             // 
             // txtRentalCost
             // 
@@ -227,25 +235,18 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Vehicle type";
             // 
-            // dtPurchDate
-            // 
-            this.dtPurchDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.dtPurchDate.Location = new System.Drawing.Point(22, 187);
-            this.dtPurchDate.Name = "dtPurchDate";
-            this.dtPurchDate.Size = new System.Drawing.Size(296, 24);
-            this.dtPurchDate.TabIndex = 16;
-            // 
             // frmPopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(410, 528);
+            this.ControlBox = false;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.btnCancel);
             this.Name = "frmPopup";
-            this.Text = "frmPopup";
+            this.Text = "Add a vehicle";
             this.Load += new System.EventHandler(this.frmPopup_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

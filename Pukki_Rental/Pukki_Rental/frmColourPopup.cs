@@ -10,25 +10,25 @@ using System.Windows.Forms;
 
 namespace Pukki_Rental
 {
-    public partial class frmModelPopup : Form
+    public partial class frmColourPopup : Form
     {
-        public string newModel;
-        public Boolean addModel = false;
-        public frmModelPopup()
+        public String newColour;
+        public Boolean addColour = false;
+        public frmColourPopup()
         {
             InitializeComponent();
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if(txtModel.Text == "")
+            if (txtColour.Text == "")
             {
-                MessageBox.Show("Please enter a model to submit");
+                MessageBox.Show("Please enter a colour to submit");
             }
             else
             {
-                newModel = txtModel.Text;
-                addModel = true;
+                newColour = txtColour.Text;
+                addColour = true;
                 this.Close();
             }
         }

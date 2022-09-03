@@ -1,6 +1,6 @@
 ﻿namespace Pukki_Rental
 {
-    partial class frmModelPopup
+    partial class frmTypePopup
     {
         /// <summary>
         /// Required designer variable.
@@ -28,64 +28,64 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCancel = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.txtType = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtModel = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnCancel.Location = new System.Drawing.Point(12, 163);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(126, 42);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnSubmit.Location = new System.Drawing.Point(159, 163);
+            this.btnSubmit.Location = new System.Drawing.Point(157, 149);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(126, 42);
-            this.btnSubmit.TabIndex = 1;
+            this.btnSubmit.TabIndex = 2;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnCancel.Location = new System.Drawing.Point(12, 149);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(126, 42);
+            this.btnCancel.TabIndex = 3;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // txtType
+            // 
+            this.txtType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.txtType.Location = new System.Drawing.Point(16, 79);
+            this.txtType.Name = "txtType";
+            this.txtType.Size = new System.Drawing.Size(179, 26);
+            this.txtType.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(8, 38);
+            this.label1.Location = new System.Drawing.Point(12, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(259, 20);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Please enter a new vehicle model";
+            this.label1.Size = new System.Drawing.Size(245, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Please enter a new vehicle type";
             // 
-            // txtModel
-            // 
-            this.txtModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtModel.Location = new System.Drawing.Point(12, 84);
-            this.txtModel.Name = "txtModel";
-            this.txtModel.Size = new System.Drawing.Size(179, 26);
-            this.txtModel.TabIndex = 3;
-            // 
-            // frmModelPopup
+            // frmTypePopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(301, 217);
+            this.ClientSize = new System.Drawing.Size(295, 203);
             this.ControlBox = false;
-            this.Controls.Add(this.txtModel);
+            this.Controls.Add(this.txtType);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.btnCancel);
-            this.Name = "frmModelPopup";
-            this.Text = "Add a model";
+            this.Controls.Add(this.btnSubmit);
+            this.Name = "frmTypePopup";
+            this.Text = "Add a vehicle type";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -93,9 +93,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtModel;
     }
 }

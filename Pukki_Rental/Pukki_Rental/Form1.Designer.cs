@@ -1,6 +1,6 @@
 ﻿namespace Pukki_Rental
 {
-    partial class frmWelcome
+    partial class frmWelcomePage
     {
         /// <summary>
         /// Required designer variable.
@@ -63,6 +63,7 @@
             this.welcomePageToolStripMenuItem.Name = "welcomePageToolStripMenuItem";
             this.welcomePageToolStripMenuItem.Size = new System.Drawing.Size(121, 24);
             this.welcomePageToolStripMenuItem.Text = "Welcome Page";
+            this.welcomePageToolStripMenuItem.Click += new System.EventHandler(this.welcomePageToolStripMenuItem_Click);
             // 
             // rentAVehicleOutToolStripMenuItem
             // 
@@ -76,7 +77,7 @@
             // ggToolStripMenuItem
             // 
             this.ggToolStripMenuItem.Name = "ggToolStripMenuItem";
-            this.ggToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ggToolStripMenuItem.Size = new System.Drawing.Size(110, 26);
             this.ggToolStripMenuItem.Text = "gg";
             // 
             // receiveVehicleBackToolStripMenuItem
@@ -134,7 +135,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmWelcome";
             this.Text = "Welcome";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

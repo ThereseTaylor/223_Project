@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Pukki_Rental
 {
-    public partial class frmWelcome : Form
+    public partial class frmWelcomePage : Form
     {
-        public frmWelcome()
+        public frmWelcomePage()
         {
             InitializeComponent();
         }
@@ -47,6 +47,14 @@ namespace Pukki_Rental
             formviewing.Dock = DockStyle.Fill; //forces child form to fill space of parent form. Doesnt help when parent form is made smaller
 
             formviewing.Show();
+        }
+
+        private void welcomePageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null) //closes previous child form
+            {
+                ActiveMdiChild.Close();
+            }
         }
     }
 }

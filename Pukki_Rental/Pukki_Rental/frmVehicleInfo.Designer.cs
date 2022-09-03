@@ -66,6 +66,7 @@
             this.cmbTable.Name = "cmbTable";
             this.cmbTable.Size = new System.Drawing.Size(166, 28);
             this.cmbTable.TabIndex = 1;
+            this.cmbTable.SelectedIndexChanged += new System.EventHandler(this.cmbTable_SelectedIndexChanged);
             // 
             // groupBox1
             // 

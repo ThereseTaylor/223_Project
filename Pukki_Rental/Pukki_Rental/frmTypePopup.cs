@@ -10,25 +10,25 @@ using System.Windows.Forms;
 
 namespace Pukki_Rental
 {
-    public partial class frmModelPopup : Form
+    public partial class frmTypePopup : Form
     {
-        public string newModel;
-        public Boolean addModel = false;
-        public frmModelPopup()
+        public string newType;
+        public Boolean addType = false;
+        public frmTypePopup()
         {
             InitializeComponent();
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if(txtModel.Text == "")
+            if (txtType.Text == "")
             {
-                MessageBox.Show("Please enter a model to submit");
+                MessageBox.Show("Please enter a type to submit");
             }
             else
             {
-                newModel = txtModel.Text;
-                addModel = true;
+                newType = txtType.Text;
+                addType = true;
                 this.Close();
             }
         }

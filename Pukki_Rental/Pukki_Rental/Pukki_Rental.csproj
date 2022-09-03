@@ -52,6 +52,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmColourPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColourPopup.Designer.cs">
+      <DependentUpon>frmColourPopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmModelPopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +76,12 @@
     <Compile Include="frmRentOut.Designer.cs">
       <DependentUpon>frmRentOut.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTypePopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTypePopup.Designer.cs">
+      <DependentUpon>frmTypePopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVehicleInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +93,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmColourPopup.resx">
+      <DependentUpon>frmColourPopup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmModelPopup.resx">
       <DependentUpon>frmModelPopup.cs</DependentUpon>
     </EmbeddedResource>
@@ -89,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRentOut.resx">
       <DependentUpon>frmRentOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTypePopup.resx">
+      <DependentUpon>frmTypePopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVehicleInfo.resx">
       <DependentUpon>frmVehicleInfo.cs</DependentUpon>

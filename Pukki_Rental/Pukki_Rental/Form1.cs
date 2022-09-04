@@ -19,7 +19,12 @@ namespace Pukki_Rental
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            frmFrontPage formviewer = new frmFrontPage();
+            formviewer.MdiParent = this;
 
+            formviewer.Dock = DockStyle.Fill;
+
+            formviewer.Show();
         }
 
         private void rentAVehicleOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -55,6 +60,13 @@ namespace Pukki_Rental
             {
                 ActiveMdiChild.Close();
             }
+
+            frmFrontPage formviewer = new frmFrontPage();
+            formviewer.MdiParent = this;
+
+            formviewer.Dock = DockStyle.Fill;
+
+            formviewer.Show();
         }
     }
 }

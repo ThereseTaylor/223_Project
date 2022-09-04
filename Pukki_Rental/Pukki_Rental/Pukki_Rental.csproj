@@ -58,6 +58,12 @@
     <Compile Include="frmColourPopup.Designer.cs">
       <DependentUpon>frmColourPopup.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFrontPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFrontPage.Designer.cs">
+      <DependentUpon>frmFrontPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmModelPopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     <EmbeddedResource Include="frmColourPopup.resx">
       <DependentUpon>frmColourPopup.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmFrontPage.resx">
+      <DependentUpon>frmFrontPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmModelPopup.resx">
       <DependentUpon>frmModelPopup.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +128,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -132,6 +142,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Car rental image 2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,6 +18,7 @@ namespace Pukki_Rental
             InitializeComponent();
         }
 
+        //tells code where its getting this data, plus some neccesary variables for using database stuff.
         string conStr = @"Data Source=DESKTOP-GVIQ2PC;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         SqlConnection conn;
         SqlCommand cmd;
@@ -49,15 +50,16 @@ namespace Pukki_Rental
 
         private void btnExecute_Click(object sender, EventArgs e)
         {
-            if (rdoAdd.Checked == true)
+            string sql;
+            //-----------------------------------------------------FOR ADDING TO DATABASE---------------------------------------------
+            if (rdoAdd.Checked == true) //add functions
             {
                 if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
                 {
-                    frmPopup popup = new frmPopup();
+                    frmPopup popup = new frmPopup(); //loads a popup used to input data that is added
                     popup.ShowDialog();
 
-                    string sql;
-                    if (popup.addVehicle == true)
+                    if (popup.addVehicle == true) //boolean variable used so it doesnt try add nothing to data, which leaves empty spaces in datagridview
                     {
                         try
                         {
@@ -73,9 +75,9 @@ namespace Pukki_Rental
                             conn.Close();
                             MessageBox.Show("New Vehicle successfully added");
                         }
-                        catch (Exception ex)
+                        catch
                         {
-                            MessageBox.Show("There was an error adding the new Vehicle\n" + ex);
+                            MessageBox.Show("There was an error adding the new Vehicle");
                             conn.Close();
                         }
                     }
@@ -85,7 +87,6 @@ namespace Pukki_Rental
                     frmModelPopup modelpopup = new frmModelPopup();
                     modelpopup.ShowDialog();
 
-                    string sql;
                     if (modelpopup.addModel == true)
                     {
                         try
@@ -112,7 +113,6 @@ namespace Pukki_Rental
                     frmTypePopup typepopup = new frmTypePopup();
                     typepopup.ShowDialog();
 
-                    string sql;
                     if (typepopup.addType == true)
                     {
                         try
@@ -138,7 +138,6 @@ namespace Pukki_Rental
                     frmColourPopup colourpopup = new frmColourPopup();
                     colourpopup.ShowDialog();
 
-                    string sql;
                     if (colourpopup.addColour == true)
                     {
                         try
@@ -165,7 +164,8 @@ namespace Pukki_Rental
                 }
 
             }
-            else if (rdoDelete.Checked == true)
+            //-----------------------------------------FOR DELETING FROM THE DATABASE---------------------------------------------------
+            else if (rdoDelete.Checked == true) //Delete functions
             {
                 if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
                 {
@@ -185,6 +185,71 @@ namespace Pukki_Rental
                     MessageBox.Show("Please select an option by data type above");
                 }
             }
+            //-------------------------------------FOR CHANGING ITEMS IN THE DATABASE--------------------------------------------------------------
+            else if (rdoChange.Checked == true) //Chance functions
+            {
+                if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
+                {
+
+                }else if(cmbTable.SelectedIndex == 1)//model
+                {
+
+                }else if(cmbTable.SelectedIndex == 2)//type
+                {
+
+                }else if(cmbTable.SelectedIndex == 3)//colour
+                {
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select an option by data type above");
+                }
+            }
+            //----------------------------Just incase they dont select an option-------------------------------------------
+            else
+            {
+                MessageBox.Show("Please select an option from functions");
+            }
+
+
+            
+            
+            //----------------------Refreshes the tables after adding/deleting/changing a new anything-----------------------------
+            conn = new SqlConnection(conStr);
+            conn.Open();
+
+            ds = new DataSet();
+            adap = new SqlDataAdapter();
+
+            if (cmbTable.SelectedIndex == 0)
+            {
+                sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+                cmd = new SqlCommand(sql, conn);
+            }
+            else if (cmbTable.SelectedIndex == 1)
+            {
+                sql = "SELECT * FROM dbo.VEHICLE_MODEL";
+                cmd = new SqlCommand(sql, conn);
+            }
+            else if (cmbTable.SelectedIndex == 2)
+            {
+                sql = "SELECT * FROM dbo.VEHICLE_TYPE";
+                cmd = new SqlCommand(sql, conn);
+            }
+            else if (cmbTable.SelectedIndex == 3)
+            {
+                sql = "SELECT * FROM dbo.VEHICLE_COLOUR";
+                cmd = new SqlCommand(sql, conn);
+            }
+
+            adap.SelectCommand = cmd;
+            adap.Fill(ds, "SourceTable");
+
+            dgVehicleInfo.DataSource = ds;
+            dgVehicleInfo.DataMember = "SourceTable";
+
+            conn.Close();
         }
 
         private void rdoChange_CheckedChanged(object sender, EventArgs e) //hides and unhides the combobox for change
@@ -203,91 +268,38 @@ namespace Pukki_Rental
 
         private void cmbTable_SelectedIndexChanged(object sender, EventArgs e) //updates the data grid to show each of the tables when selected
         {
-            if (cmbTable.SelectedIndex == 0) //vehicle
+            string sql = "";
+
+            conn = new SqlConnection(conStr);
+            conn.Open();
+
+            ds = new DataSet();
+            adap = new SqlDataAdapter();
+
+            if (cmbTable.SelectedIndex == 0)
             {
-                string sql = "";
-
-                conn = new SqlConnection(conStr);
-                conn.Open();
-
-                ds = new DataSet();
-                adap = new SqlDataAdapter();
-
-                //done in one line or code throws a fit
                 sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
-
-                cmd = new SqlCommand(sql, conn);
-                adap.SelectCommand = cmd;
-                adap.Fill(ds, "SourceTable");
-
-                dgVehicleInfo.DataSource = ds;
-                dgVehicleInfo.DataMember = "SourceTable";
-
-                conn.Close();
             }
-            else if (cmbTable.SelectedIndex == 1) //model
+            else if (cmbTable.SelectedIndex == 1)
             {
-                string sql = "";
-
-                conn = new SqlConnection(conStr);
-                conn.Open();
-
-                ds = new DataSet();
-                adap = new SqlDataAdapter();
-
                 sql = "SELECT * FROM dbo.VEHICLE_MODEL";
-
-                cmd = new SqlCommand(sql, conn);
-                adap.SelectCommand = cmd;
-                adap.Fill(ds, "SourceTable");
-
-                dgVehicleInfo.DataSource = ds;
-                dgVehicleInfo.DataMember = "SourceTable";
-
-                conn.Close();
-            }
-            else if(cmbTable.SelectedIndex == 2) //type
+            }else if (cmbTable.SelectedIndex == 2)
             {
-                string sql = "";
-
-                conn = new SqlConnection(conStr);
-                conn.Open();
-
-                ds = new DataSet();
-                adap = new SqlDataAdapter();
-
                 sql = "SELECT * FROM dbo.VEHICLE_TYPE";
-
-                cmd = new SqlCommand(sql, conn);
-                adap.SelectCommand = cmd;
-                adap.Fill(ds, "SourceTable");
-
-                dgVehicleInfo.DataSource = ds;
-                dgVehicleInfo.DataMember = "SourceTable";
-
-                conn.Close();
             }
-            else if (cmbTable.SelectedIndex == 3) //colour
+            else if (cmbTable.SelectedIndex == 3)
             {
-                string sql = "";
-
-                conn = new SqlConnection(conStr);
-                conn.Open();
-
-                ds = new DataSet();
-                adap = new SqlDataAdapter();
-
                 sql = "SELECT * FROM dbo.VEHICLE_COLOUR";
-
-                cmd = new SqlCommand(sql, conn);
-                adap.SelectCommand = cmd;
-                adap.Fill(ds, "SourceTable");
-
-                dgVehicleInfo.DataSource = ds;
-                dgVehicleInfo.DataMember = "SourceTable";
-
-                conn.Close();
             }
+
+            cmd = new SqlCommand(sql, conn);
+            adap.SelectCommand = cmd;
+            adap.Fill(ds, "SourceTable");
+
+            dgVehicleInfo.DataSource = ds;
+            dgVehicleInfo.DataMember = "SourceTable";
+
+            conn.Close();
         }
     }
 }

@@ -38,17 +38,24 @@
             this.cmbChange = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblChange = new System.Windows.Forms.Label();
+            this.cmbSelectID = new System.Windows.Forms.ComboBox();
+            this.lblSelectID = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgVehicleInfo)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgVehicleInfo
             // 
+            this.dgVehicleInfo.AllowUserToAddRows = false;
+            this.dgVehicleInfo.AllowUserToDeleteRows = false;
             this.dgVehicleInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgVehicleInfo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgVehicleInfo.Location = new System.Drawing.Point(12, 12);
             this.dgVehicleInfo.Name = "dgVehicleInfo";
+            this.dgVehicleInfo.ReadOnly = true;
             this.dgVehicleInfo.RowHeadersWidth = 51;
             this.dgVehicleInfo.RowTemplate.Height = 24;
+            this.dgVehicleInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgVehicleInfo.Size = new System.Drawing.Size(737, 490);
             this.dgVehicleInfo.TabIndex = 0;
             // 
@@ -91,6 +98,7 @@
             this.rdoChange.TabStop = true;
             this.rdoChange.Text = "Change";
             this.rdoChange.UseVisualStyleBackColor = true;
+            this.rdoChange.Visible = false;
             this.rdoChange.CheckedChanged += new System.EventHandler(this.rdoChange_CheckedChanged);
             // 
             // rdoDelete
@@ -132,9 +140,13 @@
             this.cmbChange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cmbChange.FormattingEnabled = true;
+            this.cmbChange.Items.AddRange(new object[] {
+            "Vehicle Colour",
+            "Vehicle Registration Plate",
+            "Vehicle Rental Cost"});
             this.cmbChange.Location = new System.Drawing.Point(794, 300);
             this.cmbChange.Name = "cmbChange";
-            this.cmbChange.Size = new System.Drawing.Size(166, 28);
+            this.cmbChange.Size = new System.Drawing.Size(242, 28);
             this.cmbChange.TabIndex = 4;
             this.cmbChange.Visible = false;
             // 
@@ -159,12 +171,36 @@
             this.lblChange.Text = "Data option";
             this.lblChange.Visible = false;
             // 
+            // cmbSelectID
+            // 
+            this.cmbSelectID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSelectID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cmbSelectID.FormattingEnabled = true;
+            this.cmbSelectID.Location = new System.Drawing.Point(900, 348);
+            this.cmbSelectID.Name = "cmbSelectID";
+            this.cmbSelectID.Size = new System.Drawing.Size(91, 28);
+            this.cmbSelectID.TabIndex = 6;
+            this.cmbSelectID.Visible = false;
+            // 
+            // lblSelectID
+            // 
+            this.lblSelectID.AutoSize = true;
+            this.lblSelectID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblSelectID.Location = new System.Drawing.Point(790, 351);
+            this.lblSelectID.Name = "lblSelectID";
+            this.lblSelectID.Size = new System.Drawing.Size(95, 20);
+            this.lblSelectID.TabIndex = 7;
+            this.lblSelectID.Text = "Data option";
+            this.lblSelectID.Visible = false;
+            // 
             // frmVehicleInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1095, 514);
             this.ControlBox = false;
+            this.Controls.Add(this.lblSelectID);
+            this.Controls.Add(this.cmbSelectID);
             this.Controls.Add(this.lblChange);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbChange);
@@ -196,5 +232,7 @@
         private System.Windows.Forms.RadioButton rdoChange;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblChange;
+        private System.Windows.Forms.ComboBox cmbSelectID;
+        private System.Windows.Forms.Label lblSelectID;
     }
 }

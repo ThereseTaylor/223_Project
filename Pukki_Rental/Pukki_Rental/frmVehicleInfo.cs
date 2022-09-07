@@ -13,6 +13,7 @@ namespace Pukki_Rental
 {
     public partial class frmVehicleInfo : Form
     {
+        public static int whatToChange; //need this for my change popup form
         public frmVehicleInfo()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace Pukki_Rental
         SqlCommand cmd;
         SqlDataAdapter adap;
         DataSet ds;
+        SqlDataReader reader;
 
         private void frmVehicleInfo_Load(object sender, EventArgs e)
         {
@@ -36,7 +38,7 @@ namespace Pukki_Rental
             adap = new SqlDataAdapter();
 
             //done in one line or the code throws a tantrum. Displays vehicle table to datagridview. changing the id's to information from their respective table
-            sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+            sql = "SELECT VehicleID, Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -167,16 +169,20 @@ namespace Pukki_Rental
             //-----------------------------------------FOR DELETING FROM THE DATABASE---------------------------------------------------
             else if (rdoDelete.Checked == true) //Delete functions
             {
-                if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
+
+                if (cmbChange.SelectedIndex == 0) //vehicle
                 {
 
-                }else if(cmbTable.SelectedIndex == 1)//model
+                }
+                else if(cmbChange.SelectedIndex == 1)//model
                 {
 
-                }else if(cmbTable.SelectedIndex == 2)//type
+                }
+                else if(cmbChange.SelectedIndex == 2)//type
                 {
 
-                }else if(cmbTable.SelectedIndex == 3)//colour
+                }
+                else if (cmbChange.SelectedIndex == 3)//colour
                 {
 
                 }
@@ -188,22 +194,82 @@ namespace Pukki_Rental
             //-------------------------------------FOR CHANGING ITEMS IN THE DATABASE--------------------------------------------------------------
             else if (rdoChange.Checked == true) //Chance functions
             {
-                if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
+                if (cmbChange.SelectedItem != null && cmbSelectID.SelectedItem != null)
                 {
+                    whatToChange = cmbChange.SelectedIndex;
+                    frmChangePopup changePopup = new frmChangePopup();
+                    changePopup.ShowDialog();
 
-                }else if(cmbTable.SelectedIndex == 1)//model
-                {
-
-                }else if(cmbTable.SelectedIndex == 2)//type
-                {
-
-                }else if(cmbTable.SelectedIndex == 3)//colour
-                {
-
+                    if (cmbChange.SelectedIndex == 0) //colour
+                    {
+                        if (changePopup.makeChange == true)
+                        {
+                            try
+                            {
+                                conn.Open();
+                                sql = $"UPDATE VEHICLE SET ColourID = {changePopup.changeColourID} WHERE VehicleID = {cmbSelectID.SelectedItem}";
+                                adap = new SqlDataAdapter();
+                                cmd = new SqlCommand(sql, conn);
+                                adap.InsertCommand = cmd;
+                                adap.InsertCommand.ExecuteNonQuery();
+                                conn.Close();
+                                MessageBox.Show("Colour successfully changed");
+                            }
+                            catch
+                            {
+                                MessageBox.Show("There was an error changing the colour");
+                                conn.Close();
+                            }
+                        }
+                    }
+                    else if (cmbChange.SelectedIndex == 1)//regi
+                    {
+                        if (changePopup.makeChange == true)
+                        {
+                            try
+                            {
+                                conn.Open();
+                                sql = $"UPDATE VEHICLE SET Registration_Plate = '{changePopup.changeRegistration}' WHERE VehicleID = {cmbSelectID.SelectedItem}";
+                                adap = new SqlDataAdapter();
+                                cmd = new SqlCommand(sql, conn);
+                                adap.InsertCommand = cmd;
+                                adap.InsertCommand.ExecuteNonQuery();
+                                conn.Close();
+                                MessageBox.Show("Vehicle Registration successfully Changed");
+                            }
+                            catch
+                            {
+                                MessageBox.Show("There was an error changing the vehicle registration");
+                                conn.Close();
+                            }
+                        }
+                    }
+                    else if (cmbChange.SelectedIndex == 2)//rental price
+                    {
+                        if (changePopup.makeChange == true)
+                        {
+                            try
+                            {
+                                conn.Open();
+                                sql = $"UPDATE VEHICLE SET Rental_Price = '{changePopup.changeRentalCost}' WHERE VehicleID = {cmbSelectID.SelectedItem}";
+                                adap = new SqlDataAdapter();
+                                cmd = new SqlCommand(sql, conn);
+                                adap.InsertCommand = cmd;
+                                adap.InsertCommand.ExecuteNonQuery();
+                                conn.Close();
+                                MessageBox.Show("Rental Price successfully Changed");
+                            }
+                            catch
+                            {
+                                MessageBox.Show("There was an error changing the rental price");
+                                conn.Close();
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Please select an option by data type above");
+                    MessageBox.Show("Please ensure to select which data type you would like to change and the ID of the vehicle");
                 }
             }
             //----------------------------Just incase they dont select an option-------------------------------------------
@@ -224,7 +290,7 @@ namespace Pukki_Rental
 
             if (cmbTable.SelectedIndex == 0)
             {
-                sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+                sql = "SELECT VehicleID, Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
                 cmd = new SqlCommand(sql, conn);
             }
             else if (cmbTable.SelectedIndex == 1)
@@ -258,12 +324,30 @@ namespace Pukki_Rental
             {
                 cmbChange.Visible = true;
                 lblChange.Visible = true;
+                cmbSelectID.Visible = true;
+                lblSelectID.Visible = true;
             }
             else
             {
                 cmbChange.Visible = false;
                 lblChange.Visible = false;
+                cmbSelectID.Visible = false;
+                lblSelectID.Visible = false;
             }
+            conn = new SqlConnection(conStr);
+            conn.Open();
+            string sql = "SELECT VehicleID FROM dbo.VEHICLE";
+            ds = new DataSet();
+            adap = new SqlDataAdapter();
+            cmd = new SqlCommand(sql, conn);
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                cmbSelectID.Items.Add(reader.GetValue(0));
+            }
+
+            conn.Close();
         }
 
         private void cmbTable_SelectedIndexChanged(object sender, EventArgs e) //updates the data grid to show each of the tables when selected
@@ -276,20 +360,28 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            if (cmbTable.SelectedIndex == 0)
+            if (cmbTable.SelectedIndex == 0) //vehicle
             {
-                sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+                sql = "SELECT VehicleID, Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+                rdoChange.Visible = true;
             }
-            else if (cmbTable.SelectedIndex == 1)
+            else if (cmbTable.SelectedIndex == 1) //model
             {
                 sql = "SELECT * FROM dbo.VEHICLE_MODEL";
-            }else if (cmbTable.SelectedIndex == 2)
+                rdoChange.Visible = false;
+                rdoChange.Checked = false;
+            }
+            else if (cmbTable.SelectedIndex == 2)//type
             {
                 sql = "SELECT * FROM dbo.VEHICLE_TYPE";
+                rdoChange.Visible = false;
+                rdoChange.Checked = false;
             }
-            else if (cmbTable.SelectedIndex == 3)
+            else if (cmbTable.SelectedIndex == 3)//colour
             {
                 sql = "SELECT * FROM dbo.VEHICLE_COLOUR";
+                rdoChange.Visible = false;
+                rdoChange.Checked = false;
             }
 
             cmd = new SqlCommand(sql, conn);

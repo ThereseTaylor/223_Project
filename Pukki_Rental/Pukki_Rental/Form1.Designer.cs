@@ -78,6 +78,7 @@
             this.receiveVehicleBackToolStripMenuItem.Name = "receiveVehicleBackToolStripMenuItem";
             this.receiveVehicleBackToolStripMenuItem.Size = new System.Drawing.Size(136, 20);
             this.receiveVehicleBackToolStripMenuItem.Text = "Receive a Vehicle Back";
+            this.receiveVehicleBackToolStripMenuItem.Click += new System.EventHandler(this.receiveVehicleBackToolStripMenuItem_Click);
             // 
             // vehicleInformationToolStripMenuItem
             // 

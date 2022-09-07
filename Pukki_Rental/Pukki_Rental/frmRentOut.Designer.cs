@@ -35,6 +35,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.dgVehicle = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgRentOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgVehicle)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +64,7 @@
             // cmbxType
             // 
             this.cmbxType.FormattingEnabled = true;
-            this.cmbxType.Location = new System.Drawing.Point(248, 52);
+            this.cmbxType.Location = new System.Drawing.Point(300, 52);
             this.cmbxType.Name = "cmbxType";
             this.cmbxType.Size = new System.Drawing.Size(121, 21);
             this.cmbxType.TabIndex = 4;
@@ -103,12 +105,32 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "How long will the client be renting the vehicle:";
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(300, 457);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 9;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(578, 458);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "DONE";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmRentOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1054, 559);
             this.ControlBox = false;
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dgVehicle);
             this.Controls.Add(this.label3);
@@ -136,5 +158,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgVehicle;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button button1;
     }
 }

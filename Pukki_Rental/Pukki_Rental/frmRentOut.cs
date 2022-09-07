@@ -52,6 +52,7 @@ namespace Pukki_Rental
             label3.Text = "";
             dgVehicle.Hide();
             label4.Text = "";
+            dateTimePicker1.Hide();
         }
 
         int clientID;
@@ -175,30 +176,57 @@ namespace Pukki_Rental
                     carID = (int)reader.GetValue(0);
                     rentalR = reader.GetValue(1).ToString();
                 }
-                MessageBox.Show("Thank you.", "VEHICLE", MessageBoxButtons.OK);
+ 
                 conn.Close();
 
                 label4.Text = "How long will the client be renting the vehicle?";
-                DateTime today = DateTime.Today;
-
-                try
-                {
-                    conn.Open();
-                    sql = $"INSERT INTO dbo.RENTAL_TRANSACTION (VehicleID, ClientID, Transaction_Price, Transaction_Date, Return_Status) VALUES ({carID},{clientID},{rentalR},'{today}','{"N"}')";
-                    adap.InsertCommand = cmd;
-                    adap.InsertCommand.ExecuteNonQuery();
-                    conn.Close();
-                }
-                catch (Exception message)
-                {
-                    MessageBox.Show(message.ToString());
-                }
+                dateTimePicker1.Show();
                 
             }
             else if (Result == DialogResult.No)
             {
                 MessageBox.Show("Then please choose the correct vehicle.", "VEHICLE", MessageBoxButtons.OK);
             }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DateTime today = DateTime.Today;
+            String ReturnDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
+            int days = (Convert.ToDateTime(ReturnDate) - today).Days;
+            double transactPrice = Convert.ToDouble(rentalR) * days;
+
+            string messageDays = "This will be " + days.ToString() + "days in total. The total for this period is R" + transactPrice.ToString() + ". Does the client agree to this?";
+
+            DialogResult dialogResult = MessageBox.Show(messageDays, "RENTAL", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    conn.Open();
+                    string sql = $"INSERT INTO dbo.RENTAL_TRANSACTION (VehicleID, ClientID, Transaction_Price, Transaction_Date, Return_Date, Return_Status) VALUES ({carID},{clientID},{transactPrice},'{today}','{ReturnDate}','{"N"}')";
+                    adap = new SqlDataAdapter();
+                    cmd = new SqlCommand(sql, conn);
+                    adap.InsertCommand = cmd;
+                    adap.InsertCommand.ExecuteNonQuery();
+                    conn.Close();
+                    MessageBox.Show("The rental purchase is finalised!", "RENTAL", MessageBoxButtons.OK);
+                }
+                catch (Exception message)
+                {
+                    MessageBox.Show(message.ToString());
+                }
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                MessageBox.Show("Then please choose the correct date.", "RENTAL", MessageBoxButtons.OK);
+            }
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
 
         }
     }

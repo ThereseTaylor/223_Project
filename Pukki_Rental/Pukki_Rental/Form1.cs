@@ -45,5 +45,10 @@ namespace Pukki_Rental
         {
             this.Close();
         }
+
+        private void ggToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

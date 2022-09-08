@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.cmbMonth = new System.Windows.Forms.ComboBox();
-            this.btnExportText = new System.Windows.Forms.Button();
             this.comboReports = new System.Windows.Forms.ComboBox();
             this.lblHeader = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.gvReport = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvReport)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbMonth
@@ -55,27 +54,16 @@
             "October",
             "November",
             "December"});
-            this.cmbMonth.Location = new System.Drawing.Point(225, 83);
+            this.cmbMonth.Location = new System.Drawing.Point(547, 124);
             this.cmbMonth.Name = "cmbMonth";
-            this.cmbMonth.Size = new System.Drawing.Size(85, 24);
+            this.cmbMonth.Size = new System.Drawing.Size(143, 24);
             this.cmbMonth.TabIndex = 7;
             this.cmbMonth.SelectedIndexChanged += new System.EventHandler(this.cmbMonth_SelectedIndexChanged);
-            // 
-            // btnExportText
-            // 
-            this.btnExportText.Enabled = false;
-            this.btnExportText.Location = new System.Drawing.Point(83, 407);
-            this.btnExportText.Name = "btnExportText";
-            this.btnExportText.Size = new System.Drawing.Size(192, 35);
-            this.btnExportText.TabIndex = 6;
-            this.btnExportText.Text = "Export as text file";
-            this.btnExportText.UseVisualStyleBackColor = true;
-            this.btnExportText.Click += new System.EventHandler(this.btnExportText_Click);
             // 
             // comboReports
             // 
             this.comboReports.FormattingEnabled = true;
-            this.comboReports.Location = new System.Drawing.Point(350, 83);
+            this.comboReports.Location = new System.Drawing.Point(757, 124);
             this.comboReports.Name = "comboReports";
             this.comboReports.Size = new System.Drawing.Size(220, 24);
             this.comboReports.TabIndex = 4;
@@ -84,27 +72,28 @@
             // lblHeader
             // 
             this.lblHeader.AutoSize = true;
-            this.lblHeader.Location = new System.Drawing.Point(350, 123);
+            this.lblHeader.Location = new System.Drawing.Point(758, 198);
             this.lblHeader.Name = "lblHeader";
             this.lblHeader.Size = new System.Drawing.Size(44, 16);
             this.lblHeader.TabIndex = 8;
             this.lblHeader.Text = "label1";
             // 
-            // dataGridView1
+            // gvReport
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 149);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(781, 252);
-            this.dataGridView1.TabIndex = 9;
+            this.gvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvReport.Location = new System.Drawing.Point(85, 224);
+            this.gvReport.Name = "gvReport";
+            this.gvReport.RowHeadersWidth = 51;
+            this.gvReport.RowTemplate.Height = 24;
+            this.gvReport.Size = new System.Drawing.Size(1456, 449);
+            this.gvReport.TabIndex = 9;
+            this.gvReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(306, 20);
+            this.label1.Location = new System.Drawing.Point(714, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(117, 31);
             this.label1.TabIndex = 10;
@@ -113,7 +102,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(222, 64);
+            this.label2.Location = new System.Drawing.Point(544, 105);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 16);
             this.label2.TabIndex = 11;
@@ -122,7 +111,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(350, 64);
+            this.label3.Location = new System.Drawing.Point(757, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(126, 16);
             this.label3.TabIndex = 12;
@@ -132,19 +121,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 540);
+            this.ClientSize = new System.Drawing.Size(1628, 703);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.gvReport);
             this.Controls.Add(this.lblHeader);
             this.Controls.Add(this.cmbMonth);
-            this.Controls.Add(this.btnExportText);
             this.Controls.Add(this.comboReports);
             this.Name = "frmReports";
             this.Text = "frmReports";
             this.Load += new System.EventHandler(this.frmReports_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvReport)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,10 +141,9 @@
         #endregion
 
         private System.Windows.Forms.ComboBox cmbMonth;
-        private System.Windows.Forms.Button btnExportText;
         private System.Windows.Forms.ComboBox comboReports;
         private System.Windows.Forms.Label lblHeader;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView gvReport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

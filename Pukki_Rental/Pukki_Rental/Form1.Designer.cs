@@ -31,7 +31,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.welcomePageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rentAVehicleOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ggToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.receiveVehicleBackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vehicleInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vehicleModelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,18 +72,10 @@
             // 
             // rentAVehicleOutToolStripMenuItem
             // 
-            this.rentAVehicleOutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ggToolStripMenuItem});
             this.rentAVehicleOutToolStripMenuItem.Name = "rentAVehicleOutToolStripMenuItem";
             this.rentAVehicleOutToolStripMenuItem.Size = new System.Drawing.Size(148, 24);
             this.rentAVehicleOutToolStripMenuItem.Text = "Rent Out a Vehicle ";
             this.rentAVehicleOutToolStripMenuItem.Click += new System.EventHandler(this.rentAVehicleOutToolStripMenuItem_Click);
-            // 
-            // ggToolStripMenuItem
-            // 
-            this.ggToolStripMenuItem.Name = "ggToolStripMenuItem";
-            this.ggToolStripMenuItem.Size = new System.Drawing.Size(110, 26);
-            this.ggToolStripMenuItem.Text = "gg";
             // 
             // receiveVehicleBackToolStripMenuItem
             // 
@@ -106,25 +97,25 @@
             // vehicleModelToolStripMenuItem
             // 
             this.vehicleModelToolStripMenuItem.Name = "vehicleModelToolStripMenuItem";
-            this.vehicleModelToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.vehicleModelToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.vehicleModelToolStripMenuItem.Text = "Vehicle Inventory";
             // 
             // vehicleTypeToolStripMenuItem
             // 
             this.vehicleTypeToolStripMenuItem.Name = "vehicleTypeToolStripMenuItem";
-            this.vehicleTypeToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.vehicleTypeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.vehicleTypeToolStripMenuItem.Text = "Vehicle Type";
             // 
             // vehicleColourToolStripMenuItem
             // 
             this.vehicleColourToolStripMenuItem.Name = "vehicleColourToolStripMenuItem";
-            this.vehicleColourToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.vehicleColourToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.vehicleColourToolStripMenuItem.Text = "Vehicle Colour";
             // 
             // vehicleModelToolStripMenuItem1
             // 
             this.vehicleModelToolStripMenuItem1.Name = "vehicleModelToolStripMenuItem1";
-            this.vehicleModelToolStripMenuItem1.Size = new System.Drawing.Size(204, 26);
+            this.vehicleModelToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.vehicleModelToolStripMenuItem1.Text = "Vehicle Model";
             // 
             // clientInformationToolStripMenuItem
@@ -140,19 +131,19 @@
             // addressToolStripMenuItem
             // 
             this.addressToolStripMenuItem.Name = "addressToolStripMenuItem";
-            this.addressToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.addressToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.addressToolStripMenuItem.Text = "Client Details";
             // 
             // townToolStripMenuItem
             // 
             this.townToolStripMenuItem.Name = "townToolStripMenuItem";
-            this.townToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
+            this.townToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.townToolStripMenuItem.Text = "Address";
             // 
             // townToolStripMenuItem1
             // 
             this.townToolStripMenuItem1.Name = "townToolStripMenuItem1";
-            this.townToolStripMenuItem1.Size = new System.Drawing.Size(180, 26);
+            this.townToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.townToolStripMenuItem1.Text = "Town";
             // 
             // reportsToolStripMenuItem
@@ -177,7 +168,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmWelcome";
             this.Text = "Welcome";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -203,7 +194,6 @@
         private System.Windows.Forms.ToolStripMenuItem addressToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem townToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ggToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vehicleModelToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem townToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;

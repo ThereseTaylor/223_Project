@@ -24,7 +24,7 @@ CREATE TABLE VEHICLE(
     Registration_Plate varchar(10),
     Purchase_Price money,
     Purchase_Date date,
-    Rental_Price mone,
+    Rental_Price money,
     Rental_Status int
 );
 

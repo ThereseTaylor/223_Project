@@ -23,3 +23,8 @@ C:\Users\renzi\OneDrive\Desktop\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\
 C:\Users\renzi\OneDrive\Desktop\223_Project\Pukki_Rental\Pukki_Rental\bin\Debug\Pukki_Rental.exe.config
 C:\Users\renzi\OneDrive\Desktop\223_Project\Pukki_Rental\Pukki_Rental\bin\Debug\Pukki_Rental.exe
 C:\Users\renzi\OneDrive\Desktop\223_Project\Pukki_Rental\Pukki_Rental\bin\Debug\Pukki_Rental.pdb
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmAddress.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmClientDetails.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmReceiveBack.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmReports.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmTown.resources

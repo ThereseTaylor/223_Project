@@ -35,5 +35,31 @@ namespace Pukki_Rental
             myformView.MdiParent = this;
             myformView.Show();
         }
+
+        private void vehicleModelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void townToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddress myformView = new frmAddress();
+            myformView.MdiParent = this;
+            myformView.Show();
+        }
+
+        private void clientListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmClientDetails myformView = new frmClientDetails();
+            myformView.MdiParent = this;
+            myformView.Show();
+        }
+
+        private void townToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmTown myformView = new frmTown();
+            myformView.MdiParent = this;
+            myformView.Show();
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Pukki_Rental
 {
     public partial class frmClientDetails : Form
     {
-        private static string connectionStr = "Data Source=DESKTOP-3MUDLG5;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private static string connectionStr = "Data Source=LAPTOP-8IITND7R;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         SqlConnection sqlConnection = new SqlConnection(connectionStr);
         SqlCommand sqlCommand;
         SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();

@@ -28,5 +28,12 @@ namespace Pukki_Rental
             myformView.MdiParent = this;
             myformView.Show();
         }
+
+        private void receiveVehicleBackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReceiveBack myformView = new frmReceiveBack();
+            myformView.MdiParent = this;
+            myformView.Show();
+        }
     }
 }

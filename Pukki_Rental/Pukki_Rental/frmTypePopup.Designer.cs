@@ -86,6 +86,7 @@
             this.Controls.Add(this.btnSubmit);
             this.Name = "frmTypePopup";
             this.Text = "Add a vehicle type";
+            this.Load += new System.EventHandler(this.frmTypePopup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -46,17 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="f2pop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="f2pop.Designer.cs">
+      <DependentUpon>f2pop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmChangePopup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmChangePopup.Designer.cs">
-      <DependentUpon>frmChangePopup.cs</DependentUpon>
     </Compile>
     <Compile Include="frmColourPopup.cs">
       <SubType>Form</SubType>
@@ -102,11 +102,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="f2pop.resx">
+      <DependentUpon>f2pop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmChangePopup.resx">
-      <DependentUpon>frmChangePopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmColourPopup.resx">
       <DependentUpon>frmColourPopup.cs</DependentUpon>

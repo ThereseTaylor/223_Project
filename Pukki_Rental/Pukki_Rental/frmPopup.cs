@@ -146,18 +146,18 @@ namespace Pukki_Rental
                 adap = new SqlDataAdapter();
                 cmd = new SqlCommand(sql, conn);
                 reader = cmd.ExecuteReader();
-                int availableReg = 0;
+                int availableColour = 0;
 
                 while (reader.Read())
                 {
                     if (reader.GetString(0).ToLower() == txtReg.Text.ToLower())
                     {
-                        availableReg += 1;
+                        availableColour += 1;
                     }
                 }
                 conn.Close();
 
-                if (availableReg == 0)
+                if (availableColour == 0)
                 {
                     try
                     {
@@ -189,7 +189,6 @@ namespace Pukki_Rental
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            conn.Close();
             this.Close();
         }
         

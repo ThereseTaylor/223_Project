@@ -18,7 +18,7 @@ namespace Pukki_Rental
             InitializeComponent();
         }
 
-        string conStr = @"Data Source=DESKTOP-GVIQ2PC;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string conStr = @"Data Source=LAPTOP-ON3GIIKN\SQLEXPRESS;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adap;

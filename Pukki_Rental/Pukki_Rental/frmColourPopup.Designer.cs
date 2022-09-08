@@ -48,7 +48,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label1.Location = new System.Drawing.Point(12, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(260, 20);
+            this.label1.Size = new System.Drawing.Size(325, 25);
             this.label1.TabIndex = 8;
             this.label1.Text = "Please enter a new vehicle colour";
             // 

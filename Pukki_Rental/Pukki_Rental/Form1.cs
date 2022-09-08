@@ -8,13 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace Pukki_Rental
 {
     public partial class frmWelcome : Form
     {
-       
-
         public frmWelcome()
         {
             InitializeComponent();
@@ -32,27 +29,23 @@ namespace Pukki_Rental
             myformView.Show();
         }
 
-        private void vehicleModelToolStripMenuItem_Click(object sender, EventArgs e)
+        private void receiveVehicleBackToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmReceiveBack myformView = new frmReceiveBack();
+            myformView.MdiParent = this;
+            myformView.Show();
         }
 
-        private void addressToolStripMenuItem_Click(object sender, EventArgs e)
+        private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmClientDetails frmClientDetails = new frmClientDetails();
-            frmClientDetails.Show(this);
+            frmReports myformView = new frmReports();
+            myformView.MdiParent = this;
+            myformView.Show();
         }
 
-        private void townToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddress frmAddress = new frmAddress();
-            frmAddress.Show(this);
-        }
-
-        private void townToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            frmTown frmTown = new frmTown();
-            frmTown.Show(this);
+            this.Close();
         }
     }
 }

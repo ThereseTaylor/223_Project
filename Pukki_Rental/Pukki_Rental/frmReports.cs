@@ -146,7 +146,7 @@ namespace Pukki_Rental
                 }
                 else if (comboReports.SelectedIndex == 3) // Management report
                 {
-                    sql = "SELECT VehicleID, TypeID, ModelID, ColourID, Registration_Plate, Rental_Price, Rental_Status FROM VEHICLE WHERE Rental_Status > 0";
+                    sql = "SELECT VehicleID, TypeID, ModelID, ColourID, Registration_Plate, Rental_Price, Rental_Status FROM VEHICLE WHERE Rental_Status = 0";
                     lblHeader.Text = "Vehicles currently out rented";
                 }
 

@@ -49,10 +49,10 @@ namespace Pukki_Rental
             conn.Close();
 
             cmbxType.Hide();
-            label3.Text = "";
             dgVehicle.Hide();
             label4.Text = "";
             dateTimePicker1.Hide();
+            button1.Hide();
         }
 
         int clientID;
@@ -64,50 +64,51 @@ namespace Pukki_Rental
             string clientPrompt = dgRentOut.Rows[e.RowIndex].Cells[2].Value.ToString() + " " + dgRentOut.Rows[e.RowIndex].Cells[1].Value.ToString() + " ID: " + dgRentOut.Rows[e.RowIndex].Cells[3].Value.ToString();
             string sql = "";
 
-            conn.Open();
-            sql = "SELECT ClientID, Return_Status " +
-                "FROM dbo.RENTAL_TRANSACTION " +
-                "WHERE Return_Status = 'N' OR Return_Status = 'O' ";
-            cmd = new SqlCommand(sql, conn);
-            reader = cmd.ExecuteReader();
             Boolean myflag = false;
 
-            while (reader.Read())
+            string title = "Are you sure " + clientPrompt + " is the correct client?";
+
+            DialogResult dialogResult = MessageBox.Show(title, "CLIENT", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                if (reader.GetValue(0).ToString() == clientID.ToString())
+                conn.Open();
+                string idNo = dgRentOut.Rows[e.RowIndex].Cells[2].Value.ToString();
+                sql = "SELECT ClientID FROM dbo.CLIENT WHERE ClientID_Number = " + idNo;
+                cmd = new SqlCommand(sql, conn);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    DialogResult dialog = MessageBox.Show("This client is currently renting another car.", "CLIENT", MessageBoxButtons.OK);
-                    myflag = true;
+                    clientID = (int)reader.GetValue(0);
                 }
-            }
 
-            conn.Close();
+                conn.Close();
 
-            if (!myflag)
-            {
-                string title = "Are you sure " + clientPrompt + " is the correct client?";
+                conn.Open();
+                sql = "SELECT C.ClientID FROM dbo.RENTAL_TRANSACTION R, dbo.CLIENT C, dbo.VEHICLE V WHERE C.ClientID = R.ClientID AND R.VehicleID = V.VehicleID AND V.Rental_Status = 0";
+                cmd = new SqlCommand(sql, conn);
+                reader = cmd.ExecuteReader();
 
-                DialogResult dialogResult = MessageBox.Show(title, "CLIENT", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                while (reader.Read())
                 {
-                    conn.Open();
-                    string idNo = dgRentOut.Rows[e.RowIndex].Cells[2].Value.ToString();
-                    sql = "SELECT ClientID FROM dbo.CLIENT WHERE ClientID_Number = " + idNo;
-                    cmd = new SqlCommand(sql, conn);
-                    reader = cmd.ExecuteReader();
-
-                    while (reader.Read())
+                    if ((int)reader.GetValue(0) == clientID)
                     {
-                        clientID = (int)reader.GetValue(0);
+                        MessageBox.Show("This client is curently renting a car, they cannot rent another one.", "CLIENT", MessageBoxButtons.OK);
+                        myflag = true;
+                        break;
                     }
+                }
 
-                    conn.Close();
+                conn.Close();
 
+                if (!myflag)
+                {
                     dgRentOut.DataSource = null;
                     dgRentOut.Hide();
+                    textBox1.Hide();
 
-                    label1.Text = "Double click on the vehicle the client wants to rent:";
-                    label3.Text = "Choose the clients preferred vehicle type:";
+                    label5.Text = "Double click on the vehicle the client wants to rent:";
+                    label1.Text = "Choose the clients preferred vehicle type:";
 
                     cmbxType.Show();
                     conn.Open();
@@ -121,15 +122,12 @@ namespace Pukki_Rental
                     }
 
                     conn.Close();
-
                 }
-                else if (dialogResult == DialogResult.No)
-                {
-                    MessageBox.Show("Then please choose the correct client.", "CLIENT", MessageBoxButtons.OK);
-                }
-
             }
-
+            else if (dialogResult == DialogResult.No)
+            {
+                MessageBox.Show("Then please choose the correct client.", "CLIENT", MessageBoxButtons.OK);
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -143,9 +141,9 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Rental_Price " +
-                "FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M, dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C " +
-                "WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND Rental_Status = 0";
+            sql = "SELECT DISTINCT Model_Description, Type_Description, Colour_Name, Registration_Plate, Rental_Price " +
+                "FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M, dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C, dbo.RENTAL_TRANSACTION R " +
+                "WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND V.Rental_Status = 1";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -176,11 +174,12 @@ namespace Pukki_Rental
                     carID = (int)reader.GetValue(0);
                     rentalR = reader.GetValue(1).ToString();
                 }
- 
+
                 conn.Close();
 
                 label4.Text = "How long will the client be renting the vehicle?";
                 dateTimePicker1.Show();
+                button1.Show();
                 
             }
             else if (Result == DialogResult.No)
@@ -193,41 +192,75 @@ namespace Pukki_Rental
         private void button1_Click(object sender, EventArgs e)
         {
             DateTime today = DateTime.Today;
-            String ReturnDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
-            int days = (Convert.ToDateTime(ReturnDate) - today).Days;
-            double transactPrice = Convert.ToDouble(rentalR) * days;
-
-            string messageDays = "This will be " + days.ToString() + "days in total. The total for this period is R" + transactPrice.ToString() + ". Does the client agree to this?";
-
-            DialogResult dialogResult = MessageBox.Show(messageDays, "RENTAL", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            if (dateTimePicker1.Value >= DateTime.Today)
             {
-                try
+                String ReturnDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
+                int days = (Convert.ToDateTime(ReturnDate) - today).Days;
+
+                if (days == 0)
                 {
-                    conn.Open();
-                    string sql = $"INSERT INTO dbo.RENTAL_TRANSACTION (VehicleID, ClientID, Transaction_Price, Transaction_Date, Return_Date, Return_Status) VALUES ({carID},{clientID},{transactPrice},'{today}','{ReturnDate}','{"N"}')";
-                    adap = new SqlDataAdapter();
-                    cmd = new SqlCommand(sql, conn);
-                    adap.InsertCommand = cmd;
-                    adap.InsertCommand.ExecuteNonQuery();
-                    conn.Close();
-                    MessageBox.Show("The rental purchase is finalised!", "RENTAL", MessageBoxButtons.OK);
+                    days = 1;
                 }
-                catch (Exception message)
+                double transactPrice = Convert.ToDouble(rentalR) * days;
+
+                string messageDays = "This will be " + days.ToString() + "days in total. The total for this period is R" + transactPrice.ToString() + ". Does the client agree to this?";
+
+                DialogResult dialogResult = MessageBox.Show(messageDays, "RENTAL", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    MessageBox.Show(message.ToString());
+                    try
+                    {
+                        conn.Open();
+                        string sql = $"INSERT INTO dbo.RENTAL_TRANSACTION (VehicleID, ClientID, Transaction_Price, Transaction_Date, Return_Date) VALUES ({carID},{clientID},{transactPrice},'{today}','{ReturnDate}')";
+                        adap = new SqlDataAdapter();
+                        cmd = new SqlCommand(sql, conn);
+                        adap.InsertCommand = cmd;
+                        adap.InsertCommand.ExecuteNonQuery();
+                        conn.Close();
+                        MessageBox.Show("The rental purchase is finalised!", "RENTAL", MessageBoxButtons.OK);
+
+                        conn.Open();
+                        sql = "UPDATE dbo.VEHICLE SET Rental_Status = 0 WHERE VehicleID = '" + carID + "'";
+                        adap = new SqlDataAdapter();
+                        cmd = new SqlCommand(sql, conn);
+                        adap.UpdateCommand = cmd;
+                        adap.UpdateCommand.ExecuteNonQuery();
+                        conn.Close();
+
+                    }
+                    catch (Exception message)
+                    {
+                        MessageBox.Show(message.ToString());
+                    }
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    MessageBox.Show("Then please choose the correct date.", "RENTAL", MessageBoxButtons.OK);
                 }
             }
-            else if (dialogResult == DialogResult.No)
+            else
             {
-                MessageBox.Show("Then please choose the correct date.", "RENTAL", MessageBoxButtons.OK);
+                MessageBox.Show("Please choose a date in the future.", "DATE", MessageBoxButtons.OK);
             }
 
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            string sql = "";
 
+            conn.Open();
+            ds = new DataSet();
+            adap = new SqlDataAdapter();
+            sql = "SELECT ClientLN, ClientFN, ClientID_Number, Tel_Number, Email, Street_Number, Street_Name " +
+                  "FROM dbo.CLIENT C, dbo.ADDRESS A WHERE C.AddressID = A.AddressID AND UPPER(C.ClientFN) LIKE UPPER('%" + textBox1.Text + "%') ";
+            cmd = new SqlCommand(sql, conn);
+            adap.SelectCommand = cmd;
+            adap.Fill(ds, "SourceTable");
+
+            dgRentOut.DataSource = ds;
+            dgRentOut.DataMember = "SourceTable";
+            conn.Close();
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            sql = "SELECT ClientLN, Registration_Plate FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE Return_Status = 'N' AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID ";
+            sql = "SELECT ClientFN, ClientLN, Registration_Plate FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE v.Rental_Status = 0 AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID ";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -50,12 +50,12 @@ namespace Pukki_Rental
         private void dgReceiveBack_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int carID = 0;
-            int transactionID = 0;
+
             DialogResult Result = MessageBox.Show("", "RETURN", MessageBoxButtons.YesNo);
             if (Result == DialogResult.Yes)
             {
                 conn.Open();
-                string regPlate = dgReceiveBack.Rows[e.RowIndex].Cells[1].Value.ToString();
+                string regPlate = dgReceiveBack.Rows[e.RowIndex].Cells[2].Value.ToString();
                 string sql = "SELECT VehicleID FROM dbo.VEHICLE WHERE Registration_Plate = '" + regPlate + "'";
                 cmd = new SqlCommand(sql, conn);
                 reader = cmd.ExecuteReader();
@@ -65,21 +65,10 @@ namespace Pukki_Rental
                     carID = (int)reader.GetValue(0);
                 }
                 conn.Close();
-
-
-                conn.Open();
-                sql = "SELECT TransactionID FROM dbo.RENTAL_TRANSACTION WHERE VehicleID = '" + carID + "' AND Return_Status = 'N' ";
-                cmd = new SqlCommand(sql, conn);
-                reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    transactionID = (int)reader.GetValue(0);
-                }
-                conn.Close();
+                MessageBox.Show(carID.ToString());
 
                 conn.Open();
-                sql = "UPDATE dbo.RENTAL_TRANSACTION SET Return_Status = 'Y' WHERE TransactionID = '" + transactionID + "'";
+                sql = "UPDATE dbo.VEHICLE SET Rental_Status = 1 WHERE VehicleID = '" + carID + "'";
                 adap = new SqlDataAdapter();
                 cmd = new SqlCommand(sql, conn);
                 adap.UpdateCommand = cmd;
@@ -92,6 +81,23 @@ namespace Pukki_Rental
             {
                 MessageBox.Show("Then please choose the correct one.", "RETURN", MessageBoxButtons.OK);
             }
+        }
+
+        private void tbxName_TextChanged(object sender, EventArgs e)
+        {
+            string sql = "";
+
+            conn.Open();
+            ds = new DataSet();
+            adap = new SqlDataAdapter();
+            sql = "SELECT ClientFN, ClientLN, Registration_Plate FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE v.Rental_Status = 0 AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID AND UPPER(c.ClientFN) LIKE UPPER('%" + tbxName.Text + "%')  ";
+            cmd = new SqlCommand(sql, conn);
+            adap.SelectCommand = cmd;
+            adap.Fill(ds, "SourceTable");
+
+            dgReceiveBack.DataSource = ds;
+            dgReceiveBack.DataMember = "SourceTable";
+            conn.Close();
         }
     }
 }

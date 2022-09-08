@@ -31,6 +31,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgReceiveBack = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.tbxName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgReceiveBack)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,7 +51,7 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgReceiveBack.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgReceiveBack.Location = new System.Drawing.Point(58, 93);
+            this.dgReceiveBack.Location = new System.Drawing.Point(58, 124);
             this.dgReceiveBack.Name = "dgReceiveBack";
             this.dgReceiveBack.Size = new System.Drawing.Size(603, 258);
             this.dgReceiveBack.TabIndex = 0;
@@ -58,11 +60,28 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 57);
+            this.label1.Location = new System.Drawing.Point(55, 95);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(178, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Select the car that is being returned:";
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(55, 66);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(226, 13);
+            this.lblName.TabIndex = 2;
+            this.lblName.Text = "Name of the client that is returning the vehicle:";
+            // 
+            // tbxName
+            // 
+            this.tbxName.Location = new System.Drawing.Point(304, 59);
+            this.tbxName.Name = "tbxName";
+            this.tbxName.Size = new System.Drawing.Size(100, 20);
+            this.tbxName.TabIndex = 3;
+            this.tbxName.TextChanged += new System.EventHandler(this.tbxName_TextChanged);
             // 
             // frmReceiveBack
             // 
@@ -70,6 +89,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.tbxName);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgReceiveBack);
             this.Name = "frmReceiveBack";
@@ -85,5 +106,7 @@
 
         private System.Windows.Forms.DataGridView dgReceiveBack;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.TextBox tbxName;
     }
 }

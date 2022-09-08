@@ -156,6 +156,7 @@ namespace Pukki_Rental
                 adpt.Fill(ds, "SourceTable");
 
                 // Fill gridview
+                lblHeader.Visible = true;
                 gvReport.DataSource = ds;
                 gvReport.DataMember = "SourceTable";
 

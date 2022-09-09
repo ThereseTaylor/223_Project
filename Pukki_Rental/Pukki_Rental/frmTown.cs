@@ -18,6 +18,7 @@ namespace Pukki_Rental
         SqlCommand sqlCommand;
         SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
         DataSet dataSet = new DataSet();
+        SqlDataReader reader;
         string SELECT_ALL_TOWN = "SELECT * FROM TOWN";
 
         private void selectTownQuery(string sql)
@@ -45,7 +46,7 @@ namespace Pukki_Rental
         private void insertTownQuery(string Town_Name)
         {
             string query = "INSERT INTO TOWN(Town_Name) VALUES(@Town_Name)";
-
+            MessageBox.Show(Town_Name);
             try
             {
                 sqlConnection.Open();
@@ -104,14 +105,23 @@ namespace Pukki_Rental
             selectTownQuery(SELECT_ALL_TOWN);
         }
 
+        public int Town_ID;
         private void btnClientTown_Click(object sender, EventArgs e)
         {
-           
             string Town_Name = txtbTownName.Text;
+            sqlConnection.Open();
+            string sql = "SELECT TownID FROM dbo.TOWN WHERE Town_Name= '" + Town_Name + "'";
+            sqlCommand = new SqlCommand(sql, sqlConnection);
+            reader = sqlCommand.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Town_ID = (int)reader.GetValue(0);
+            }
+
+            sqlConnection.Close();
 
             insertTownQuery(Town_Name);
-
-            txtbTownID.Clear();
             txtbTownName.Clear();
         }
 

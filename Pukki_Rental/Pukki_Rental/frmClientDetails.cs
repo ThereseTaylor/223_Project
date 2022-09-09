@@ -117,18 +117,15 @@ namespace Pukki_Rental
             int ClientID_Number = Int32.Parse(txtbClientIDNumber.Text);
             int Tel_Number = Int32.Parse(txtbClientTelNumber.Text);
             string Email = txtbEmail.Text;
-            int AddressID = Int32.Parse(txtbAddressID.Text);
+            int AddressID = 0;//Int32.Parse(txtbAddressID.Text);
 
             insertClientQuery(ClientLN, ClientFN, ClientID_Number, Tel_Number, Email, AddressID);
 
             txtbClientIDNumber.Clear();
             txtbLastName.Clear();
             txtbFirstName.Clear();
-            txtbClientIDNumber.Clear();
             txtbClientTelNumber.Clear();
             txtbEmail.Clear();
-            txtbAddressID.Clear();
-
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

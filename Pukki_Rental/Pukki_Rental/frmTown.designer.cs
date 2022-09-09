@@ -36,11 +36,12 @@ namespace Pukki_Rental
             this.btnClientTown = new System.Windows.Forms.Button();
             this.txtbTownName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtbTownID = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dbViewTown)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dbViewTown
@@ -54,7 +55,7 @@ namespace Pukki_Rental
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnDeleteTown);
-            this.groupBox1.Location = new System.Drawing.Point(13, 170);
+            this.groupBox1.Location = new System.Drawing.Point(561, 198);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 100);
             this.groupBox1.TabIndex = 1;
@@ -76,18 +77,16 @@ namespace Pukki_Rental
             this.groupBox2.Controls.Add(this.btnClientTown);
             this.groupBox2.Controls.Add(this.txtbTownName);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.txtbTownID);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(241, 170);
+            this.groupBox2.Location = new System.Drawing.Point(22, 198);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(207, 147);
+            this.groupBox2.Size = new System.Drawing.Size(220, 100);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Add Client Town";
             // 
             // btnClientTown
             // 
-            this.btnClientTown.Location = new System.Drawing.Point(13, 114);
+            this.btnClientTown.Location = new System.Drawing.Point(13, 63);
             this.btnClientTown.Name = "btnClientTown";
             this.btnClientTown.Size = new System.Drawing.Size(188, 23);
             this.btnClientTown.TabIndex = 3;
@@ -97,7 +96,7 @@ namespace Pukki_Rental
             // 
             // txtbTownName
             // 
-            this.txtbTownName.Location = new System.Drawing.Point(87, 70);
+            this.txtbTownName.Location = new System.Drawing.Point(87, 28);
             this.txtbTownName.Name = "txtbTownName";
             this.txtbTownName.Size = new System.Drawing.Size(100, 20);
             this.txtbTownName.TabIndex = 3;
@@ -105,27 +104,29 @@ namespace Pukki_Rental
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 73);
+            this.label2.Location = new System.Drawing.Point(10, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Town Name :";
             // 
-            // txtbTownID
+            // groupBox3
             // 
-            this.txtbTownID.Location = new System.Drawing.Point(90, 26);
-            this.txtbTownID.Name = "txtbTownID";
-            this.txtbTownID.Size = new System.Drawing.Size(100, 20);
-            this.txtbTownID.TabIndex = 1;
+            this.groupBox3.Controls.Add(this.comboBox1);
+            this.groupBox3.Location = new System.Drawing.Point(287, 198);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(219, 100);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Update Client Town";
             // 
-            // label1
+            // comboBox1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Town ID :";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(100, 31);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(94, 21);
+            this.comboBox1.TabIndex = 0;
             // 
             // frmTown
             // 
@@ -133,6 +134,7 @@ namespace Pukki_Rental
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dbViewTown);
@@ -142,6 +144,7 @@ namespace Pukki_Rental
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -155,7 +158,7 @@ namespace Pukki_Rental
         private System.Windows.Forms.Button btnClientTown;
         private System.Windows.Forms.TextBox txtbTownName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtbTownID;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

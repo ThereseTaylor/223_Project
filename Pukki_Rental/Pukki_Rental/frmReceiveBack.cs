@@ -45,6 +45,10 @@ namespace Pukki_Rental
             dgReceiveBack.DataMember = "SourceTable";
 
             conn.Close();
+
+            //ToolTip toolTip1 = new ToolTip();
+            //toolTip1.Active = true;
+            //toolTip1.SetToolTip(dgReceiveBack, "Double click on the client that is returning the vehicle.");
         }
 
         private void dgReceiveBack_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

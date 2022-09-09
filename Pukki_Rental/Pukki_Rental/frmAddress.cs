@@ -108,14 +108,12 @@ namespace Pukki_Rental
 
         private void btnClientAddress_Click(object sender, EventArgs e)
         {
-            int townId = Int32.Parse(txtbTownID.Text);
+            int townId = 0;// nog kry
             int streetNumber = Int32.Parse(txtbStreetNumber.Text);
             string streetName = txtbStreetName.Text;
 
             insertAddressQuery(townId, streetNumber, streetName);
 
-            txtbAddressID.Clear();
-            txtbTownID.Clear();
             txtbStreetNumber.Clear();
             txtbStreetName.Clear();
         }

@@ -106,7 +106,7 @@ namespace Pukki_Rental
             try
             {
                 // ConnectionString with path to DB
-                constr = @"Data Source=LAPTOP-9VKTMA6M;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False ";
+                constr = @"Data Source=LAPTOP-8IITND7R;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 conn = new SqlConnection(constr);
 
                 // Test if DB available

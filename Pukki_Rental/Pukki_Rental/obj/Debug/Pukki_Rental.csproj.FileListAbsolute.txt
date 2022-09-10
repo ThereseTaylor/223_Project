@@ -28,3 +28,10 @@ C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental
 C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmReceiveBack.resources
 C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmReports.resources
 C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmTown.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmChangePopup.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmColourPopup.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmModelPopup.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmPopup.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmTypePopup.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.frmVehicleInfo.resources
+C:\Users\Therese\OneDrive\Documents\GitHub\223_Project\Pukki_Rental\Pukki_Rental\obj\Debug\Pukki_Rental.f2pop.resources

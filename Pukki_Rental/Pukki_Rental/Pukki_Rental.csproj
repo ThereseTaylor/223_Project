@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="f2pop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="f2pop.designer.cs">
+      <DependentUpon>f2pop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,11 +64,35 @@
     <Compile Include="frmAddress.designer.cs">
       <DependentUpon>frmAddress.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmChangePopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangePopup.designer.cs">
+      <DependentUpon>frmChangePopup.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmClientDetails.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmClientDetails.designer.cs">
       <DependentUpon>frmClientDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmColourPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColourPopup.designer.cs">
+      <DependentUpon>frmColourPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmModelPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModelPopup.designer.cs">
+      <DependentUpon>frmModelPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPopup.designer.cs">
+      <DependentUpon>frmPopup.cs</DependentUpon>
     </Compile>
     <Compile Include="frmReceiveBack.cs">
       <SubType>Form</SubType>
@@ -88,16 +118,43 @@
     <Compile Include="frmTown.designer.cs">
       <DependentUpon>frmTown.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTypePopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTypePopup.designer.cs">
+      <DependentUpon>frmTypePopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVehicleInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVehicleInfo.designer.cs">
+      <DependentUpon>frmVehicleInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="f2pop.resx">
+      <DependentUpon>f2pop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddress.resx">
       <DependentUpon>frmAddress.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmChangePopup.resx">
+      <DependentUpon>frmChangePopup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmClientDetails.resx">
       <DependentUpon>frmClientDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColourPopup.resx">
+      <DependentUpon>frmColourPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmModelPopup.resx">
+      <DependentUpon>frmModelPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPopup.resx">
+      <DependentUpon>frmPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReceiveBack.resx">
       <DependentUpon>frmReceiveBack.cs</DependentUpon>
@@ -110,6 +167,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTown.resx">
       <DependentUpon>frmTown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTypePopup.resx">
+      <DependentUpon>frmTypePopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVehicleInfo.resx">
+      <DependentUpon>frmVehicleInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

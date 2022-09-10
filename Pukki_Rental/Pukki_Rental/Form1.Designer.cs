@@ -37,10 +37,10 @@
             this.vehicleColourToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vehicleModelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.clientInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.townToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.townToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clientListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,6 +88,7 @@
             this.vehicleInformationToolStripMenuItem.Name = "vehicleInformationToolStripMenuItem";
             this.vehicleInformationToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
             this.vehicleInformationToolStripMenuItem.Text = "Vehicle Information";
+            this.vehicleInformationToolStripMenuItem.Click += new System.EventHandler(this.vehicleInformationToolStripMenuItem_Click);
             // 
             // vehicleTypeToolStripMenuItem
             // 
@@ -116,18 +117,26 @@
             this.clientInformationToolStripMenuItem.Name = "clientInformationToolStripMenuItem";
             this.clientInformationToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.clientInformationToolStripMenuItem.Text = "Client Information";
+            this.clientInformationToolStripMenuItem.Click += new System.EventHandler(this.clientInformationToolStripMenuItem_Click);
+            // 
+            // clientListToolStripMenuItem
+            // 
+            this.clientListToolStripMenuItem.Name = "clientListToolStripMenuItem";
+            this.clientListToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.clientListToolStripMenuItem.Text = "Client List";
+            this.clientListToolStripMenuItem.Click += new System.EventHandler(this.clientListToolStripMenuItem_Click);
             // 
             // townToolStripMenuItem
             // 
             this.townToolStripMenuItem.Name = "townToolStripMenuItem";
-            this.townToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.townToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.townToolStripMenuItem.Text = "Address";
             this.townToolStripMenuItem.Click += new System.EventHandler(this.townToolStripMenuItem_Click);
             // 
             // townToolStripMenuItem1
             // 
             this.townToolStripMenuItem1.Name = "townToolStripMenuItem1";
-            this.townToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.townToolStripMenuItem1.Size = new System.Drawing.Size(126, 22);
             this.townToolStripMenuItem1.Text = "Town";
             this.townToolStripMenuItem1.Click += new System.EventHandler(this.townToolStripMenuItem1_Click);
             // 
@@ -136,13 +145,7 @@
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
-            // 
-            // clientListToolStripMenuItem
-            // 
-            this.clientListToolStripMenuItem.Name = "clientListToolStripMenuItem";
-            this.clientListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.clientListToolStripMenuItem.Text = "Client List";
-            this.clientListToolStripMenuItem.Click += new System.EventHandler(this.clientListToolStripMenuItem_Click);
+            this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
             // 
             // frmWelcome
             // 

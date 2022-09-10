@@ -20,7 +20,7 @@ namespace Pukki_Rental
         }
 
         //tells code where its getting this data, plus some neccesary variables for using database stuff.
-        string conStr = @"Data Source=DESKTOP-GVIQ2PC;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string conStr = @"Data Source=LAPTOP-8IITND7R;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adap;
@@ -48,6 +48,9 @@ namespace Pukki_Rental
             dgVehicleInfo.DataMember = "SourceTable";
 
             conn.Close();
+
+            cmbSelectID.Items.Clear();
+            cmBox3_DeleteVehicle.Hide();
         }
 
         private void btnExecute_Click(object sender, EventArgs e)
@@ -170,21 +173,21 @@ namespace Pukki_Rental
             else if (rdoDelete.Checked == true) //Delete functions
             {
 
-                if (cmbChange.SelectedIndex == 0) //vehicle
+                if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
                 {
-
+                    Delete();
                 }
-                else if(cmbChange.SelectedIndex == 1)//model
+                else if (cmbTable.SelectedIndex == 1)//model
                 {
-
+                    Delete();
                 }
-                else if(cmbChange.SelectedIndex == 2)//type
+                else if (cmbTable.SelectedIndex == 2)//type
                 {
-
+                    Delete();
                 }
-                else if (cmbChange.SelectedIndex == 3)//colour
+                else if (cmbTable.SelectedIndex == 3)//colour
                 {
-
+                    Delete();
                 }
                 else
                 {
@@ -392,6 +395,72 @@ namespace Pukki_Rental
             dgVehicleInfo.DataMember = "SourceTable";
 
             conn.Close();
+        }
+
+        public void Delete()
+        {
+            try
+            {
+                f2pop popDelete = new f2pop();
+                popDelete.ShowDialog();
+
+                if (popDelete.conf == true)
+                {
+                    conn.Open();
+                    String Delete = $"DELETE FROM dbo.VEHICLE WHERE VehicleID= '{cmBox3_DeleteVehicle.Text}'";
+                    cmd = new SqlCommand(Delete, conn);
+                    adap = new SqlDataAdapter();
+                    adap.DeleteCommand = cmd;
+                    adap.DeleteCommand.ExecuteNonQuery();
+                    conn.Close();
+                    MessageBox.Show(cmBox3_DeleteVehicle.Text + " recored deleted");
+                }
+                else
+                {
+                    MessageBox.Show(cmBox3_DeleteVehicle.Text + " not deleted");
+                }
+
+
+            }
+            catch (SqlException error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
+
+        public void Combo()//fill the combo box with reg_plate so the user can select and delete that vehicle
+        {
+            try
+            {
+
+                conn.Open();
+                adap = new SqlDataAdapter();
+                ds = new DataSet();
+                string fill = "SELECT VehicleID FROM dbo.VEHICLE ";
+                cmd = new SqlCommand(fill, conn);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    cmBox3_DeleteVehicle.Items.Add(reader.GetValue(0));
+                }
+                conn.Close();
+            }
+            catch (SqlException error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
+
+        private void dgVehicleInfo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void rdoDelete_CheckedChanged(object sender, EventArgs e)
+        {
+            Combo();
+            cmBox3_DeleteVehicle.Show();
+            lblChange.Show();
         }
     }
 }

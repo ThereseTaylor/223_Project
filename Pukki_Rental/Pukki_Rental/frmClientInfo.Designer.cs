@@ -56,10 +56,15 @@
             // cmbTable
             // 
             this.cmbTable.FormattingEnabled = true;
+            this.cmbTable.Items.AddRange(new object[] {
+            "Client",
+            "Address",
+            "Town"});
             this.cmbTable.Location = new System.Drawing.Point(12, 263);
             this.cmbTable.Name = "cmbTable";
             this.cmbTable.Size = new System.Drawing.Size(147, 21);
             this.cmbTable.TabIndex = 1;
+            this.cmbTable.SelectedIndexChanged += new System.EventHandler(this.cmbTable_SelectedIndexChanged_1);
             // 
             // groupBox1
             // 
@@ -83,6 +88,7 @@
             this.rdoAdd.TabStop = true;
             this.rdoAdd.Text = "Add";
             this.rdoAdd.UseVisualStyleBackColor = true;
+            this.rdoAdd.CheckedChanged += new System.EventHandler(this.rdoAdd_CheckedChanged_1);
             // 
             // rdoChange
             // 
@@ -94,6 +100,7 @@
             this.rdoChange.TabStop = true;
             this.rdoChange.Text = "Change";
             this.rdoChange.UseVisualStyleBackColor = true;
+            this.rdoChange.CheckedChanged += new System.EventHandler(this.rdoChange_CheckedChanged_1);
             // 
             // rdoDelete
             // 
@@ -105,6 +112,7 @@
             this.rdoDelete.TabStop = true;
             this.rdoDelete.Text = "Delete";
             this.rdoDelete.UseVisualStyleBackColor = true;
+            this.rdoDelete.CheckedChanged += new System.EventHandler(this.rdoDelete_CheckedChanged_1);
             // 
             // cmbChange
             // 
@@ -113,11 +121,12 @@
             this.cmbChange.Name = "cmbChange";
             this.cmbChange.Size = new System.Drawing.Size(153, 21);
             this.cmbChange.TabIndex = 3;
+            this.cmbChange.SelectedIndexChanged += new System.EventHandler(this.cmbChange_SelectedIndexChanged_1);
             // 
             // cmBox3_DeleteVehicle
             // 
             this.cmBox3_DeleteVehicle.FormattingEnabled = true;
-            this.cmBox3_DeleteVehicle.Location = new System.Drawing.Point(256, 339);
+            this.cmBox3_DeleteVehicle.Location = new System.Drawing.Point(256, 335);
             this.cmBox3_DeleteVehicle.Name = "cmBox3_DeleteVehicle";
             this.cmBox3_DeleteVehicle.Size = new System.Drawing.Size(153, 21);
             this.cmBox3_DeleteVehicle.TabIndex = 4;
@@ -138,6 +147,7 @@
             this.btnExecute.TabIndex = 6;
             this.btnExecute.Text = "Execute";
             this.btnExecute.UseVisualStyleBackColor = true;
+            this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click_1);
             // 
             // label1
             // 

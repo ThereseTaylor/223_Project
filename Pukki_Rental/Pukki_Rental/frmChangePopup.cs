@@ -14,7 +14,7 @@ namespace Pukki_Rental
     public partial class frmChangePopup : Form
     {
         public int changeColourID, whatToChange;
-        public string changeRegistration;
+        public string changeRegistration, changeLastName, changeTel, changeEmail;
         public double changeRentalCost;
         public bool makeChange = false;
         string conStr = @"Data Source=LAPTOP-8IITND7R;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
@@ -59,6 +59,16 @@ namespace Pukki_Rental
             else if(whatToChange == 2)
             {
                 lblText.Text = "Enter the new rental cost below";
+                txtChangedInfo.Visible = true;
+            }
+            else if (whatToChange == 3)
+            {
+                lblText.Text = "Enter the new Last Name below";
+                txtChangedInfo.Visible = true;
+            }
+            else if (whatToChange == 4)
+            {
+                lblText.Text = "Enter the new Telephone Number below";
                 txtChangedInfo.Visible = true;
             }
         }
@@ -156,6 +166,45 @@ namespace Pukki_Rental
                 }
                 else
                 {
+                    this.Close();
+                }
+            }
+            else if (whatToChange == 3) //LastName part
+            {
+                if (txtChangedInfo.Text == "")
+                {
+                    MessageBox.Show("Please enter a new last name or press cancel");
+                }
+                else
+                {
+                    changeLastName = txtChangedInfo.Text;
+                    makeChange = true;
+                    this.Close();
+                }
+            }
+            else if (whatToChange == 4) //Telephone number part
+            {
+                if (txtChangedInfo.Text == "")
+                {
+                    MessageBox.Show("Please enter a new telephone number or press cancel");
+                }
+                else
+                {
+                    changeTel = txtChangedInfo.Text;
+                    makeChange = true;
+                    this.Close();
+                }
+            }
+            else if (whatToChange == 4) //Email part
+            {
+                if (txtChangedInfo.Text == "")
+                {
+                    MessageBox.Show("Please enter a new email or press cancel");
+                }
+                else
+                {
+                    changeEmail = txtChangedInfo.Text;
+                    makeChange = true;
                     this.Close();
                 }
             }

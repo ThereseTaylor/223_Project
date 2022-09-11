@@ -214,7 +214,7 @@
             // cmBox3_DeleteVehicle
             // 
             this.cmBox3_DeleteVehicle.FormattingEnabled = true;
-            this.cmBox3_DeleteVehicle.Location = new System.Drawing.Point(230, 335);
+            this.cmBox3_DeleteVehicle.Location = new System.Drawing.Point(230, 333);
             this.cmBox3_DeleteVehicle.Name = "cmBox3_DeleteVehicle";
             this.cmBox3_DeleteVehicle.Size = new System.Drawing.Size(182, 21);
             this.cmBox3_DeleteVehicle.TabIndex = 8;

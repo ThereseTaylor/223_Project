@@ -36,7 +36,7 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            sql = "SELECT ClientLN, ClientFN, ClientID_Number, Tel_Number, Email, Street_Number, Street_Name " +
+            sql = "SELECT C.ClientLN, C.ClientFN, C.ClientID_Number, C.Tel_Number, C.Email, A.Street_Number, A.Street_Name " +
                   "FROM dbo.CLIENT C, dbo.ADDRESS A WHERE C.AddressID = A.AddressID ";
             
             cmd = new SqlCommand(sql, conn);
@@ -61,7 +61,7 @@ namespace Pukki_Rental
 
         private void dgRentOut_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string clientPrompt = dgRentOut.Rows[e.RowIndex].Cells[2].Value.ToString() + " " + dgRentOut.Rows[e.RowIndex].Cells[1].Value.ToString() + " ID: " + dgRentOut.Rows[e.RowIndex].Cells[3].Value.ToString();
+            string clientPrompt = dgRentOut.Rows[e.RowIndex].Cells[1].Value.ToString() + " " + dgRentOut.Rows[e.RowIndex].Cells[0].Value.ToString() + " ID: " + dgRentOut.Rows[e.RowIndex].Cells[2].Value.ToString();
             string sql = "";
 
             Boolean myflag = false;
@@ -73,7 +73,7 @@ namespace Pukki_Rental
             {
                 conn.Open();
                 string idNo = dgRentOut.Rows[e.RowIndex].Cells[2].Value.ToString();
-                sql = "SELECT ClientID FROM dbo.CLIENT WHERE ClientID_Number = " + idNo;
+                sql = "SELECT ClientID FROM dbo.CLIENT WHERE ClientID_Number = '" + idNo + "'";
                 cmd = new SqlCommand(sql, conn);
                 reader = cmd.ExecuteReader();
 
@@ -83,7 +83,6 @@ namespace Pukki_Rental
                 }
 
                 conn.Close();
-
                 conn.Open();
                 sql = "SELECT C.ClientID FROM dbo.RENTAL_TRANSACTION R, dbo.CLIENT C, dbo.VEHICLE V WHERE C.ClientID = R.ClientID AND R.VehicleID = V.VehicleID AND V.Rental_Status = 0";
                 cmd = new SqlCommand(sql, conn);
@@ -141,9 +140,7 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            sql = "SELECT DISTINCT Model_Description, Type_Description, Colour_Name, Registration_Plate, Rental_Price " +
-                "FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M, dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C, dbo.RENTAL_TRANSACTION R " +
-                "WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND V.Rental_Status = 1";
+           sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M, dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND V.Rental_Status = 1 AND T.Type_Description = '" + cmbxType.GetItemText(cmbxType.SelectedItem) + "'";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -194,13 +191,14 @@ namespace Pukki_Rental
             DateTime today = DateTime.Today;
             if (dateTimePicker1.Value >= DateTime.Today)
             {
-                String ReturnDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
+                string ReturnDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
                 int days = (Convert.ToDateTime(ReturnDate) - today).Days;
 
                 if (days == 0)
                 {
                     days = 1;
                 }
+
                 double transactPrice = Convert.ToDouble(rentalR) * days;
 
                 string messageDays = "This will be " + days.ToString() + "days in total. The total for this period is R" + transactPrice.ToString() + ". Does the client agree to this?";
@@ -211,7 +209,7 @@ namespace Pukki_Rental
                     try
                     {
                         conn.Open();
-                        string sql = $"INSERT INTO dbo.RENTAL_TRANSACTION (VehicleID, ClientID, Transaction_Price, Transaction_Date, Return_Date) VALUES ({carID},{clientID},{transactPrice},'{today}','{ReturnDate}')";
+                        string sql = $"INSERT INTO dbo.RENTAL_TRANSACTION (VehicleID, ClientID, Transaction_Price, Transaction_Date, Return_Date) VALUES ({carID},{clientID},{transactPrice},'{today}',null)";
                         adap = new SqlDataAdapter();
                         cmd = new SqlCommand(sql, conn);
                         adap.InsertCommand = cmd;

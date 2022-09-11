@@ -67,7 +67,14 @@ namespace Pukki_Rental
 
         private void clientInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (ActiveMdiChild != null)// closes previous child form
+            {
+                ActiveMdiChild.Close();
+            }
 
+            frmClientInfo myformView = new frmClientInfo();
+            myformView.MdiParent = this;
+            myformView.Show();
         }
 
         private void reportsToolStripMenuItem_Click(object sender, EventArgs e)

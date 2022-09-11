@@ -47,8 +47,11 @@
             // 
             // dgClientInfo
             // 
+            this.dgClientInfo.AllowUserToResizeColumns = false;
+            this.dgClientInfo.AllowUserToResizeRows = false;
             this.dgClientInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgClientInfo.Location = new System.Drawing.Point(12, 12);
+            this.dgClientInfo.ColumnHeadersVisible = false;
+            this.dgClientInfo.Location = new System.Drawing.Point(12, 23);
             this.dgClientInfo.Name = "dgClientInfo";
             this.dgClientInfo.Size = new System.Drawing.Size(776, 194);
             this.dgClientInfo.TabIndex = 0;

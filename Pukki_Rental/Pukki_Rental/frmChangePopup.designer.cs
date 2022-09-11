@@ -50,7 +50,7 @@
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.btnCancel.Location = new System.Drawing.Point(9, 129);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(78, 34);
             this.btnCancel.TabIndex = 1;
@@ -62,7 +62,7 @@
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.btnSubmit.Location = new System.Drawing.Point(166, 129);
-            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(78, 34);
             this.btnSubmit.TabIndex = 2;
@@ -76,7 +76,7 @@
             this.cmbColour.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.cmbColour.FormattingEnabled = true;
             this.cmbColour.Location = new System.Drawing.Point(9, 58);
-            this.cmbColour.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbColour.Margin = new System.Windows.Forms.Padding(2);
             this.cmbColour.Name = "cmbColour";
             this.cmbColour.Size = new System.Drawing.Size(92, 21);
             this.cmbColour.TabIndex = 14;
@@ -87,9 +87,9 @@
             // 
             this.txtChangedInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.txtChangedInfo.Location = new System.Drawing.Point(9, 58);
-            this.txtChangedInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtChangedInfo.Margin = new System.Windows.Forms.Padding(2);
             this.txtChangedInfo.Name = "txtChangedInfo";
-            this.txtChangedInfo.Size = new System.Drawing.Size(124, 23);
+            this.txtChangedInfo.Size = new System.Drawing.Size(225, 23);
             this.txtChangedInfo.TabIndex = 16;
             this.txtChangedInfo.Visible = false;
             // 
@@ -97,14 +97,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(254, 173);
+            this.ClientSize = new System.Drawing.Size(341, 188);
             this.ControlBox = false;
             this.Controls.Add(this.txtChangedInfo);
             this.Controls.Add(this.cmbColour);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblText);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmChangePopup";
             this.Text = "Input the desired information";
             this.Load += new System.EventHandler(this.frmChangePopup_Load);

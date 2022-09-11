@@ -13,7 +13,7 @@ namespace Pukki_Rental
 {
     public partial class frmClientInfo : Form
     {
-        public static int whatToChange; //need this for my change popup form
+        public static int newToChange; //need this for my change popup form
         public frmClientInfo()
         {
             InitializeComponent();
@@ -138,7 +138,7 @@ namespace Pukki_Rental
         private void cmbChange_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             rdoAdd.Checked = false;
-            rdoChange.Checked = false;
+            //rdoChange.Checked = false;
             rdoDelete.Checked = false;
         }
 
@@ -187,7 +187,12 @@ namespace Pukki_Rental
 
         private void rdoChange_CheckedChanged_1(object sender, EventArgs e)
         {
+            cmbChange.Items.Clear();
+            cmbChange.Items.Add("Last Name");
+            cmbChange.Items.Add("Telephone Number");
+            cmbChange.Items.Add("Email");
             cmBox3_DeleteVehicle.Hide();
+
             if (rdoChange.Checked == true)
             {
                 cmbChange.Visible = true;
@@ -333,20 +338,17 @@ namespace Pukki_Rental
             {
                 if (cmbChange.SelectedItem != null && cmbSelectID.SelectedItem != null)
                 {
-                    whatToChange = cmbChange.SelectedIndex + 3;
+                    newToChange = cmbChange.SelectedIndex+3;
+                    MessageBox.Show(newToChange.ToString());
                     frmChangePopup changePopup = new frmChangePopup();
                     changePopup.ShowDialog();
 
                     if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Clients
                     {
-                        cmbChange.Items.Clear();
-                        cmbChange.Items.Add("Last Name");
-                        cmbChange.Items.Add("Telephone Number");
-                        cmbChange.Items.Add("Email");
+
                         //cmbChange.Items.Add("Street Number");
                         //cmbChange.Items.Add("Street Name");
                         //cmbChange.Items.Add("Town");
-
                         if (cmbChange.SelectedIndex == 0) //LastName
                         {
                             if (changePopup.makeChange == true)
@@ -375,6 +377,7 @@ namespace Pukki_Rental
                             {
                                 try
                                 {
+                                    MessageBox.Show("tel");
                                     conn.Open();
                                     sql = $"UPDATE dbo.CLIENT SET Tel_Number = '{changePopup.changeTel}' WHERE ClientID = {cmbSelectID.SelectedItem}";
                                     adap = new SqlDataAdapter();

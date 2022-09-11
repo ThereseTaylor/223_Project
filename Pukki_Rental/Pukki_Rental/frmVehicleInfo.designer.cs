@@ -50,15 +50,16 @@
             this.dgVehicleInfo.AllowUserToAddRows = false;
             this.dgVehicleInfo.AllowUserToDeleteRows = false;
             this.dgVehicleInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgVehicleInfo.ColumnHeadersVisible = false;
             this.dgVehicleInfo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgVehicleInfo.Location = new System.Drawing.Point(0, 1);
+            this.dgVehicleInfo.Location = new System.Drawing.Point(9, 20);
             this.dgVehicleInfo.Margin = new System.Windows.Forms.Padding(2);
             this.dgVehicleInfo.Name = "dgVehicleInfo";
             this.dgVehicleInfo.ReadOnly = true;
             this.dgVehicleInfo.RowHeadersWidth = 51;
             this.dgVehicleInfo.RowTemplate.Height = 24;
             this.dgVehicleInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgVehicleInfo.Size = new System.Drawing.Size(820, 171);
+            this.dgVehicleInfo.Size = new System.Drawing.Size(803, 171);
             this.dgVehicleInfo.TabIndex = 0;
             this.dgVehicleInfo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgVehicleInfo_CellContentClick);
             // 

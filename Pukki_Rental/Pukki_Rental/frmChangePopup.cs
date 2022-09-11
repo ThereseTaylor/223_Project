@@ -13,7 +13,7 @@ namespace Pukki_Rental
 {
     public partial class frmChangePopup : Form
     {
-        public int changeColourID, whatToChange;
+        public int changeColourID, whatToChange, newToChange;
         public string changeRegistration, changeLastName, changeTel, changeEmail;
         public double changeRentalCost;
         public bool makeChange = false;
@@ -45,6 +45,12 @@ namespace Pukki_Rental
             conn.Close();
 
             whatToChange = frmVehicleInfo.whatToChange;
+            newToChange = frmClientInfo.newToChange;
+            if (newToChange != 0)
+            {
+                whatToChange = 10;
+            }
+            MessageBox.Show(whatToChange.ToString());
 
             if (whatToChange == 0)
             {
@@ -61,14 +67,19 @@ namespace Pukki_Rental
                 lblText.Text = "Enter the new rental cost below";
                 txtChangedInfo.Visible = true;
             }
-            else if (whatToChange == 3)
+            else if (newToChange == 3)
             {
                 lblText.Text = "Enter the new Last Name below";
                 txtChangedInfo.Visible = true;
             }
-            else if (whatToChange == 4)
+            else if (newToChange == 4)
             {
                 lblText.Text = "Enter the new Telephone Number below";
+                txtChangedInfo.Visible = true;
+            }
+            else if (newToChange == 5)
+            {
+                lblText.Text = "Enter the new Email below";
                 txtChangedInfo.Visible = true;
             }
         }
@@ -169,7 +180,7 @@ namespace Pukki_Rental
                     this.Close();
                 }
             }
-            else if (whatToChange == 3) //LastName part
+            else if (newToChange == 3) //LastName part
             {
                 if (txtChangedInfo.Text == "")
                 {
@@ -182,7 +193,7 @@ namespace Pukki_Rental
                     this.Close();
                 }
             }
-            else if (whatToChange == 4) //Telephone number part
+            else if (newToChange == 4) //Telephone number part
             {
                 if (txtChangedInfo.Text == "")
                 {
@@ -195,7 +206,7 @@ namespace Pukki_Rental
                     this.Close();
                 }
             }
-            else if (whatToChange == 4) //Email part
+            else if (newToChange == 5) //Email part
             {
                 if (txtChangedInfo.Text == "")
                 {

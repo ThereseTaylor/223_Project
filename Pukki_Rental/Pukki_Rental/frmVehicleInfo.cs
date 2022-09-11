@@ -198,6 +198,7 @@ namespace Pukki_Rental
             //-------------------------------------FOR CHANGING ITEMS IN THE DATABASE--------------------------------------------------------------
             else if (rdoChange.Checked == true) //Chance functions
             {
+                
                 if (cmbChange.SelectedItem != null && cmbSelectID.SelectedItem != null)
                 {
                     whatToChange = cmbChange.SelectedIndex;

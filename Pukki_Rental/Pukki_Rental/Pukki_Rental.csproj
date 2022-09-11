@@ -46,12 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="f2pop.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="f2pop.designer.cs">
-      <DependentUpon>f2pop.cs</DependentUpon>
-    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +69,12 @@
     </Compile>
     <Compile Include="frmClientDetails.designer.cs">
       <DependentUpon>frmClientDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmClientInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClientInfo.Designer.cs">
+      <DependentUpon>frmClientInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="frmColourPopup.cs">
       <SubType>Form</SubType>
@@ -132,9 +132,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="f2pop.resx">
-      <DependentUpon>f2pop.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmClientDetails.resx">
       <DependentUpon>frmClientDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClientInfo.resx">
+      <DependentUpon>frmClientInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmColourPopup.resx">
       <DependentUpon>frmColourPopup.cs</DependentUpon>

@@ -148,7 +148,7 @@ namespace Pukki_Rental
                     }
                 }
             }
-            else if(whatToChange == 0)//closes the form for colour, thats it lol
+            else if(whatToChange == 0)//closes the form for colour
             {
                 if(cmbColour.SelectedItem == null)
                 {

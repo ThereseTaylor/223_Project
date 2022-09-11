@@ -51,6 +51,7 @@ namespace Pukki_Rental
 
             cmbSelectID.Items.Clear();
             cmBox3_DeleteVehicle.Hide();
+           
         }
 
         private void btnExecute_Click(object sender, EventArgs e)
@@ -172,27 +173,27 @@ namespace Pukki_Rental
             //-----------------------------------------FOR DELETING FROM THE DATABASE---------------------------------------------------
             else if (rdoDelete.Checked == true) //Delete functions
             {
-
-                if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
+                if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehicles
                 {
-                    Delete();
+                    Delete($"DELETE FROM dbo.VEHICLE WHERE VehicleID = '{cmBox3_DeleteVehicle.Text}'");
                 }
                 else if (cmbTable.SelectedIndex == 1)//model
                 {
-                    Delete();
+                    Delete($"DELETE FROM dbo.VEHICLE_MODEL WHERE ModelID = '{cmBox3_DeleteVehicle.Text}'");
                 }
                 else if (cmbTable.SelectedIndex == 2)//type
                 {
-                    Delete();
+                    Delete($"DELETE FROM dbo.VEHICLE_TYPE WHERE TypeID = '{cmBox3_DeleteVehicle.Text}'");
                 }
                 else if (cmbTable.SelectedIndex == 3)//colour
                 {
-                    Delete();
+                    Delete($"DELETE FROM dbo.VEHICLE_COLOUR WHERE ColourID = '{cmBox3_DeleteVehicle.Text}'");
                 }
                 else
                 {
                     MessageBox.Show("Please select an option by data type above");
                 }
+                cmBox3_DeleteVehicle.Show();
             }
             //-------------------------------------FOR CHANGING ITEMS IN THE DATABASE--------------------------------------------------------------
             else if (rdoChange.Checked == true) //Chance functions
@@ -323,6 +324,7 @@ namespace Pukki_Rental
 
         private void rdoChange_CheckedChanged(object sender, EventArgs e) //hides and unhides the combobox for change
         {
+            cmBox3_DeleteVehicle.Hide();
             if(rdoChange.Checked == true)
             {
                 cmbChange.Visible = true;
@@ -355,6 +357,10 @@ namespace Pukki_Rental
 
         private void cmbTable_SelectedIndexChanged(object sender, EventArgs e) //updates the data grid to show each of the tables when selected
         {
+            rdoAdd.Checked = false;
+            rdoChange.Checked = false;
+            rdoDelete.Checked = false;
+
             string sql = "";
 
             conn = new SqlConnection(conStr);
@@ -397,29 +403,18 @@ namespace Pukki_Rental
             conn.Close();
         }
 
-        public void Delete()
+        public void Delete(string sql)
         {
             try
             {
-                f2pop popDelete = new f2pop();
-                popDelete.ShowDialog();
-
-                if (popDelete.conf == true)
-                {
-                    conn.Open();
-                    String Delete = $"DELETE FROM dbo.VEHICLE WHERE VehicleID= '{cmBox3_DeleteVehicle.Text}'";
-                    cmd = new SqlCommand(Delete, conn);
-                    adap = new SqlDataAdapter();
-                    adap.DeleteCommand = cmd;
-                    adap.DeleteCommand.ExecuteNonQuery();
-                    conn.Close();
-                    MessageBox.Show(cmBox3_DeleteVehicle.Text + " recored deleted");
-                }
-                else
-                {
-                    MessageBox.Show(cmBox3_DeleteVehicle.Text + " not deleted");
-                }
-
+                conn.Open();
+                String Delete = sql;
+                cmd = new SqlCommand(Delete, conn);
+                adap = new SqlDataAdapter();
+                adap.DeleteCommand = cmd;
+                adap.DeleteCommand.ExecuteNonQuery();
+                conn.Close();
+                MessageBox.Show("Succesfully deleted");
 
             }
             catch (SqlException error)
@@ -428,15 +423,16 @@ namespace Pukki_Rental
             }
         }
 
-        public void Combo()//fill the combo box with reg_plate so the user can select and delete that vehicle
+        public void Combo(string sql)//fill the combo box with reg_plate so the user can select and delete that vehicle
         {
             try
             {
-
                 conn.Open();
                 adap = new SqlDataAdapter();
                 ds = new DataSet();
-                string fill = "SELECT VehicleID FROM dbo.VEHICLE ";
+
+                string fill = sql;
+               // MessageBox.Show(name + ID);
                 cmd = new SqlCommand(fill, conn);
                 reader = cmd.ExecuteReader();
                 while (reader.Read())
@@ -458,9 +454,43 @@ namespace Pukki_Rental
 
         private void rdoDelete_CheckedChanged(object sender, EventArgs e)
         {
-            Combo();
+            cmBox3_DeleteVehicle.Items.Clear();
+            if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehicles
+            {
+                Combo("SELECT VehicleID FROM dbo.VEHICLE");
+            }
+            else if (cmbTable.SelectedIndex == 1)//model
+            {
+                Combo("SELECT ModelID FROM dbo.VEHICLE_MODEL");
+            }
+            else if (cmbTable.SelectedIndex == 2)//type
+            {
+                Combo("SELECT TypeID FROM dbo.VEHICLE_TYPE");
+            }
+            else if (cmbTable.SelectedIndex == 3)//colour
+            {
+                Combo("SELECT ColourID FROM dbo.VEHICLE_COLOUR");
+            }
+            else
+            {
+                MessageBox.Show("Please select an option by data type above");
+            }
             cmBox3_DeleteVehicle.Show();
             lblChange.Show();
+        }
+
+        private void cmbChange_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rdoAdd.Checked = false;
+            rdoChange.Checked = false;
+            rdoDelete.Checked = false;
+
+        }
+
+        private void rdoAdd_CheckedChanged(object sender, EventArgs e)
+        {
+            cmBox3_DeleteVehicle.Hide();
+            lblChange.Hide();
         }
     }
 }

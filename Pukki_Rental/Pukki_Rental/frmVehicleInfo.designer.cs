@@ -134,6 +134,7 @@
             this.rdoAdd.TabStop = true;
             this.rdoAdd.Text = "Add";
             this.rdoAdd.UseVisualStyleBackColor = true;
+            this.rdoAdd.CheckedChanged += new System.EventHandler(this.rdoAdd_CheckedChanged);
             // 
             // btnExecute
             // 
@@ -161,6 +162,7 @@
             this.cmbChange.Size = new System.Drawing.Size(182, 24);
             this.cmbChange.TabIndex = 4;
             this.cmbChange.Visible = false;
+            this.cmbChange.SelectedIndexChanged += new System.EventHandler(this.cmbChange_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -212,9 +214,9 @@
             // cmBox3_DeleteVehicle
             // 
             this.cmBox3_DeleteVehicle.FormattingEnabled = true;
-            this.cmBox3_DeleteVehicle.Location = new System.Drawing.Point(230, 334);
+            this.cmBox3_DeleteVehicle.Location = new System.Drawing.Point(230, 335);
             this.cmBox3_DeleteVehicle.Name = "cmBox3_DeleteVehicle";
-            this.cmBox3_DeleteVehicle.Size = new System.Drawing.Size(149, 21);
+            this.cmBox3_DeleteVehicle.Size = new System.Drawing.Size(182, 21);
             this.cmBox3_DeleteVehicle.TabIndex = 8;
             // 
             // frmVehicleInfo

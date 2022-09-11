@@ -43,7 +43,6 @@ namespace Pukki_Rental
 
             frmReceiveBack myformView = new frmReceiveBack();
             myformView.MdiParent = this;
-            myformView.Dock = DockStyle.Fill;
             myformView.Show();
         }
 
@@ -61,7 +60,6 @@ namespace Pukki_Rental
 
             frmAddress myformView = new frmAddress();
             myformView.MdiParent = this;
-            myformView.Dock = DockStyle.Fill;
             myformView.Show();
         }
 
@@ -74,7 +72,6 @@ namespace Pukki_Rental
 
             frmClientDetails myformView = new frmClientDetails();
             myformView.MdiParent = this;
-            myformView.Dock = DockStyle.Fill;
             myformView.Show();
         }
 
@@ -87,7 +84,6 @@ namespace Pukki_Rental
 
             frmTown myformView = new frmTown();
             myformView.MdiParent = this;
-            myformView.Dock = DockStyle.Fill;
             myformView.Show();
         }
 
@@ -100,7 +96,6 @@ namespace Pukki_Rental
 
             frmVehicleInfo myformView = new frmVehicleInfo();
             myformView.MdiParent = this;
-            myformView.Dock = DockStyle.Fill;
             myformView.Show();
 
         }
@@ -119,7 +114,6 @@ namespace Pukki_Rental
 
             frmReports myformView = new frmReports();
             myformView.MdiParent = this;
-            myformView.Dock = DockStyle.Fill;
             myformView.Show();
         }
     }

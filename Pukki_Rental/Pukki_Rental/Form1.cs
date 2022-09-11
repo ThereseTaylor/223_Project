@@ -51,41 +51,6 @@ namespace Pukki_Rental
 
         }
 
-        private void townToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild != null)// closes previous child form
-            {
-                ActiveMdiChild.Close();
-            }
-
-            frmAddress myformView = new frmAddress();
-            myformView.MdiParent = this;
-            myformView.Show();
-        }
-
-        private void clientListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild != null)
-            {
-                ActiveMdiChild.Close();
-            }
-
-            frmClientDetails myformView = new frmClientDetails();
-            myformView.MdiParent = this;
-            myformView.Show();
-        }
-
-        private void townToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild != null)// closes previous child form
-            {
-                ActiveMdiChild.Close();
-            }
-
-            frmTown myformView = new frmTown();
-            myformView.MdiParent = this;
-            myformView.Show();
-        }
 
         private void vehicleInformationToolStripMenuItem_Click(object sender, EventArgs e)
         {

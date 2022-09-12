@@ -34,12 +34,15 @@ namespace Pukki_Rental
             comboReports.Items.Clear();
             cmbMonth.SelectedIndex = 0;
 
+            label2.Hide();
+            cmbMonth.Hide();
+
             comboReports.Items.Add("Sales report per month");
             comboReports.Items.Add("Client report");
             comboReports.Items.Add("Inventory report");
             comboReports.Items.Add("Rented out cars report"); // Management report
 
-            comboReports.Enabled = false;
+            //comboReports.Enabled = false;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,10 +52,84 @@ namespace Pukki_Rental
 
         private void comboReports_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+
+            try
+            {
+                // ConnectionString with path to DB
+                constr = @"Data Source=LAPTOP-8IITND7R;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                conn = new SqlConnection(constr);
+
+                // Open DB
+                conn.Open();
+                adpt = new SqlDataAdapter();
+                ds = new DataSet();
+
+                DateTime start = new DateTime(2022, 09, 11);
+                DateTime end = new DateTime(2022, 09, 30);
+                DateTime toets = DateTime.Today;
+
+
+                // Set SQL to display all data
+                if (comboReports.SelectedIndex == 0) // Sales report per month
+                {
+                    string mnth = cmbMonth.SelectedItem.ToString();
+                    sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Transaction_Price, Transaction_Date FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C, dbo.RENTAL_TRANSACTION R WHERE R.VehicleID = V.VehicleID AND V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+                    MessageBox.Show(sql);
+                    lblHeader.Text = "Sales report of " + mnth;
+                }
+                else if (comboReports.SelectedIndex == 1) // Client report
+                {
+                    sql = "SELECT ClientID, ClientLN, ClientFN, ClientID_Number, Tel_Number, Email, Street_Number, Street_Name " +
+                  "FROM dbo.CLIENT C, dbo.ADDRESS A WHERE C.AddressID = A.AddressID";
+                    lblHeader.Text = "Client report";
+                }
+                else if (comboReports.SelectedIndex == 2) // Inventory report
+                {
+                    sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+                    lblHeader.Text = "Inventory report";
+                }
+                else if (comboReports.SelectedIndex == 3) // Management report
+                {
+                    sql = "SELECT VehicleID, TypeID, ModelID, ColourID, Registration_Plate, Rental_Price, Rental_Status FROM VEHICLE WHERE Rental_Status = 0";
+                    lblHeader.Text = "Vehicles currently rented out";
+                }
+
+                // Implement SQL
+                comd = new SqlCommand(sql, conn);
+                adpt.SelectCommand = comd;
+                adpt.SelectCommand.Parameters.AddWithValue("@StartDate", new DateTime(2022, 09, 01));
+                adpt.SelectCommand.Parameters.AddWithValue("@EndDate", new DateTime(2023, 11, 01));
+                adpt.Fill(ds, "SourceTable");
+
+                // Fill gridview
+                gvReport.DataSource = ds;
+                gvReport.DataMember = "SourceTable";
+
+                // Close DB
+                conn.Close();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message);
+            }
+        }
+
+        private void btnExportText_Click(object sender, EventArgs e)
+        {
+
+        }
+        string date = "";
+        DateTime start, end;
+
+        private void cmbMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboReports.Enabled = true;
+
             int month = (cmbMonth.SelectedIndex) + 1;
-            DateTime start = new DateTime();
-            DateTime end = new DateTime();
-            string date = "";
+            DateTime start = new DateTime(2022,09,01);
+            DateTime end = new DateTime(2022,09,30);
+            MessageBox.Show(start.ToShortDateString());
 
             if (month == 1) // January
             {
@@ -88,7 +165,7 @@ namespace Pukki_Rental
             }
             else if (month == 9) // September
             {
-                date = "BETWEEN '09/01/2022' AND '09/30/2022'";
+                date = "BETWEEN '01/09/2022' AND '30/09/2022'";
             }
             else if (month == 10) // October
             {
@@ -102,80 +179,6 @@ namespace Pukki_Rental
             {
                 date = "BETWEEN '12/01/2022' AND '12/31/2022'";
             }
-
-            try
-            {
-                // ConnectionString with path to DB
-                constr = @"Data Source=LAPTOP-8IITND7R;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-                conn = new SqlConnection(constr);
-
-                // Test if DB available
-                try
-                {
-                    conn.Open();
-                    conn.Close();
-                    // MessageBox.Show("Database connection successful.");
-                }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show("Database connection unsuccessful!");
-                    Close();
-                }
-
-                // Open DB
-                conn.Open();
-                adpt = new SqlDataAdapter();
-                ds = new DataSet();
-
-                // Set SQL to display all data
-                if (comboReports.SelectedIndex == 0) // Sales report per month
-                {
-                    string mnth = cmbMonth.SelectedItem.ToString();
-                    sql = "SELECT * FROM RENTAL_TRANSACTION WHERE Transaction_Date "+ date;
-                    lblHeader.Text = "Sales report of " + mnth;
-                }
-                else if (comboReports.SelectedIndex == 1) // Client report
-                {
-                    sql = "SELECT ClientLN, ClientFN, ClientID_Number, Tel_Number, Email FROM CLIENT";
-                    lblHeader.Text = "Client report";
-                }
-                else if (comboReports.SelectedIndex == 2) // Inventory report
-                {
-                    sql = "SELECT * FROM VEHICLE";
-                    lblHeader.Text = "Inventory report";
-                }
-                else if (comboReports.SelectedIndex == 3) // Management report
-                {
-                    sql = "SELECT VehicleID, TypeID, ModelID, ColourID, Registration_Plate, Rental_Price, Rental_Status FROM VEHICLE WHERE Rental_Status = 0";
-                    lblHeader.Text = "Vehicles currently out rented";
-                }
-
-                // Implement SQL
-                comd = new SqlCommand(sql, conn);
-                adpt.SelectCommand = comd;
-                adpt.Fill(ds, "SourceTable");
-
-                // Fill gridview
-                gvReport.DataSource = ds;
-                gvReport.DataMember = "SourceTable";
-
-                // Close DB
-                conn.Close();
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.Message);
-            }
-        }
-
-        private void btnExportText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbMonth_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            comboReports.Enabled = true;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

@@ -72,8 +72,10 @@ namespace Pukki_Rental
                             sql = "";
                             int rentalstatus = 0;
                             conn.Open();
-                            sql = $"INSERT INTO VEHICLE(TypeID, ModelID, ColourID, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price, Rental_Status) " +
-                                $"VALUES ({popup.vTypeID}, {popup.vModelID}, {popup.vColourID}, '{popup.vehicleReg}', {popup.purchPrice}, '{popup.purchDate}', {popup.rentalCost}, {rentalstatus})";
+                            sql = $"INSERT INTO VEHICLE(TypeID, ModelID, ColourID, Registration_Plate, Purchase_Price, Purchase_Date, " +
+                                $"Rental_Price, Rental_Status) " +
+                                $"VALUES ({popup.vTypeID}, {popup.vModelID}, {popup.vColourID}, '{popup.vehicleReg}', {popup.purchPrice}, " +
+                                $"'{popup.purchDate}', {popup.rentalCost}, {rentalstatus})";
                             adap = new SqlDataAdapter();
                             cmd = new SqlCommand(sql, conn);
                             adap.InsertCommand = cmd;
@@ -227,14 +229,15 @@ namespace Pukki_Rental
                             }
                         }
                     }
-                    else if (cmbChange.SelectedIndex == 1)//regi
+                    else if (cmbChange.SelectedIndex == 1)//registration
                     {
                         if (changePopup.makeChange == true)
                         {
                             try
                             {
                                 conn.Open();
-                                sql = $"UPDATE VEHICLE SET Registration_Plate = '{changePopup.changeRegistration}' WHERE VehicleID = {cmbSelectID.SelectedItem}";
+                                sql = $"UPDATE VEHICLE SET Registration_Plate = '{changePopup.changeRegistration}' " +
+                                    $"WHERE VehicleID = {cmbSelectID.SelectedItem}";
                                 adap = new SqlDataAdapter();
                                 cmd = new SqlCommand(sql, conn);
                                 adap.InsertCommand = cmd;

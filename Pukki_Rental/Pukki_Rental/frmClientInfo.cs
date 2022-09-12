@@ -82,7 +82,6 @@ namespace Pukki_Rental
                 ds = new DataSet();
 
                 string fill = sql;
-                // MessageBox.Show(name + ID);
                 cmd = new SqlCommand(fill, conn);
                 reader = cmd.ExecuteReader();
                 while (reader.Read())

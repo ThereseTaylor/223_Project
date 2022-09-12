@@ -44,6 +44,7 @@
             // 
             // dgRentOut
             // 
+            this.dgRentOut.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgRentOut.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgRentOut.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgRentOut.ColumnHeadersVisible = false;
@@ -81,6 +82,7 @@
             // 
             // dgVehicle
             // 
+            this.dgVehicle.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgVehicle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgVehicle.Location = new System.Drawing.Point(52, 120);
             this.dgVehicle.Name = "dgVehicle";
@@ -135,7 +137,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1054, 559);
+            this.BackgroundImage = global::Pukki_Rental.Properties.Resources.pngtree_plain_aesthetic_background_with_cool_wallpaper_image_914477;
+            this.ClientSize = new System.Drawing.Size(937, 497);
             this.ControlBox = false;
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox1);

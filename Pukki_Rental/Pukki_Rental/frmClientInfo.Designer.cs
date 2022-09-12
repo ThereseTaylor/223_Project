@@ -49,9 +49,10 @@
             // 
             this.dgClientInfo.AllowUserToResizeColumns = false;
             this.dgClientInfo.AllowUserToResizeRows = false;
+            this.dgClientInfo.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgClientInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgClientInfo.ColumnHeadersVisible = false;
-            this.dgClientInfo.Location = new System.Drawing.Point(12, 23);
+            this.dgClientInfo.Location = new System.Drawing.Point(12, 27);
             this.dgClientInfo.Name = "dgClientInfo";
             this.dgClientInfo.Size = new System.Drawing.Size(776, 194);
             this.dgClientInfo.TabIndex = 0;
@@ -183,6 +184,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::Pukki_Rental.Properties.Resources.pngtree_plain_aesthetic_background_with_cool_wallpaper_image_914477;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
             this.Controls.Add(this.lblSelectID);
@@ -196,6 +198,7 @@
             this.Controls.Add(this.cmbTable);
             this.Controls.Add(this.dgClientInfo);
             this.Name = "frmClientInfo";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmClientInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgClientInfo)).EndInit();
             this.groupBox1.ResumeLayout(false);

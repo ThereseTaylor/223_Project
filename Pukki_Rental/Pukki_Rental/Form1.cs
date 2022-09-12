@@ -19,7 +19,10 @@ namespace Pukki_Rental
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            frmFrontPage formviewer = new frmFrontPage();
+            formviewer.MdiParent = this;
+            formviewer.Dock = DockStyle.Left;
+            formviewer.Show();
         }
 
         private void rentAVehicleOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -31,6 +34,7 @@ namespace Pukki_Rental
             
             frmRentOut myformView = new frmRentOut();
             myformView.MdiParent = this;
+            myformView.Dock = DockStyle.Left;
             myformView.Show();
         }
 
@@ -43,6 +47,7 @@ namespace Pukki_Rental
 
             frmReceiveBack myformView = new frmReceiveBack();
             myformView.MdiParent = this;
+            myformView.Dock = DockStyle.Left;
             myformView.Show();
         }
 
@@ -61,6 +66,7 @@ namespace Pukki_Rental
 
             frmVehicleInfo myformView = new frmVehicleInfo();
             myformView.MdiParent = this;
+            myformView.Dock = DockStyle.Left;
             myformView.Show();
 
         }
@@ -74,6 +80,7 @@ namespace Pukki_Rental
 
             frmClientInfo myformView = new frmClientInfo();
             myformView.MdiParent = this;
+            myformView.Dock = DockStyle.Left;
             myformView.Show();
         }
 
@@ -86,6 +93,7 @@ namespace Pukki_Rental
 
             frmReports myformView = new frmReports();
             myformView.MdiParent = this;
+            myformView.Dock = DockStyle.Left;
             myformView.Show();
         }
     }

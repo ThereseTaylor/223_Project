@@ -49,6 +49,7 @@
             // 
             this.dgVehicleInfo.AllowUserToAddRows = false;
             this.dgVehicleInfo.AllowUserToDeleteRows = false;
+            this.dgVehicleInfo.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dgVehicleInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgVehicleInfo.ColumnHeadersVisible = false;
             this.dgVehicleInfo.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -224,7 +225,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 418);
+            this.BackgroundImage = global::Pukki_Rental.Properties.Resources.pngtree_plain_aesthetic_background_with_cool_wallpaper_image_914477;
+            this.ClientSize = new System.Drawing.Size(821, 444);
             this.ControlBox = false;
             this.Controls.Add(this.cmBox3_DeleteVehicle);
             this.Controls.Add(this.lblSelectID);

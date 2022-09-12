@@ -230,16 +230,17 @@ namespace Pukki_Rental
             {
                 if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehciles
                 {
-                    frmPopup popup = new frmPopup(); //loads a popup used to input data that is added
-                    popup.ShowDialog();
+                    frmClientDetails popupClient = new frmClientDetails(); //loads a popup used to input data that is added
+                    popupClient.ShowDialog();
 
-                    if (popup.addVehicle == true) //boolean variable used so it doesnt try add nothing to data, which leaves empty spaces in datagridview
+                    if (popupClient.addClient == true) //boolean variable used so it doesnt try add nothing to data, which leaves empty spaces in datagridview
                     {
                         try
                         {
                             sql = "";
                             conn.Open();
-                            sql = $"INSERT INTO";
+                            sql = $"INSERT INTO dbo.CLIENT (ClientLN, ClientFN, ClientID_Number, Tel_Number, Email, AddressID) " +
+                                $"VALUES(‘{}’, ‘{}’, ‘{}’, '{}', ‘{}’, {})";
                             adap = new SqlDataAdapter();
                             cmd = new SqlCommand(sql, conn);
                             adap.InsertCommand = cmd;

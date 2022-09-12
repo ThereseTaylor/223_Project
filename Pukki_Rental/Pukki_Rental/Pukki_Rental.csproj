@@ -52,12 +52,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmAddress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmAddress.designer.cs">
-      <DependentUpon>frmAddress.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmChangePopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +75,12 @@
     </Compile>
     <Compile Include="frmColourPopup.designer.cs">
       <DependentUpon>frmColourPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFrontPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFrontPage.Designer.cs">
+      <DependentUpon>frmFrontPage.cs</DependentUpon>
     </Compile>
     <Compile Include="frmModelPopup.cs">
       <SubType>Form</SubType>
@@ -112,12 +112,6 @@
     <Compile Include="frmReports.Designer.cs">
       <DependentUpon>frmReports.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTown.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmTown.designer.cs">
-      <DependentUpon>frmTown.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmTypePopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,9 +129,6 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmAddress.resx">
-      <DependentUpon>frmAddress.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmChangePopup.resx">
       <DependentUpon>frmChangePopup.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmColourPopup.resx">
       <DependentUpon>frmColourPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFrontPage.resx">
+      <DependentUpon>frmFrontPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmModelPopup.resx">
       <DependentUpon>frmModelPopup.cs</DependentUpon>
@@ -165,9 +159,6 @@
     <EmbeddedResource Include="frmReports.resx">
       <DependentUpon>frmReports.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTown.resx">
-      <DependentUpon>frmTown.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmTypePopup.resx">
       <DependentUpon>frmTypePopup.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +173,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -198,6 +190,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Drop.sql" />
+    <None Include="Resources\images.png" />
+    <None Include="Resources\Background1.jpg" />
+    <None Include="Resources\pngtree-plain-aesthetic-background-with-cool-wallpaper-image_914477.png" />
+    <None Include="Resources\newlogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

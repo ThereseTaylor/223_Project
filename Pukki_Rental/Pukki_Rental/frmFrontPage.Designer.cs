@@ -1,7 +1,6 @@
-﻿
-namespace Pukki_Rental
+﻿namespace Pukki_Rental
 {
-    partial class frmClientDetails
+    partial class frmFrontPage
     {
         /// <summary>
         /// Required designer variable.
@@ -31,13 +30,14 @@ namespace Pukki_Rental
         {
             this.SuspendLayout();
             // 
-            // frmClientDetails
+            // frmFrontPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 510);
-            this.Name = "frmClientDetails";
-            this.Load += new System.EventHandler(this.frmClientDetails_Load);
+            this.BackgroundImage = global::Pukki_Rental.Properties.Resources.newlogo;
+            this.ClientSize = new System.Drawing.Size(777, 449);
+            this.ControlBox = false;
+            this.Name = "frmFrontPage";
             this.ResumeLayout(false);
 
         }

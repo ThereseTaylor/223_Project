@@ -13,7 +13,7 @@ namespace Pukki_Rental
 {
     public partial class frmClientInfo : Form
     {
-        public static int newToChange; //need this for my change popup form
+        public static int newToChange, whatToInsert; //need this for my change popup form
         public frmClientInfo()
         {
             InitializeComponent();
@@ -233,14 +233,14 @@ namespace Pukki_Rental
                     frmClientDetails popupClient = new frmClientDetails(); //loads a popup used to input data that is added
                     popupClient.ShowDialog();
 
-                    if (popupClient.addClient == true) //boolean variable used so it doesnt try add nothing to data, which leaves empty spaces in datagridview
+                    //if (popupClient.addClient == true) //boolean variable used so it doesnt try add nothing to data, which leaves empty spaces in datagridview
                     {
                         try
                         {
                             sql = "";
                             conn.Open();
-                            sql = $"INSERT INTO dbo.CLIENT (ClientLN, ClientFN, ClientID_Number, Tel_Number, Email, AddressID) " +
-                                $"VALUES(‘{}’, ‘{}’, ‘{}’, '{}', ‘{}’, {})";
+                            //sql = $"INSERT INTO dbo.CLIENT (ClientLN, ClientFN, ClientID_Number, Tel_Number, Email, AddressID) " +
+                            //    $"VALUES(‘{}’, ‘{}’, ‘{}’, '{}', ‘{}’, {})";
                             adap = new SqlDataAdapter();
                             cmd = new SqlCommand(sql, conn);
                             adap.InsertCommand = cmd;
@@ -257,41 +257,37 @@ namespace Pukki_Rental
                 }
                 else if (cmbTable.SelectedIndex == 1)//address
                 {
-                    frmModelPopup modelpopup = new frmModelPopup();
-                    modelpopup.ShowDialog();
+                    whatToInsert = 1;
+                    frmTypePopup addresspopup = new frmTypePopup();
+                    addresspopup.ShowDialog();
 
-                    if (modelpopup.addModel == true)
+                    if (addresspopup.addAddress == true)
                     {
-                        try
-                        {
-                            conn.Open();
-                            sql = $"INSERT INTO";
-                            adap = new SqlDataAdapter();
-                            cmd = new SqlCommand(sql, conn);
-                            adap.InsertCommand = cmd;
-                            adap.InsertCommand.ExecuteNonQuery();
-                            conn.Close();
-                            MessageBox.Show("New model successfully added");
-                        }
-                        catch
-                        {
-                            MessageBox.Show("There was an error adding the new address");
-                            conn.Close();
-                        }
+                        conn.Open();
+                        sql = $"INSERT INTO ADDRESS(Street_Number, Street_Name, TownID) VALUES ({addresspopup.newNumber},'{addresspopup.newName}',{addresspopup.newTownID})";
+                        adap = new SqlDataAdapter();
+                        cmd = new SqlCommand(sql, conn);
+                        adap.InsertCommand = cmd;
+                        adap.InsertCommand.ExecuteNonQuery();
+                        conn.Close();
+                        MessageBox.Show("New address successfully added");
+                        
+ 
                     }
 
                 }
                 else if (cmbTable.SelectedIndex == 2)//town
                 {
+                    whatToInsert = 2;
                     frmTypePopup typepopup = new frmTypePopup();
                     typepopup.ShowDialog();
 
-                    if (typepopup.addType == true)
+                    if (typepopup.addTown == true)
                     {
                         try
                         {
                             conn.Open();
-                            sql = $"INSERT INTO";
+                            sql = $"INSERT INTO TOWN(Town_Name) VALUES ('{typepopup.newTown}')";
                             adap = new SqlDataAdapter();
                             cmd = new SqlCommand(sql, conn);
                             adap.InsertCommand = cmd;

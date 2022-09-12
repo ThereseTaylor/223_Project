@@ -120,7 +120,6 @@ namespace Pukki_Rental
                 {
                     frmTypePopup typepopup = new frmTypePopup();
                     typepopup.ShowDialog();
-
                     if (typepopup.addType == true)
                     {
                         try

@@ -32,13 +32,18 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtType = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnSubmit
             // 
             this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnSubmit.Location = new System.Drawing.Point(118, 121);
-            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSubmit.Location = new System.Drawing.Point(123, 139);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(94, 34);
             this.btnSubmit.TabIndex = 2;
@@ -49,8 +54,8 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnCancel.Location = new System.Drawing.Point(9, 121);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Location = new System.Drawing.Point(11, 139);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(94, 34);
             this.btnCancel.TabIndex = 3;
@@ -61,8 +66,8 @@
             // txtType
             // 
             this.txtType.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtType.Location = new System.Drawing.Point(12, 64);
-            this.txtType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtType.Location = new System.Drawing.Point(89, 37);
+            this.txtType.Margin = new System.Windows.Forms.Padding(2);
             this.txtType.Name = "txtType";
             this.txtType.Size = new System.Drawing.Size(135, 23);
             this.txtType.TabIndex = 5;
@@ -71,26 +76,73 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(9, 33);
+            this.label1.Location = new System.Drawing.Point(9, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(208, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "Please enter a new vehicle type";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(89, 76);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(135, 20);
+            this.textBox1.TabIndex = 6;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Street number:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Street name:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 110);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Town:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(88, 107);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(136, 21);
+            this.comboBox1.TabIndex = 10;
+            // 
             // frmTypePopup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(221, 165);
+            this.ClientSize = new System.Drawing.Size(281, 194);
             this.ControlBox = false;
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.txtType);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSubmit);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmTypePopup";
-            this.Text = "Add a vehicle type";
+            this.Text = "Enter your desired information";
             this.Load += new System.EventHandler(this.frmTypePopup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -103,5 +155,10 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

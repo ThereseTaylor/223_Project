@@ -36,7 +36,7 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            sql = "SELECT C.ClientLN AS Surname, C.ClientFN AS Name, C.ClientID_Number 'ID Number', C.Tel_Number 'Telephone Number', C.Email AS Email, A.Street_Number AS 'Street Number', A.Street_Name AS 'Street Name'" +
+            sql = "SELECT C.ClientLN AS Surname, C.ClientFN AS Name, C.ClientID_Number AS 'ID Number', C.Tel_Number AS 'Telephone Number', C.Email AS Email, A.Street_Number AS 'Street Number', A.Street_Name AS 'Street Name'" +
                   "FROM dbo.CLIENT C, dbo.ADDRESS A WHERE C.AddressID = A.AddressID ";
             
             cmd = new SqlCommand(sql, conn);
@@ -140,7 +140,7 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-           sql = "SELECT Model_Description AS 'Vehicle Model', Type_Description AS 'Vehicle Type', Colour_Name AS 'Vehicle Colour', Registration_Plate AS 'Registration Plate', Rental_Price AS 'Rental Price' FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M, dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND V.Rental_Status = 1 AND T.Type_Description = '" + cmbxType.GetItemText(cmbxType.SelectedItem) + "'";
+           sql = "SELECT Model_Description AS 'Vehicle Model', Type_Description AS 'Vehicle Type', Colour_Name AS 'Vehicle Colour', Registration_Plate AS 'Registration Plate', REPLACE(FORMAT(Rental_Price,'C'),'$','R') AS 'Rental Price' FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M, dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND V.Rental_Status = 1 AND T.Type_Description = '" + cmbxType.GetItemText(cmbxType.SelectedItem) + "'";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -264,7 +264,7 @@ namespace Pukki_Rental
                 conn.Open();
                 ds = new DataSet();
                 adap = new SqlDataAdapter();
-                sql = "SELECT C.ClientLN AS Surname, C.ClientFN AS Name, C.ClientID_Number 'ID Number', C.Tel_Number 'Telephone Number', C.Email AS Email, A.Street_Number AS 'Street Number', A.Street_Name AS 'Street Name' " +
+                sql = "SELECT C.ClientLN AS Surname, C.ClientFN AS Name, C.ClientID_Number AS 'ID Number', C.Tel_Number AS 'Telephone Number', C.Email AS Email, A.Street_Number AS 'Street Number', A.Street_Name AS 'Street Name' " +
                       "FROM dbo.CLIENT C, dbo.ADDRESS A WHERE C.AddressID = A.AddressID AND UPPER(C.ClientFN) LIKE UPPER('%" + textBox1.Text + "%') ";
                 cmd = new SqlCommand(sql, conn);
                 adap.SelectCommand = cmd;

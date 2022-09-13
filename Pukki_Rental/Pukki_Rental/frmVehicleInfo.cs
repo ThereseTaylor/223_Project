@@ -36,9 +36,9 @@ namespace Pukki_Rental
 
             ds = new DataSet();
             adap = new SqlDataAdapter();
-
+            
             //done in one line or the code throws a tantrum. Displays vehicle table to datagridview. changing the id's to information from their respective table
-            sql = "SELECT VehicleID, Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+            sql = "SELECT Model_Description AS 'Vehicle Model', Type_Description AS 'Vehicle Type', Colour_Name AS 'Vehicle Colour', Registration_Plate AS 'Registration Plate', REPLACE(FORMAT(Purchase_Price,'C'),'$','R') AS 'Purchase Price', Purchase_Date AS 'Date Purchased', REPLACE(FORMAT(Rental_Price,'C'),'$','R') AS 'Rental Price' FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -297,22 +297,22 @@ namespace Pukki_Rental
 
             if (cmbTable.SelectedIndex == 0)
             {
-                sql = "SELECT VehicleID, Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+                sql = "SELECT Model_Description AS 'Vehicle Model', Type_Description AS 'Vehicle Type', Colour_Name AS 'Vehicle Colour', Registration_Plate AS 'Registration Plate',  REPLACE(FORMAT(Purchase_Price,'C'),'$','R') AS 'Purchase Price', Purchase_Date AS 'Date Purchased', REPLACE(FORMAT(Rental_Price,'C'),'$','R') AS 'Rental Price' FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
                 cmd = new SqlCommand(sql, conn);
             }
             else if (cmbTable.SelectedIndex == 1)
             {
-                sql = "SELECT * FROM dbo.VEHICLE_MODEL";
+                sql = "SELECT ModelID AS 'Model Number', Model_Description AS 'Description' FROM dbo.VEHICLE_MODEL";
                 cmd = new SqlCommand(sql, conn);
             }
             else if (cmbTable.SelectedIndex == 2)
             {
-                sql = "SELECT * FROM dbo.VEHICLE_TYPE";
+                sql = "SELECT TypeID AS 'Type Number', Type_Description AS 'Description' FROM dbo.VEHICLE_TYPE";
                 cmd = new SqlCommand(sql, conn);
             }
             else if (cmbTable.SelectedIndex == 3)
             {
-                sql = "SELECT * FROM dbo.VEHICLE_COLOUR";
+                sql = "SELECT ColourID AS 'Colour Number', Colour_Name AS 'Colour Name' FROM dbo.VEHICLE_COLOUR";
                 cmd = new SqlCommand(sql, conn);
             }
 
@@ -374,24 +374,24 @@ namespace Pukki_Rental
 
             if (cmbTable.SelectedIndex == 0) //vehicle
             {
-                sql = "SELECT VehicleID, Model_Description, Type_Description, Colour_Name, Registration_Plate, Purchase_Price, Purchase_Date, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
+                sql = "SELECT Model_Description AS 'Vehicle Model', Type_Description AS 'Vehicle Type', Colour_Name AS 'Vehicle Colour', Registration_Plate AS 'Registration Plate', REPLACE(FORMAT(Purchase_Price,'C'),'$','R') AS 'Purchase Price', Purchase_Date AS 'Date Purchased', REPLACE(FORMAT(Rental_Price,'C'),'$','R') AS 'Rental Price'  FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID";
                 rdoChange.Visible = true;
             }
             else if (cmbTable.SelectedIndex == 1) //model
             {
-                sql = "SELECT * FROM dbo.VEHICLE_MODEL";
+                sql = "SELECT ModelID AS 'Model Number', Model_Description AS 'Description' FROM dbo.VEHICLE_MODEL";
                 rdoChange.Visible = false;
                 rdoChange.Checked = false;
             }
             else if (cmbTable.SelectedIndex == 2)//type
             {
-                sql = "SELECT * FROM dbo.VEHICLE_TYPE";
+                sql = "SELECT ModelID AS 'Model Number', Model_Description AS 'Description' FROM dbo.VEHICLE_MODEL";
                 rdoChange.Visible = false;
                 rdoChange.Checked = false;
             }
             else if (cmbTable.SelectedIndex == 3)//colour
             {
-                sql = "SELECT * FROM dbo.VEHICLE_COLOUR";
+                sql = "SELECT ColourID AS 'Colour Number', Colour_Name AS 'Colour Name' FROM dbo.VEHICLE_COLOUR";
                 rdoChange.Visible = false;
                 rdoChange.Checked = false;
             }
@@ -458,6 +458,10 @@ namespace Pukki_Rental
         private void rdoDelete_CheckedChanged(object sender, EventArgs e)
         {
             cmBox3_DeleteVehicle.Items.Clear();
+            cmbChange.Hide();
+            cmbSelectID.Hide();
+            lblSelectID.Show();
+            cmBox3_DeleteVehicle.Show();
             if (cmbTable.SelectedIndex == 0) //0 shows it will be first option in the combobox. Vehicles
             {
                 Combo("SELECT VehicleID FROM dbo.VEHICLE");
@@ -478,8 +482,7 @@ namespace Pukki_Rental
             {
                 MessageBox.Show("Please select an option by data type above");
             }
-            cmBox3_DeleteVehicle.Show();
-            lblChange.Show();
+            
         }
 
         private void cmbChange_SelectedIndexChanged(object sender, EventArgs e)
@@ -487,13 +490,14 @@ namespace Pukki_Rental
             rdoAdd.Checked = false;
             rdoChange.Checked = false;
             rdoDelete.Checked = false;
-
+           
         }
 
         private void rdoAdd_CheckedChanged(object sender, EventArgs e)
         {
             cmBox3_DeleteVehicle.Hide();
             lblChange.Hide();
+            lblSelectID.Hide();
         }
     }
 }

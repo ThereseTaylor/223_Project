@@ -14,7 +14,7 @@ namespace Pukki_Rental
     public partial class frmChangePopup : Form
     {
         public int changeColourID, whatToChange, newToChange;
-        public string changeRegistration, changeLastName, changeTel, changeEmail;
+        public string changeRegistration, changeLastName, changeTel, changeEmail, changeTownName, changeStreetName;
         public double changeRentalCost;
         public bool makeChange = false;
         string conStr = @"Data Source=LAPTOP-8IITND7R;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";

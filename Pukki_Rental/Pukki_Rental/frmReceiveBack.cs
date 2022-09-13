@@ -35,7 +35,7 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            sql = "SELECT ClientFN, ClientLN, Registration_Plate FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE v.Rental_Status = 0 AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID ";
+            sql = "SELECT DISTINCT ClientFN AS 'Client Name', ClientLN AS 'Client Surname', Registration_Plate AS 'Vehicle Registration Plate' FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE v.Rental_Status = 0 AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID ";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -55,7 +55,9 @@ namespace Pukki_Rental
         {
             int carID = 0;
 
-            DialogResult Result = MessageBox.Show("", "RETURN", MessageBoxButtons.YesNo);
+            string message = "Are you sure " + dgReceiveBack.Rows[e.RowIndex].Cells[2].Value.ToString() + " " + dgReceiveBack.Rows[e.RowIndex].Cells[1].Value.ToString() + " is the correct client?";
+
+            DialogResult Result = MessageBox.Show(message, "RETURN", MessageBoxButtons.YesNo);
             if (Result == DialogResult.Yes)
             {
                 conn.Open();
@@ -69,7 +71,6 @@ namespace Pukki_Rental
                     carID = (int)reader.GetValue(0);
                 }
                 conn.Close();
-                MessageBox.Show(carID.ToString());
 
                 conn.Open();
                 sql = "UPDATE dbo.VEHICLE SET Rental_Status = 1 WHERE VehicleID = '" + carID + "'";
@@ -80,6 +81,23 @@ namespace Pukki_Rental
                 conn.Close();
 
                 MessageBox.Show("Return successfully proccessed!", "RETURN", MessageBoxButtons.OK);
+
+                conn = new SqlConnection(conStr);
+                conn.Open();
+
+                ds = new DataSet();
+                adap = new SqlDataAdapter();
+
+                sql = "SELECT DISTINCT ClientFN AS 'Client Name', ClientLN AS 'Client Surname', Registration_Plate AS 'Vehicle Registration Plate' FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE v.Rental_Status = 0 AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID ";
+
+                cmd = new SqlCommand(sql, conn);
+                adap.SelectCommand = cmd;
+                adap.Fill(ds, "SourceTable");
+
+                dgReceiveBack.DataSource = ds;
+                dgReceiveBack.DataMember = "SourceTable";
+
+                conn.Close();
             }
             else if (Result == DialogResult.No)
             {
@@ -94,7 +112,7 @@ namespace Pukki_Rental
             conn.Open();
             ds = new DataSet();
             adap = new SqlDataAdapter();
-            sql = "SELECT ClientFN, ClientLN, Registration_Plate FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE v.Rental_Status = 0 AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID AND UPPER(c.ClientFN) LIKE UPPER('%" + tbxName.Text + "%')  ";
+            sql = "SELECT DISTINCT ClientFN AS 'Client Name', ClientLN AS 'Client Surname', Registration_Plate AS 'Vehicle Registration Plate' FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE v.Rental_Status = 0 AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID AND UPPER(c.ClientFN) LIKE UPPER('%" + tbxName.Text + "%')  ";
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
             adap.Fill(ds, "SourceTable");

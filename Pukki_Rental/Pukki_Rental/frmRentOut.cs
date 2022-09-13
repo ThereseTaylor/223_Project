@@ -36,7 +36,7 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-            sql = "SELECT C.ClientLN, C.ClientFN, C.ClientID_Number, C.Tel_Number, C.Email, A.Street_Number, A.Street_Name " +
+            sql = "SELECT C.ClientLN AS Surname, C.ClientFN AS Name, C.ClientID_Number 'ID Number', C.Tel_Number 'Telephone Number', C.Email AS Email, A.Street_Number AS 'Street Number', A.Street_Name AS 'Street Name'" +
                   "FROM dbo.CLIENT C, dbo.ADDRESS A WHERE C.AddressID = A.AddressID ";
             
             cmd = new SqlCommand(sql, conn);
@@ -107,11 +107,11 @@ namespace Pukki_Rental
                     textBox1.Hide();
 
                     label5.Text = "Double click on the vehicle the client wants to rent:";
-                    label1.Text = "Choose the clients preferred vehicle type:";
+                    label1.Text = "Choose the clients preferred available vehicle type:";
 
                     cmbxType.Show();
                     conn.Open();
-                    sql = "SELECT Type_Description FROM dbo.VEHICLE_TYPE";
+                    sql = "SELECT DISTINCT Type_Description FROM dbo.VEHICLE_TYPE T, dbo.VEHICLE V WHERE V.TypeID = T.TypeID AND V.Rental_Status = 1";
                     cmd = new SqlCommand(sql, conn);
                     reader = cmd.ExecuteReader();
 
@@ -140,7 +140,7 @@ namespace Pukki_Rental
             ds = new DataSet();
             adap = new SqlDataAdapter();
 
-           sql = "SELECT Model_Description, Type_Description, Colour_Name, Registration_Plate, Rental_Price FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M, dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND V.Rental_Status = 1 AND T.Type_Description = '" + cmbxType.GetItemText(cmbxType.SelectedItem) + "'";
+           sql = "SELECT Model_Description AS 'Vehicle Model', Type_Description AS 'Vehicle Type', Colour_Name AS 'Vehicle Colour', Registration_Plate AS 'Registration Plate', Rental_Price AS 'Rental Price' FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M, dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND V.Rental_Status = 1 AND T.Type_Description = '" + cmbxType.GetItemText(cmbxType.SelectedItem) + "'";
 
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -191,8 +191,9 @@ namespace Pukki_Rental
             DateTime today = DateTime.Today;
             if (dateTimePicker1.Value >= DateTime.Today)
             {
-                string ReturnDate = dateTimePicker1.Value.ToString("dd-MM-yyyy");
-                int days = (Convert.ToDateTime(ReturnDate) - today).Days;
+                string sum = dateTimePicker1.Value.ToString("dd-MM-yyyy");
+                DateTime ReturnDate = dateTimePicker1.Value;
+                int days = (Convert.ToDateTime(sum) - today).Days;
 
                 if (days == 0)
                 {
@@ -201,7 +202,7 @@ namespace Pukki_Rental
 
                 double transactPrice = Convert.ToDouble(rentalR) * days;
 
-                string messageDays = "This will be " + days.ToString() + "days in total. The total for this period is R" + transactPrice.ToString() + ". Does the client agree to this?";
+                string messageDays = "This will be " + days.ToString() + " days in total. The total for this period is R" + transactPrice.ToString() + ". Does the client agree to this?";
 
                 DialogResult dialogResult = MessageBox.Show(messageDays, "RENTAL", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
@@ -209,13 +210,18 @@ namespace Pukki_Rental
                     try
                     {
                         conn.Open();
-                        string sql = $"INSERT INTO dbo.RENTAL_TRANSACTION (VehicleID, ClientID, Transaction_Price, Transaction_Date, Return_Date) VALUES ({carID},{clientID},{transactPrice},'{today}',null)";
+                        string sql = $"INSERT INTO dbo.RENTAL_TRANSACTION (VehicleID, ClientID, Transaction_Price, Transaction_Date, Return_Date) VALUES (@CarID, @ClientID, @TransactPrice, @Today, @ReturnDate)";
                         adap = new SqlDataAdapter();
                         cmd = new SqlCommand(sql, conn);
+                        cmd.Parameters.AddWithValue("@CarID",carID);
+                        cmd.Parameters.AddWithValue("@ClientID",clientID);
+                        cmd.Parameters.AddWithValue("@TransactPrice",transactPrice);
+                        cmd.Parameters.AddWithValue("@Today",today);
+                        cmd.Parameters.AddWithValue("@ReturnDate",ReturnDate);
                         adap.InsertCommand = cmd;
                         adap.InsertCommand.ExecuteNonQuery();
                         conn.Close();
-                        MessageBox.Show("The rental purchase is finalised!", "RENTAL", MessageBoxButtons.OK);
+                        MessageBox.Show("The rental purchase is finalised!.", "RENTAL", MessageBoxButtons.OK);
 
                         conn.Open();
                         sql = "UPDATE dbo.VEHICLE SET Rental_Status = 0 WHERE VehicleID = '" + carID + "'";
@@ -241,6 +247,7 @@ namespace Pukki_Rental
                 MessageBox.Show("Please choose a date in the future.", "DATE", MessageBoxButtons.OK);
             }
 
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -250,7 +257,7 @@ namespace Pukki_Rental
             conn.Open();
             ds = new DataSet();
             adap = new SqlDataAdapter();
-            sql = "SELECT ClientLN, ClientFN, ClientID_Number, Tel_Number, Email, Street_Number, Street_Name " +
+            sql = "SELECT C.ClientLN AS Surname, C.ClientFN AS Name, C.ClientID_Number 'ID Number', C.Tel_Number 'Telephone Number', C.Email AS Email, A.Street_Number AS 'Street Number', A.Street_Name AS 'Street Name' " +
                   "FROM dbo.CLIENT C, dbo.ADDRESS A WHERE C.AddressID = A.AddressID AND UPPER(C.ClientFN) LIKE UPPER('%" + textBox1.Text + "%') ";
             cmd = new SqlCommand(sql, conn);
             adap.SelectCommand = cmd;
@@ -259,6 +266,11 @@ namespace Pukki_Rental
             dgRentOut.DataSource = ds;
             dgRentOut.DataMember = "SourceTable";
             conn.Close();
+        }
+
+        private void dgVehicle_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

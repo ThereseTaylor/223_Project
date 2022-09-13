@@ -96,6 +96,16 @@ namespace Pukki_Rental
             conn.Close();
         }
 
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             string vModel = comboBox2.GetItemText(comboBox2.SelectedItem);
@@ -164,7 +174,7 @@ namespace Pukki_Rental
                         vehicleReg = txtReg.Text;
                         rentalCost = Convert.ToDouble(txtRentalCost.Text);
                         purchPrice = Convert.ToDouble(txtPurchPrice.Text);
-                        if (dtPurchDate.Value <= DateTime.Today)
+                        if (dtPurchDate.Value >= DateTime.Today)
                         {
                             purchDate = dtPurchDate.Value.ToString("dd-MM-yyyy");
                             addVehicle = true;

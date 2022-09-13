@@ -91,7 +91,7 @@
             // 
             this.cmbxType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbxType.FormattingEnabled = true;
-            this.cmbxType.Location = new System.Drawing.Point(390, 18);
+            this.cmbxType.Location = new System.Drawing.Point(450, 16);
             this.cmbxType.Name = "cmbxType";
             this.cmbxType.Size = new System.Drawing.Size(136, 28);
             this.cmbxType.TabIndex = 4;

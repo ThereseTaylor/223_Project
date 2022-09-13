@@ -193,7 +193,7 @@ namespace Pukki_Rental
             {
                 string sum = dateTimePicker1.Value.ToString("dd-MM-yyyy");
                 DateTime ReturnDate = dateTimePicker1.Value;
-                int days = (Convert.ToDateTime(ReturnDate) - today).Days;
+                int days = (ReturnDate - today).Days;
 
                 if (days == 0)
                 {

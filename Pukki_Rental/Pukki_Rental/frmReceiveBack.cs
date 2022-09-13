@@ -107,19 +107,26 @@ namespace Pukki_Rental
 
         private void tbxName_TextChanged(object sender, EventArgs e)
         {
-            string sql = "";
+            if (tbxName.Text.Any(char.IsDigit) == true)
+            {
+                MessageBox.Show("Please enter text.", "CLIENT", MessageBoxButtons.OK);
+                tbxName.SelectAll();
+            }
+            {
+                string sql = "";
 
-            conn.Open();
-            ds = new DataSet();
-            adap = new SqlDataAdapter();
-            sql = "SELECT DISTINCT ClientFN AS 'Client Name', ClientLN AS 'Client Surname', Registration_Plate AS 'Vehicle Registration Plate' FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE v.Rental_Status = 0 AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID AND UPPER(c.ClientFN) LIKE UPPER('%" + tbxName.Text + "%')  ";
-            cmd = new SqlCommand(sql, conn);
-            adap.SelectCommand = cmd;
-            adap.Fill(ds, "SourceTable");
+                conn.Open();
+                ds = new DataSet();
+                adap = new SqlDataAdapter();
+                sql = "SELECT DISTINCT ClientFN AS 'Client Name', ClientLN AS 'Client Surname', Registration_Plate AS 'Vehicle Registration Plate' FROM dbo.RENTAL_TRANSACTION r, dbo.CLIENT c, dbo.VEHICLE v WHERE v.Rental_Status = 0 AND r.ClientID = c.ClientID AND r.VehicleID = v.VehicleID AND UPPER(c.ClientFN) LIKE UPPER('%" + tbxName.Text + "%')  ";
+                cmd = new SqlCommand(sql, conn);
+                adap.SelectCommand = cmd;
+                adap.Fill(ds, "SourceTable");
 
-            dgReceiveBack.DataSource = ds;
-            dgReceiveBack.DataMember = "SourceTable";
-            conn.Close();
+                dgReceiveBack.DataSource = ds;
+                dgReceiveBack.DataMember = "SourceTable";
+                conn.Close();
+            }
         }
     }
 }

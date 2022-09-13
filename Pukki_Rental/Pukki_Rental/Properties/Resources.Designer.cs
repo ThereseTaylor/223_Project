@@ -63,6 +63,16 @@ namespace Pukki_Rental.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1920x1080_light_blue_solid_color_background {
+            get {
+                object obj = ResourceManager.GetObject("1920x1080-light-blue-solid-color-background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Background1 {
             get {
                 object obj = ResourceManager.GetObject("Background1", resourceCulture);

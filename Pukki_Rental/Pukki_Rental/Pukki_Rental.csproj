@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Drop.sql" />
+    <None Include="Resources\1920x1080-light-blue-solid-color-background.jpg" />
     <None Include="Resources\images.png" />
     <None Include="Resources\Background1.jpg" />
     <None Include="Resources\pngtree-plain-aesthetic-background-with-cool-wallpaper-image_914477.png" />

@@ -32,7 +32,7 @@ namespace Pukki_Rental
             // Clear all objects and set initial/default values
 
             comboReports.Items.Clear();
-            cmbMonth.SelectedIndex = 0;
+            //cmbMonth.SelectedIndex = 0;
 
             label2.Hide();
             cmbMonth.Hide();
@@ -94,6 +94,7 @@ namespace Pukki_Rental
 
         private void cmbMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             int month = (cmbMonth.SelectedIndex) + 1;
 
             if (month == 1) // January
@@ -159,10 +160,18 @@ namespace Pukki_Rental
             }
         }
 
+        Boolean flag = false;
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            if (comboReports.SelectedItem == null)
             {
+                MessageBox.Show("Please choose a report.", "CLIENT", MessageBoxButtons.OK);
+                comboReports.Focus();
+                flag = true;
+            }
+            else
+            {
+                
                 // ConnectionString with path to DB
                 constr = @"Data Source=LAPTOP-8IITND7R;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 conn = new SqlConnection(constr);
@@ -171,77 +180,85 @@ namespace Pukki_Rental
                 conn.Open();
                 adpt = new SqlDataAdapter();
                 ds = new DataSet();
-
+                flag = false;
                 // Set SQL to display all data
                 if (comboReports.SelectedIndex == 0) // Sales report per month
                 {
-                    label2.Show();
-                    cmbMonth.Show();
-                    string mnth = cmbMonth.SelectedItem.ToString();
-                    sql = "SELECT Model_Description AS 'Vehicle Model', Type_Description AS 'Vehicle Type', Colour_Name AS 'Vehicle Colour', Registration_Plate AS 'Registration Plate', Transaction_Price AS 'Purchase Price', Transaction_Date AS 'Date Purchased' FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C, dbo.RENTAL_TRANSACTION R WHERE R.VehicleID = V.VehicleID AND V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND Transaction_Date BETWEEN @startDate AND @endDate";
-
-                    comd = new SqlCommand(sql, conn);
-                    adpt.SelectCommand = comd;
-                    adpt.SelectCommand.Parameters.AddWithValue("@startDate", start);
-                    adpt.SelectCommand.Parameters.AddWithValue("@endDate", end);
-                    adpt.Fill(ds, "SourceTable");
-
-                    // Fill gridview
-                    gvReport.DataSource = ds;
-                    gvReport.DataMember = "SourceTable";
-                  
-                    // Close DB
-                    conn.Close();
-                }
-                else if (comboReports.SelectedIndex == 1) //Amount of sales transactions per month
-                {                    
-                    if (comboBox1.SelectedIndex == 0)
+                    if (cmbMonth.SelectedItem == null)
                     {
-                        MessageBox.Show("in1");
-                        if (radioButton2.Checked == true)///ASC
-                        {
-                            sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month";
-                            MessageBox.Show("in1a");
-                        }
-                        else
-                        {
-                            sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month DESC";
-                            MessageBox.Show("in1b");
-                        }
-                           
-                    }
-                    else if (comboBox1.SelectedIndex == 1)
-                    {
-                        MessageBox.Show("in2");
-                        if (radioButton2.Checked == true)//ASC
-                        {
-                            sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY 'Amount of Transactions'";
-                        }
-                        else
-                        {
-                            sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY 'Amount of Transactions' DESC";
-                        }
+                        MessageBox.Show("Please choose a month.", "CLIENT", MessageBoxButtons.OK);
+                        cmbMonth.Focus();
+                        flag = true;
                     }
                     else
                     {
-                        MessageBox.Show("in3");
-                        sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM')";
+                        flag = false;
+                        label2.Show();
+                        cmbMonth.Show();
+                        string mnth = cmbMonth.SelectedItem.ToString();
+                        sql = "SELECT Model_Description AS 'Vehicle Model', Type_Description AS 'Vehicle Type', Colour_Name AS 'Vehicle Colour', Registration_Plate AS 'Registration Plate', Transaction_Price AS 'Purchase Price', Transaction_Date AS 'Date Purchased' FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C, dbo.RENTAL_TRANSACTION R WHERE R.VehicleID = V.VehicleID AND V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID AND Transaction_Date BETWEEN @startDate AND @endDate";
+
+                        comd = new SqlCommand(sql, conn);
+                        adpt.SelectCommand = comd;
+                        adpt.SelectCommand.Parameters.AddWithValue("@startDate", start);
+                        adpt.SelectCommand.Parameters.AddWithValue("@endDate", end);
+                        adpt.Fill(ds, "SourceTable");
+
+                        // Fill gridview
+                        gvReport.DataSource = ds;
+                        gvReport.DataMember = "SourceTable";
+
+                        // Close DB
+                        conn.Close();
                     }
+                        
+                }
+                else if (comboReports.SelectedIndex == 1) //Amount of sales transactions per month
+                {
+                    sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month";
+                //    if (comboBox1.SelectedIndex == 0)
+                //    {
+                //        if (radioButton2.Checked == true)///ASC
+                //        {
+                //            sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month";
+                //           // flag = false;      
+                //        }
+                //        else //if (radioButton1.Checked == true)
+                //        {
+                //            sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month DESC";
+                //            //flag = false;
+                //        }
+                //        //else
+                //        //{
+                //        //    MessageBox.Show("Please choose a ascending or descending.", "CLIENT", MessageBoxButtons.OK);
+                //        //    radioButton1.Focus();
+                //        //   // flag = true;
+                //        //}
 
-                    comd = new SqlCommand(sql, conn);
-                    adpt.SelectCommand = comd;
-                    adpt.SelectCommand.Parameters.AddWithValue("@startDate", start);
-                    adpt.SelectCommand.Parameters.AddWithValue("@endDate", end);
-                    adpt.Fill(ds, "SourceTable");
-
-                    // Fill gridview
-                    gvReport.DataSource = ds;
-                    gvReport.DataMember = "SourceTable";
-
-                    // Close DB
-                    conn.Close();
-                    radioButton1.Checked = false;
-                    radioButton2.Checked = false;
+                //    }
+                //    else if (comboBox1.SelectedIndex == 1)
+                //    {
+                //        if (radioButton2.Checked == true)//ASC
+                //        {
+                //            sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY 'Amount of Transactions'";
+                //            //flag = false;
+                //        }
+                //        else //if (radioButton1.Checked == true)
+                //        {
+                //            sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY 'Amount of Transactions' DESC";
+                //            //flag = false;
+                //        }
+                //        //else
+                //        //{
+                //        //    MessageBox.Show("Please choose a ascending or descending.", "CLIENT", MessageBoxButtons.OK);
+                //        //    radioButton1.Focus();
+                //        //    //flag = true;
+                //        //}
+                //    }
+                //    else 
+                //    {
+                //        sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month";
+                //    }
                 }
 
                 else if (comboReports.SelectedIndex == 2) // Inventory report
@@ -249,29 +266,40 @@ namespace Pukki_Rental
                     sql = "SELECT Model_Description AS 'Vehicle Model', Type_Description AS 'Vehicle Type', Colour_Name AS 'Vehicle Colour', Registration_Plate AS 'Registration Plate', Purchase_Price AS 'Purchase Price', Purchase_Date AS 'Date Purchased', Rental_Price AS 'Rental Price' FROM dbo.VEHICLE V, dbo.VEHICLE_MODEL M , dbo.VEHICLE_TYPE T, dbo.VEHICLE_COLOUR C WHERE V.ModelID = M.ModelID AND V.TypeID = T.TypeID AND V.ColourID = C.ColourID ORDER BY Purchase_Date";
                 }
 
+                //if (!flag)
+                //{
+                    // Implement SQL
+                    comd = new SqlCommand(sql, conn);
+                    adpt.SelectCommand = comd;
+                    adpt.SelectCommand.Parameters.AddWithValue("@startDate", start);
+                    adpt.SelectCommand.Parameters.AddWithValue("@endDate", end);
+                    adpt.Fill(ds, "SourceTable");
 
-                // Implement SQL
-                comd = new SqlCommand(sql, conn);
-                adpt.SelectCommand = comd;
-                adpt.SelectCommand.Parameters.AddWithValue("@startDate", start);
-                adpt.SelectCommand.Parameters.AddWithValue("@endDate", end);
-                adpt.Fill(ds, "SourceTable");
+                    // Fill gridview
+                    gvReport.DataSource = ds;
+                    gvReport.DataMember = "SourceTable";
 
-                // Fill gridview
-                gvReport.DataSource = ds;
-                gvReport.DataMember = "SourceTable";
-
-                // Close DB
-                conn.Close();
+                    // Close DB
+                    conn.Close();
+                //}
+                   
+                
             }
-            catch (Exception error)
-            {
-                MessageBox.Show(error.Message);
-            }
+            
 
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

@@ -193,7 +193,7 @@ namespace Pukki_Rental
             {
                 string sum = dateTimePicker1.Value.ToString("dd-MM-yyyy");
                 DateTime ReturnDate = dateTimePicker1.Value;
-                int days = (Convert.ToDateTime(sum) - today).Days;
+                int days = (Convert.ToDateTime(ReturnDate) - today).Days;
 
                 if (days == 0)
                 {
@@ -252,21 +252,31 @@ namespace Pukki_Rental
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            string sql = "";
 
-            conn.Open();
-            ds = new DataSet();
-            adap = new SqlDataAdapter();
-            sql = "SELECT C.ClientLN AS Surname, C.ClientFN AS Name, C.ClientID_Number 'ID Number', C.Tel_Number 'Telephone Number', C.Email AS Email, A.Street_Number AS 'Street Number', A.Street_Name AS 'Street Name' " +
-                  "FROM dbo.CLIENT C, dbo.ADDRESS A WHERE C.AddressID = A.AddressID AND UPPER(C.ClientFN) LIKE UPPER('%" + textBox1.Text + "%') ";
-            cmd = new SqlCommand(sql, conn);
-            adap.SelectCommand = cmd;
-            adap.Fill(ds, "SourceTable");
+            if (textBox1.Text.Any(char.IsDigit) == true)
+            {
+                MessageBox.Show("Please enter text.", "CLIENT", MessageBoxButtons.OK);
+                textBox1.SelectAll();
+            }
+            else
+            {
+                string sql = "";
 
-            dgRentOut.DataSource = ds;
-            dgRentOut.DataMember = "SourceTable";
-            conn.Close();
-        }
+                conn.Open();
+                ds = new DataSet();
+                adap = new SqlDataAdapter();
+                sql = "SELECT C.ClientLN AS Surname, C.ClientFN AS Name, C.ClientID_Number 'ID Number', C.Tel_Number 'Telephone Number', C.Email AS Email, A.Street_Number AS 'Street Number', A.Street_Name AS 'Street Name' " +
+                      "FROM dbo.CLIENT C, dbo.ADDRESS A WHERE C.AddressID = A.AddressID AND UPPER(C.ClientFN) LIKE UPPER('%" + textBox1.Text + "%') ";
+                cmd = new SqlCommand(sql, conn);
+                adap.SelectCommand = cmd;
+                adap.Fill(ds, "SourceTable");
+
+                dgRentOut.DataSource = ds;
+                dgRentOut.DataMember = "SourceTable";
+                conn.Close();
+            }
+        }       
+           
 
         private void dgVehicle_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

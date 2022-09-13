@@ -104,7 +104,7 @@ namespace Pukki_Rental
                 ActiveMdiChild.Close();
             }
 
-            frmReports myformView = new frmReports();
+            frmFrontPage myformView = new frmFrontPage();
             myformView.MdiParent = this;
             myformView.Dock = DockStyle.Fill;
             myformView.Show();

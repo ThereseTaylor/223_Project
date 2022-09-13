@@ -197,22 +197,18 @@ namespace Pukki_Rental
                 {                    
                     if (comboBox1.SelectedIndex == 0)
                     {
-                        MessageBox.Show("in1");
                         if (radioButton2.Checked == true)///ASC
                         {
                             sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month";
-                            MessageBox.Show("in1a");
                         }
                         else
                         {
                             sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month DESC";
-                            MessageBox.Show("in1b");
                         }
                            
                     }
                     else if (comboBox1.SelectedIndex == 1)
                     {
-                        MessageBox.Show("in2");
                         if (radioButton2.Checked == true)//ASC
                         {
                             sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY 'Amount of Transactions'";
@@ -224,24 +220,9 @@ namespace Pukki_Rental
                     }
                     else
                     {
-                        MessageBox.Show("in3");
                         sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM')";
                     }
 
-                    comd = new SqlCommand(sql, conn);
-                    adpt.SelectCommand = comd;
-                    adpt.SelectCommand.Parameters.AddWithValue("@startDate", start);
-                    adpt.SelectCommand.Parameters.AddWithValue("@endDate", end);
-                    adpt.Fill(ds, "SourceTable");
-
-                    // Fill gridview
-                    gvReport.DataSource = ds;
-                    gvReport.DataMember = "SourceTable";
-
-                    // Close DB
-                    conn.Close();
-                    radioButton1.Checked = false;
-                    radioButton2.Checked = false;
                 }
 
                 else if (comboReports.SelectedIndex == 2) // Inventory report

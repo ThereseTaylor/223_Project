@@ -113,7 +113,7 @@ namespace Pukki_Rental
             }
             else if (month == 4) // April
             {
-                MessageBox.Show("in");
+                
                 start = new DateTime(2022, 04, 01);
                 end = new DateTime(2022, 04, 30);
             }
@@ -171,6 +171,7 @@ namespace Pukki_Rental
             {
                 try
                 {
+                    flag = false;
                     // ConnectionString with path to DB
                     constr = @"Data Source=LAPTOP-8IITND7R;Initial Catalog=dbPUKKI_RENTAL;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                     conn = new SqlConnection(constr);
@@ -200,33 +201,53 @@ namespace Pukki_Rental
                     }
                     else if (comboReports.SelectedIndex == 1) //Amount of sales transactions per month
                     {
+                        
                         if (comboBox1.SelectedIndex == 0)
                         {
-                            
-                            if (radioButton2.Checked == true)///ASC
+                            if (radioButton1.Checked == true || radioButton2.Checked == true)
                             {
-                                sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month";
+                                if (radioButton2.Checked == true)///ASC
+                                {
+                                    sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month DESC";
+                                    flag = false;
+                                }
+                                else
+                                {
+                                    sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month";
+                                    flag = false;
+                                }
                             }
                             else
                             {
-                                sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY Month DESC";
-                            }
-
+                                MessageBox.Show("Please choose ascending or decending.", "CLIENT", MessageBoxButtons.OK);
+                                flag = true;
+                            }     
                         }
                         else if (comboBox1.SelectedIndex == 1)
                         {
-                            if (radioButton2.Checked == true)//ASC
+                            if (radioButton1.Checked == true || radioButton2.Checked == true)
                             {
-                                sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY 'Amount of Transactions'";
+                                if (radioButton2.Checked == true)//ASC
+                                {
+                                    sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY 'Amount of Transactions'";
+                                    flag = false;
+                                }
+                                else
+                                {
+                                    sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY 'Amount of Transactions' DESC";
+                                    flag = false;
+                                }
                             }
                             else
                             {
-                                sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM') ORDER BY 'Amount of Transactions' DESC";
+                                MessageBox.Show("Please choose ascending or decending.", "CLIENT", MessageBoxButtons.OK);
+                                flag = true;
                             }
                         }
                         else
                         {
                             sql = "SELECT FORMAT(Transaction_Date,'MMMM') AS Month, COUNT(TransactionID) AS 'Amount of Transactions' FROM dbo.RENTAL_TRANSACTION GROUP BY FORMAT(Transaction_Date,'MMMM')";
+                            flag = false;
                         }
 
                     }
@@ -238,7 +259,6 @@ namespace Pukki_Rental
 
                     if (flag == false)
                     {
-                        MessageBox.Show("in");
                         // Implement SQL
                         comd = new SqlCommand(sql, conn);
                         adpt.SelectCommand = comd;

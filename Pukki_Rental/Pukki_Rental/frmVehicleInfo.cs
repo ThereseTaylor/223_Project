@@ -327,6 +327,7 @@ namespace Pukki_Rental
 
         private void rdoChange_CheckedChanged(object sender, EventArgs e) //hides and unhides the combobox for change
         {
+            cmbSelectID.Items.Clear();
             cmBox3_DeleteVehicle.Hide();
             if(rdoChange.Checked == true)
             {
@@ -488,7 +489,7 @@ namespace Pukki_Rental
         private void cmbChange_SelectedIndexChanged(object sender, EventArgs e)
         {
             rdoAdd.Checked = false;
-            rdoChange.Checked = false;
+            //rdoChange.Checked = false;
             rdoDelete.Checked = false;
            
         }

@@ -36,29 +36,29 @@
             // 
             // txtColour
             // 
-            this.txtColour.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtColour.Location = new System.Drawing.Point(12, 59);
-            this.txtColour.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtColour.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtColour.Location = new System.Drawing.Point(38, 60);
+            this.txtColour.Margin = new System.Windows.Forms.Padding(2);
             this.txtColour.Name = "txtColour";
-            this.txtColour.Size = new System.Drawing.Size(135, 23);
+            this.txtColour.Size = new System.Drawing.Size(213, 26);
             this.txtColour.TabIndex = 9;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(9, 28);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(220, 17);
+            this.label1.Size = new System.Drawing.Size(276, 20);
             this.label1.TabIndex = 8;
             this.label1.Text = "Please enter a new vehicle colour";
             // 
             // btnCancel
             // 
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnCancel.Location = new System.Drawing.Point(9, 132);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(38, 116);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(94, 34);
             this.btnCancel.TabIndex = 7;
@@ -68,9 +68,9 @@
             // 
             // btnSubmit
             // 
-            this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.btnSubmit.Location = new System.Drawing.Point(131, 132);
-            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit.Location = new System.Drawing.Point(157, 116);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(2);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(94, 34);
             this.btnSubmit.TabIndex = 6;
@@ -82,14 +82,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(235, 176);
+            this.ClientSize = new System.Drawing.Size(298, 163);
+            this.ControlBox = false;
             this.Controls.Add(this.txtColour);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSubmit);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmColourPopup";
-            this.Text = "frmColourPopup";
+            this.Text = "Enter a new colour";
             this.Load += new System.EventHandler(this.frmColourPopup_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

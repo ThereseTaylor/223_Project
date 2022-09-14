@@ -13,7 +13,7 @@ namespace Pukki_Rental
 {
     public partial class frmChangePopup : Form
     {
-        public int changeColourID, whatToChange, newToChange;
+        public int changeColourID, whatToChange, newToChange, townToChange;
         public string changeRegistration, changeLastName, changeTel, changeEmail, changeTownName, changeStreetName;
         public double changeRentalCost;
         public bool makeChange = false;
@@ -46,11 +46,12 @@ namespace Pukki_Rental
 
             whatToChange = frmVehicleInfo.whatToChange;
             newToChange = frmClientInfo.newToChange;
-            if (newToChange != 0)
+            townToChange = frmClientInfo.townToChange;
+            //MessageBox.Show(townToChange.ToString());
+            if (newToChange != 0 || townToChange != 0)
             {
                 whatToChange = 10;
             }
-            MessageBox.Show(whatToChange.ToString());
 
             if (whatToChange == 0)
             {
@@ -62,7 +63,7 @@ namespace Pukki_Rental
                 lblText.Text = "Enter the new registration below";
                 txtChangedInfo.Visible = true;
             }
-            else if(whatToChange == 2)
+            else if (whatToChange == 2)
             {
                 lblText.Text = "Enter the new rental cost below";
                 txtChangedInfo.Visible = true;
@@ -80,6 +81,16 @@ namespace Pukki_Rental
             else if (newToChange == 5)
             {
                 lblText.Text = "Enter the new Email below";
+                txtChangedInfo.Visible = true;
+            }
+            else if (townToChange == 1)
+            {
+                lblText.Text = "Enter the new Town Name below";
+                txtChangedInfo.Visible = true;
+            }
+            else if (townToChange == 2)
+            {
+                lblText.Text = "Enter the new Steet Name below";
                 txtChangedInfo.Visible = true;
             }
         }
@@ -112,8 +123,8 @@ namespace Pukki_Rental
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             if (whatToChange == 1) //registration part
-            { 
-                if(txtChangedInfo.Text == "")
+            {
+                if (txtChangedInfo.Text == "")
                 {
                     MessageBox.Show("Please enter a new registration or press cancel");
                 }
@@ -146,14 +157,16 @@ namespace Pukki_Rental
                     else
                     {
                         MessageBox.Show("You already have a vehicle with that registration\nYou cannot have duplicates");
+                        txtChangedInfo.SelectAll();
                     }
                 }
             }
-            else if(whatToChange == 2) //Rental cost part
+            else if (whatToChange == 2) //Rental cost part
             {
-                if(txtChangedInfo.Text == "")
+                if (txtChangedInfo.Text == "")
                 {
                     MessageBox.Show("Please enter a new rental price or press cancel");
+                    txtChangedInfo.SelectAll();
                 }
                 else
                 {
@@ -169,11 +182,12 @@ namespace Pukki_Rental
                     }
                 }
             }
-            else if(whatToChange == 0)//closes the form for colour
+            else if (whatToChange == 0)//closes the form for colour
             {
-                if(cmbColour.SelectedItem == null)
+                if (cmbColour.SelectedItem == null)
                 {
-                    MessageBox.Show("Please select a new colour or press cancel");
+                    MessageBox.Show("Please enter a colour or press cancel", "COLOUR", MessageBoxButtons.OK);
+
                 }
                 else
                 {
@@ -182,9 +196,10 @@ namespace Pukki_Rental
             }
             else if (newToChange == 3) //LastName part
             {
-                if (txtChangedInfo.Text == "")
+                if (txtChangedInfo.Text == "" || (txtChangedInfo.Text.Any(char.IsDigit) == true))
                 {
-                    MessageBox.Show("Please enter a new last name or press cancel");
+                    MessageBox.Show("Please enter a telephone number or press cancel", "LASTNAME", MessageBoxButtons.OK);
+                    txtChangedInfo.SelectAll();
                 }
                 else
                 {
@@ -193,11 +208,14 @@ namespace Pukki_Rental
                     this.Close();
                 }
             }
+            //HIER
             else if (newToChange == 4) //Telephone number part
             {
-                if (txtChangedInfo.Text == "")
+                string var = txtChangedInfo.Text;
+                if ((txtChangedInfo.Text == "") || (var.Length != 10) || (txtChangedInfo.Text.Any(char.IsLetter) == true))
                 {
-                    MessageBox.Show("Please enter a new telephone number or press cancel");
+                    MessageBox.Show("Please enter a telephone number or press cancel", "TELEPHONE", MessageBoxButtons.OK);
+                    txtChangedInfo.SelectAll();
                 }
                 else
                 {
@@ -208,13 +226,42 @@ namespace Pukki_Rental
             }
             else if (newToChange == 5) //Email part
             {
-                if (txtChangedInfo.Text == "")
+                if ((txtChangedInfo.Text == "")|| (txtChangedInfo.Text.Any(char.IsDigit) == true))
                 {
-                    MessageBox.Show("Please enter a new email or press cancel");
+                    MessageBox.Show("Please enter a email or press cancel", "EMAIL", MessageBoxButtons.OK);
+                    txtChangedInfo.SelectAll();
                 }
                 else
                 {
                     changeEmail = txtChangedInfo.Text;
+                    makeChange = true;
+                    this.Close();
+                }
+            }
+            else if (townToChange == 1) //Town part
+            {
+                if ((txtChangedInfo.Text == "") || (txtChangedInfo.Text.Any(char.IsDigit) == true))
+                {
+                    MessageBox.Show("Please enter a town name or press cancel", "TOWN", MessageBoxButtons.OK);
+                    txtChangedInfo.SelectAll();
+                }
+                else
+                {
+                    changeTownName = txtChangedInfo.Text;
+                    makeChange = true;
+                    this.Close();
+                }
+            }
+            else if (townToChange == 2) //Address part
+            {
+                if ((txtChangedInfo.Text == "") || (txtChangedInfo.Text.Any(char.IsDigit) == true))
+                {
+                    MessageBox.Show("Please enter a street name or press cancel", "ADDRESS", MessageBoxButtons.OK);
+                    txtChangedInfo.SelectAll();
+                }
+                else
+                {
+                    changeStreetName = txtChangedInfo.Text;
                     makeChange = true;
                     this.Close();
                 }

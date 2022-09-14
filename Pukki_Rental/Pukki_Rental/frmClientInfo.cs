@@ -191,11 +191,73 @@ namespace Pukki_Rental
 
         private void rdoChange_CheckedChanged_1(object sender, EventArgs e)
         {
-            cmbChange.Items.Clear();
-            cmbChange.Items.Add("Last Name");
-            cmbChange.Items.Add("Telephone Number");
-            cmbChange.Items.Add("Email");
-            cmBox3_DeleteVehicle.Hide();
+
+            if (cmbTable.SelectedIndex == 0)
+            {
+                cmbChange.Items.Clear();
+                cmbChange.Items.Add("Last Name");
+                cmbChange.Items.Add("Telephone Number");
+                cmbChange.Items.Add("Email");
+                cmbSelectID.Items.Clear();
+                cmBox3_DeleteVehicle.Hide();
+
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                string sql = "SELECT ClientID FROM dbo.CLIENT";
+                ds = new DataSet();
+                adap = new SqlDataAdapter();
+                cmd = new SqlCommand(sql, conn);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    cmbSelectID.Items.Add(reader.GetValue(0));
+                }
+
+                conn.Close();
+            }
+            else if (cmbTable.SelectedIndex == 1)
+            {
+                cmbChange.Items.Clear();
+                cmbSelectID.Items.Clear();
+                cmbChange.Items.Add("Street Name");
+
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                string sql = "SELECT AddressID FROM dbo.ADDRESS";
+                ds = new DataSet();
+                adap = new SqlDataAdapter();
+                cmd = new SqlCommand(sql, conn);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    cmbSelectID.Items.Add(reader.GetValue(0));
+                }
+
+                conn.Close();
+            }
+            else if (cmbTable.SelectedIndex == 2)
+            {
+                cmbChange.Items.Clear();
+                cmbChange.Items.Add("Town Name");
+                cmbSelectID.Items.Clear();
+
+                conn = new SqlConnection(conStr);
+                conn.Open();
+                string sql = "SELECT TownID FROM dbo.TOWN";
+                ds = new DataSet();
+                adap = new SqlDataAdapter();
+                cmd = new SqlCommand(sql, conn);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    cmbSelectID.Items.Add(reader.GetValue(0));
+                }
+
+                conn.Close();
+            }
 
             if (rdoChange.Checked == true)
             {
@@ -211,20 +273,9 @@ namespace Pukki_Rental
                 cmbSelectID.Visible = false;
                 lblSelectID.Visible = false;
             }
-            conn = new SqlConnection(conStr);
-            conn.Open();
-            string sql = "SELECT ClientID FROM dbo.CLIENT";
-            ds = new DataSet();
-            adap = new SqlDataAdapter();
-            cmd = new SqlCommand(sql, conn);
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
-            {
-                cmbSelectID.Items.Add(reader.GetValue(0));
-            }
-
-            conn.Close();
+            
+            
+            
         }
 
         private void btnExecute_Click_1(object sender, EventArgs e)
@@ -356,9 +407,8 @@ namespace Pukki_Rental
                         frmChangePopup changePopup = new frmChangePopup();
                         changePopup.ShowDialog();
 
-                        //cmbChange.Items.Add("Street Number");
-                        //cmbChange.Items.Add("Street Name");
-                        //cmbChange.Items.Add("Town");
+                        //cmbChange.Items.Add("AddressID");
+                       
                         if (cmbChange.SelectedIndex == 0) //LastName
                         {
 
@@ -388,7 +438,6 @@ namespace Pukki_Rental
                             {
                                 try
                                 {
-                                    MessageBox.Show("tel");
                                     conn.Open();
                                     sql = $"UPDATE dbo.CLIENT SET Tel_Number = '{changePopup.changeTel}' WHERE ClientID = {cmbSelectID.SelectedItem}";
                                     adap = new SqlDataAdapter();
@@ -430,6 +479,7 @@ namespace Pukki_Rental
                     }
                     else if (cmbTable.SelectedIndex == 1)//Address
                     {
+                        townToChange = cmbChange.SelectedIndex + 2;
                         frmChangePopup changePops = new frmChangePopup();
                         changePops.ShowDialog();
 
@@ -440,7 +490,7 @@ namespace Pukki_Rental
                                 try
                                 {
                                     conn.Open();
-                                    sql = $"UPDATE dbo.TOWN SET ClientLN = '{changePops.changeStreetName}' WHERE TownID = {cmbSelectID.SelectedItem}";
+                                    sql = $"UPDATE dbo.ADDRESS SET Street_Name = '{changePops.changeStreetName}' WHERE AddressID = {cmbSelectID.SelectedItem}";
                                     adap = new SqlDataAdapter();
                                     cmd = new SqlCommand(sql, conn);
                                     adap.InsertCommand = cmd;
@@ -458,13 +508,12 @@ namespace Pukki_Rental
                     }
                     else if (cmbTable.SelectedIndex == 2)//Town
                     {
+                        townToChange = cmbChange.SelectedIndex + 1;
                         frmChangePopup changePop = new frmChangePopup();
                         changePop.ShowDialog();
-                        //HIER
-                        townToChange = cmbChange.SelectedIndex + 3;
-                        MessageBox.Show(newToChange.ToString());
-                        frmChangePopup changePopup = new frmChangePopup();
-                        changePopup.ShowDialog();
+                        
+                        
+                        //MessageBox.Show(townToChange.ToString());
 
                         if (cmbChange.SelectedIndex == 0) //TownName
                         {
@@ -473,7 +522,7 @@ namespace Pukki_Rental
                                 try
                                 {
                                     conn.Open();
-                                    sql = $"UPDATE dbo.TOWN SET ClientLN = '{changePop.changeTownName}' WHERE TownID = {cmbSelectID.SelectedItem}";
+                                    sql = $"UPDATE dbo.TOWN SET Town_Name = '{changePop.changeTownName}' WHERE TownID = {cmbSelectID.SelectedItem}";
                                     adap = new SqlDataAdapter();
                                     cmd = new SqlCommand(sql, conn);
                                     adap.InsertCommand = cmd;

@@ -70,52 +70,104 @@ namespace Pukki_Rental
         Boolean flag = false;
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if(txtEmail.Text == "" || txtFName.Text == "" || txtIDNum.Text == "" || txtLName.Text == "" || txtTelNum.Text == "" || cmbStrName.SelectedItem == null || cmbStrNum.SelectedItem == null)
+            if (txtEmail.Text == "" || txtFName.Text == "" || txtIDNum.Text == "" || txtLName.Text == "" || txtTelNum.Text == "" || cmbStrName.SelectedItem == null || cmbStrNum.SelectedItem == null)
             {
                 MessageBox.Show("Please ensure to fill out the form correctly");
             }
             else
             {
+
                 ClientEmail = txtEmail.Text;
                 ClientFN = txtFName.Text;
                 ClientID = txtIDNum.Text;
                 ClientLN = txtLName.Text;
                 ClientTele = txtTelNum.Text;
-
-                
-                string streetName = cmbStrName.GetItemText(cmbStrName.SelectedItem);
-                string streetNum = cmbStrNum.GetItemText(cmbStrNum.SelectedItem);
-                sqlConnection.Open();
-                string sql = "SELECT AddressID, Street_Name, Street_Number FROM dbo.ADDRESS";
-                sqlCommand = new SqlCommand(sql, sqlConnection);
-                reader = sqlCommand.ExecuteReader();
-
-                while (reader.Read())
+                try
                 {
-                    MessageBox.Show(reader.GetValue(2).ToString());
-                    if ((reader.GetValue(1).ToString() == streetName) && (reader.GetValue(2).ToString()==streetNum))
+                    bool hbool = false;
+                    bool gbool = false;
+
+                    if (txtLName.Text.Any(char.IsDigit) == true)
                     {
-                        MessageBox.Show("in");
-                        AddressID = (int)reader.GetValue(0);
-                        flag = true;
-                        break;
+                        MessageBox.Show("Please enter a valid Last Name.");
+                        gbool = false;
                     }
+                    else if (txtFName.Text.Any(char.IsDigit) == true)
+                    {
+                        MessageBox.Show("Please enter a valid First Name.");
+                        gbool = false;
+                    }
+                    else
+                    {
+                        gbool = true;
+                    }
+
+
+                    if (ClientID.Length != 13)
+                    {
+                        MessageBox.Show("Please enter a valid ID.");
+                        hbool = false;
+                    }
+                    else if (ClientTele.Length != 10)
+                    {
+                        MessageBox.Show("Please enter a valid Telephone number.");
+                        hbool = false;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            int clientnum = int.Parse(ClientID);
+                            int clientel = int.Parse(ClientTele);
+                            hbool = true;
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Please enter a 13 digit ID number and a 10 digit telephone number.");
+                            hbool = false;
+                        }
+                    }
+
+                    if (hbool && gbool)
+                    {
+                        string streetName = cmbStrName.GetItemText(cmbStrName.SelectedItem);
+                        string streetNum = cmbStrNum.GetItemText(cmbStrNum.SelectedItem);
+                        sqlConnection.Open();
+                        string sql = "SELECT AddressID, Street_Name, Street_Number FROM dbo.ADDRESS";
+                        sqlCommand = new SqlCommand(sql, sqlConnection);
+                        reader = sqlCommand.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            MessageBox.Show(reader.GetValue(2).ToString());
+                            if ((reader.GetValue(1).ToString() == streetName) && (reader.GetValue(2).ToString() == streetNum))
+                            {
+                                MessageBox.Show("in");
+                                AddressID = (int)reader.GetValue(0);
+                                flag = true;
+                                break;
+                            }
+                        }
+
+                        sqlConnection.Close();
+
+                        if (flag == false)
+                        {
+                            MessageBox.Show("Please enter a valid address.", "RETURN", MessageBoxButtons.OK);
+                        }
+                        else
+                        {
+                            addClient = true;
+                            this.Close();
+                        }
+                    }
+
                 }
-
-                sqlConnection.Close();
-
-                if (flag == false)
+                catch
                 {
-                    MessageBox.Show("Please enter a valid address.", "RETURN", MessageBoxButtons.OK);
-                }
-                else
-                {
-                    addClient = true;
-                    this.Close();
+
                 }
 
-                
-               
             }
         }
 
